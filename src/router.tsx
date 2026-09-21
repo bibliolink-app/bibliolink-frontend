@@ -5,8 +5,10 @@ import { PublicOnly } from './features/auth/guards/PublicOnly'
 import { RedirectAdmins } from './features/auth/guards/RedirectAdmins'
 import { RequireAuth } from './features/auth/guards/RequireAuth'
 import { RequireRole } from './features/auth/guards/RequireRole'
+import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
 import { LoginPage } from './features/auth/pages/LoginPage'
 import { RegisterPage } from './features/auth/pages/RegisterPage'
+import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
 import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
 import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
@@ -22,6 +24,7 @@ export const PATHS = {
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
   admin: '/admin',
     adminProfile: '/admin/perfil',
   adminUsers: '/admin/usuarios',
@@ -40,8 +43,12 @@ export function createAppRouter() {
       children: [
         { path: PATHS.login, element: <LoginPage /> },
         { path: PATHS.register, element: <RegisterPage /> },
+        { path: PATHS.forgotPassword, element: <ForgotPasswordPage /> },
       ],
     },
+
+    // Abierta a todos: el enlace del correo debe funcionar también si ya hay una sesión iniciada en el navegador.
+    { path: PATHS.resetPassword, element: <ResetPasswordPage /> },
 
     // Requieren sesión.
     {
