@@ -11,9 +11,7 @@ import {
   updateUser,
 } from '../Services/UserService'
 
-// ─── Consultas ───
 
-/** Perfil del usuario con la sesión abierta. */
 export const useProfile = () => {
   return useQuery({
     queryKey: ['users', 'profile'],
@@ -22,7 +20,7 @@ export const useProfile = () => {
   })
 }
 
-/** Lista completa de usuarios. Solo ADMIN. */
+
 export const useUsers = () => {
   return useQuery({
     queryKey: ['users', 'list'],
@@ -31,19 +29,17 @@ export const useUsers = () => {
   })
 }
 
-/** Un usuario por su ID. Solo ADMIN. */
+
 export const useUser = (userId: number) => {
   return useQuery({
     queryKey: ['users', 'detail', userId],
     queryFn: () => getUserById(userId),
     staleTime: 5 * 60 * 1000, // 5 minutos
-    enabled: userId > 0, // no dispara la petición hasta que haya ID
+    enabled: userId > 0, 
   })
 }
 
-// ─── Mutaciones ───
 
-/** Crea una cuenta con rol ADMIN. */
 export const useCreateAdmin = () => {
   const queryClient = useQueryClient()
 

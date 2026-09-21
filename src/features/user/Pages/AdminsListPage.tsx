@@ -11,7 +11,7 @@ import { userErrorMessage } from '../lib/userErrorMessage'
 export function AdminsListPage() {
   const { data: users, isPending, isError, error } = useUsers()
 
-  // El backend devuelve todos los usuarios: el filtro por rol se hace aquí.
+  //  filtro por rol se hace aquí.
   const admins = useMemo(() => (users ?? []).filter((user) => user.role === 'ADMIN'), [users])
 
   return (

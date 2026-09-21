@@ -1,8 +1,6 @@
 import { z } from 'zod'
 
-// ─── Reglas reutilizables, copiadas de las validaciones del backend ───
 
-/** Refleja IsStrongPassword: 8+ caracteres, letra, número, especial, máx. 72 bytes UTF-8. */
 const contrasenaFuerte = z
   .string()
   .refine((valor) => Array.from(valor).length >= 8, {
@@ -57,7 +55,7 @@ const nombreObligatorio = (etiqueta: string) =>
     .min(1, { error: `${etiqueta} es obligatorio.` })
     .max(50, { error: `${etiqueta} no puede superar los 50 caracteres.` })
 
-/** El backend acepta null pero rechaza cadena vacía: un input sin rellenar se convierte en null. */
+
 const nombreOpcional = (etiqueta: string) =>
   z
     .string()
@@ -67,7 +65,7 @@ const nombreOpcional = (etiqueta: string) =>
 
 // ─── Esquemas ───
 
-/** Valida el formulario de POST /users/admins. */
+/** Valida el formulario de admi */
 export const crearAdminSchema = z.object({
   username: nombreUsuario,
   firstName: nombreObligatorio('El primer nombre'),
@@ -79,7 +77,7 @@ export const crearAdminSchema = z.object({
   password: contrasenaFuerte,
 })
 
-/** Valida el formulario de PATCH /users/:userId. Todo opcional. */
+/** Valida el formulario */
 export const actualizarUsuarioSchema = z.object({
   username: nombreUsuario.optional(),
   firstName: nombreObligatorio('El primer nombre').optional(),

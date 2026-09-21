@@ -6,6 +6,7 @@ import { RedirectAdmins } from './features/auth/guards/RedirectAdmins'
 import { RequireAuth } from './features/auth/guards/RequireAuth'
 import { RequireRole } from './features/auth/guards/RequireRole'
 import { LoginPage } from './features/auth/pages/LoginPage'
+import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
 import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
@@ -36,7 +37,10 @@ export function createAppRouter() {
     // Solo visitantes sin sesión.
     {
       element: <PublicOnly />,
-      children: [{ path: PATHS.login, element: <LoginPage /> }],
+      children: [
+        { path: PATHS.login, element: <LoginPage /> },
+        { path: PATHS.register, element: <RegisterPage /> },
+      ],
     },
 
     // Requieren sesión.

@@ -5,8 +5,7 @@ import { PATHS } from '../../router'
 import { FeatureCard } from '../../ui/FeatureCard'
 
 export function AdminDashboardPage() {
-  // `SECTIONS` vive dentro del componente a propósito: `router.tsx` importa esta página y esta
-  // página importa `PATHS` de vuelta. Leerlo en el nivel del módulo lo alcanzaría sin inicializar.
+
   const SECTIONS = [
     {
       title: 'Mi perfil',
