@@ -1,7 +1,8 @@
 import { revalidateLogic, useForm } from '@tanstack/react-form'
-import { CircleAlert, LoaderCircle } from 'lucide-react'
+import { CircleAlert } from 'lucide-react'
 
 import { PATHS } from '../../../router'
+import { Button } from '../../../ui/Button'
 import { TextField } from '../../../ui/TextField'
 import { TextLink } from '../../../ui/TextLink'
 import { useLogin } from '../hooks/useLogin'
@@ -80,15 +81,9 @@ export function LoginForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={login.isPending}
-        aria-busy={login.isPending}
-        className="inline-flex items-center justify-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif text-lg font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 enabled:cursor-pointer enabled:hover:bg-rose-900 enabled:hover:text-stone-300 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
-      >
-        {login.isPending && <LoaderCircle className="size-5 motion-safe:animate-spin" />}
+      <Button type="submit" loading={login.isPending}>
         {login.isPending ? 'Iniciando sesión…' : 'Iniciar sesión'}
-      </button>
+      </Button>
     </form>
   )
 }
