@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router'
-import { LoaderCircle, LogOut } from 'lucide-react'
+import { Link, Outlet } from 'react-router'
+import { CircleUser, LoaderCircle, LogOut } from 'lucide-react'
 
 import { useLogout } from '../features/auth/hooks/useLogout'
 import { useSession } from '../features/auth/hooks/useSession'
 import { ROLE_LABELS } from '../features/auth/types'
 import { Logo } from '../ui/Logo'
-
+import { BottomNav } from '../ui/BottomNav'
+import { PATHS } from '../router'
 /** Marco de la zona autenticada: cabecera con la marca, el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {
-  const { user } = useSession()
-  const logout = useLogout()
+  const { user, isAdmin } = useSession()
+const logout = useLogout()
 
   return (
     <div className="bg-linear-to-b from-mist-700 to-teal-950 flex flex-1 flex-col">
@@ -29,6 +30,16 @@ export function AppLayout() {
               <span className="hidden rounded-full border border-yellow-600 px-3 py-1 text-sm font-semibold text-stone-300 sm:inline-block">
                 {ROLE_LABELS[user.role]}
               </span>
+            )}
+             {/* El administrador entra a su perfil desde su propio panel. */}
+            {!isAdmin && (
+              <Link
+                to={PATHS.profile}
+                aria-label="Mi perfil"
+                className="rounded-full text-stone-300 hover:text-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
+              >
+                <CircleUser className="size-8" />
+              </Link>
             )}
 
             <button
@@ -53,6 +64,7 @@ export function AppLayout() {
       <main id="contenido" tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 outline-none sm:py-14">
         <Outlet />
       </main>
+      {!isAdmin && <BottomNav />}
     </div>
   )
 }

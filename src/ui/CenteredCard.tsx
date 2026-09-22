@@ -21,7 +21,7 @@ export function CenteredCard({ title, description, children }: CenteredCardProps
 
         <section
           aria-labelledby={titleId}
-          className="relative w-full max-w-md rounded-lg bg-stone-300 p-6 text-stone-900 shadow-2xl ring-1 ring-black/25 before:pointer-events-none before:absolute before:inset-2 before:rounded-md before:border before:border-stone-500/30 sm:p-10"
+          className="relative w-full max-w-lg rounded-lg bg-stone-300 p-6 text-stone-900 shadow-2xl ring-1 ring-black/25 before:pointer-events-none before:absolute before:inset-2 before:rounded-md before:border before:border-stone-500/30 sm:p-10"
         >
           <h1 id={titleId} className="font-serif text-3xl font-semibold text-stone-900">
             {title}

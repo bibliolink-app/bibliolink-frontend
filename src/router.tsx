@@ -14,7 +14,9 @@ import { AppLayout } from './layouts/AppLayout'
 import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
 import { AdminsListPage } from './features/user/Pages/AdminsListPage'
 import { CreateAdminPage } from './features/user/Pages/CreateAdminPage'
-
+import { FavoritesPage } from './features/library/FavoritesPage'
+import { SearchPage } from './features/library/SearchPage'
+import { UserProfilePage } from './features/user/Pages/UserProfilePage'
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
  
  //Las features importan este objeto 
@@ -29,6 +31,9 @@ export const PATHS = {
     adminProfile: '/admin/perfil',
   adminUsers: '/admin/usuarios',
   adminUserNew: '/admin/usuarios/nuevo',
+    search: '/buscar',
+  favorites: '/favoritos',
+  profile: '/perfil',
 } as const
 
 
@@ -60,7 +65,11 @@ export function createAppRouter() {
             // Inicio: biblioteca para el usuario normal; el administrador es enviado a su panel.
             {
               element: <RedirectAdmins to={PATHS.admin} />,
-              children: [{ path: PATHS.home, element: <LibraryHomePage /> }],
+              children: [{ path: PATHS.home, element: <LibraryHomePage /> },
+                               { path: PATHS.search, element: <SearchPage /> },
+                 { path: PATHS.favorites, element: <FavoritesPage /> },
+                { path: PATHS.profile, element: <UserProfilePage /> },
+              ],
             },
 
             // Solo administradores.
