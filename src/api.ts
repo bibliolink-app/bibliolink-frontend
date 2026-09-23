@@ -3,9 +3,7 @@ import { z } from 'zod'
 
 //Conexión con la API del backend: configuración, errores y cliente HTTP.
  
- 
 
-// ───────────────────────────── Configuración ─────────────────────────────
 
 const envSchema = z.object({
   VITE_API_URL: z.url({ error: 'VITE_API_URL debe ser una URL válida.' }),

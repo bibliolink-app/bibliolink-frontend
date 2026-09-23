@@ -4,7 +4,7 @@ import { CircleAlert, Eye, EyeOff } from 'lucide-react'
 interface TextFieldProps {
   label: string
   name: string
-  type?: 'text' | 'email' | 'password'
+  type?: 'text' | 'email' | 'password'| 'date'
   value: string
   onChange: (value: string) => void
   onBlur: () => void

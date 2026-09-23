@@ -7,11 +7,16 @@ import { RequireAuth } from './features/auth/guards/RequireAuth'
 import { RequireRole } from './features/auth/guards/RequireRole'
 import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
 import { LoginPage } from './features/auth/pages/LoginPage'
+import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
 import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
-
-
+import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
+import { AdminsListPage } from './features/user/Pages/AdminsListPage'
+import { CreateAdminPage } from './features/user/Pages/CreateAdminPage'
+import { FavoritesPage } from './features/library/FavoritesPage'
+import { SearchPage } from './features/library/SearchPage'
+import { UserProfilePage } from './features/user/Pages/UserProfilePage'
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
  
  //Las features importan este objeto 
@@ -23,6 +28,12 @@ export const PATHS = {
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   admin: '/admin',
+    adminProfile: '/admin/perfil',
+  adminUsers: '/admin/usuarios',
+  adminUserNew: '/admin/usuarios/nuevo',
+    search: '/buscar',
+  favorites: '/favoritos',
+  profile: '/perfil',
 } as const
 
 
@@ -36,6 +47,7 @@ export function createAppRouter() {
       element: <PublicOnly />,
       children: [
         { path: PATHS.login, element: <LoginPage /> },
+        { path: PATHS.register, element: <RegisterPage /> },
         { path: PATHS.forgotPassword, element: <ForgotPasswordPage /> },
       ],
     },
@@ -53,13 +65,21 @@ export function createAppRouter() {
             // Inicio: biblioteca para el usuario normal; el administrador es enviado a su panel.
             {
               element: <RedirectAdmins to={PATHS.admin} />,
-              children: [{ path: PATHS.home, element: <LibraryHomePage /> }],
+              children: [{ path: PATHS.home, element: <LibraryHomePage /> },
+                               { path: PATHS.search, element: <SearchPage /> },
+                 { path: PATHS.favorites, element: <FavoritesPage /> },
+                { path: PATHS.profile, element: <UserProfilePage /> },
+              ],
             },
 
             // Solo administradores.
             {
               element: <RequireRole roles={['ADMIN']} />,
-              children: [{ path: PATHS.admin, element: <AdminDashboardPage /> }],
+              children: [{ path: PATHS.admin, element: <AdminDashboardPage /> },
+                { path: PATHS.adminProfile, element: <AdminProfilePage /> },
+                { path: PATHS.adminUsers, element: <AdminsListPage /> },
+                { path: PATHS.adminUserNew, element: <CreateAdminPage /> },
+              ],
             },
           ],
         },
