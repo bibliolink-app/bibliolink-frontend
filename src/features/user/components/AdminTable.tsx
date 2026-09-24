@@ -1,13 +1,6 @@
-import { useMemo, useState } from 'react'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type SortingState,
-} from '@tanstack/react-table'
-import { ArrowUpDown, LoaderCircle } from 'lucide-react'
+import { useMemo } from 'react'
+import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import { LoaderCircle } from 'lucide-react'
 
 import {
   AlertDialog,
@@ -39,7 +32,6 @@ function StatusBadge({ active }: { active: boolean }) {
 }
 
 export function AdminsTable({ users }: { users: UsuarioListado[] }) {
-  const [sorting, setSorting] = useState<SortingState>([])
   const { user: currentUser } = useSession()
   const enableUser = useEnableUser()
   const disableUser = useDisableUser()
@@ -64,7 +56,7 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
       }),
 
       columnHelper.accessor('createdAt', {
-        header: 'Alta',
+        header: 'Fecha de registro',
         // Llega como ISO string: se convierte solo para mostrarlo.
         cell: (info) => new Date(info.getValue()).toLocaleDateString('es-CR'),
       }),
@@ -135,10 +127,7 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
   const table = useReactTable({
     data: users,
     columns,
-    state: { sorting },
-    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
   })
 
   return (
@@ -149,18 +138,7 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th key={header.id} scope="col" className="px-4 py-3 text-sm font-semibold tracking-wide">
-                  {header.column.getCanSort() ? (
-                    <button
-                      type="button"
-                      onClick={header.column.getToggleSortingHandler()}
-                      className="inline-flex cursor-pointer items-center gap-1.5 hover:text-rose-900"
-                    >
-                      {flexRender(header.column.columnDef.header, header.getContext())}
-                      <ArrowUpDown className="size-3.5" />
-                    </button>
-                  ) : (
-                    flexRender(header.column.columnDef.header, header.getContext())
-                  )}
+                  {flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
             </tr>

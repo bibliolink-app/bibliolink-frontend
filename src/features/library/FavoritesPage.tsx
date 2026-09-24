@@ -12,9 +12,6 @@ export function FavoritesPage() {
       <div className="grid place-items-center gap-3 rounded-lg bg-stone-300 px-4 py-14 text-center">
         <Library className="size-10 text-stone-600" />
         <p className="font-serif text-xl font-semibold text-stone-900">Todavía no hay favoritos</p>
-        <p className="max-w-sm text-stone-600">
-          Cuando el catálogo esté disponible, los libros que guardes aparecerán aquí.
-        </p>
       </div>
     </>
   )

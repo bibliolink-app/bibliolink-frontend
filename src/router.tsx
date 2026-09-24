@@ -17,12 +17,15 @@ import { CreateAdminPage } from './features/user/Pages/CreateAdminPage'
 import { FavoritesPage } from './features/library/FavoritesPage'
 import { SearchPage } from './features/library/SearchPage'
 import { UserProfilePage } from './features/user/Pages/UserProfilePage'
+import { LandingPage } from './features/landing/landingPage'
+
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
  
  //Las features importan este objeto 
  
 export const PATHS = {
-  home: '/',
+  home: '/biblioteca',
+  landing: '/',
   login: '/login',
   register: '/register',
   forgotPassword: '/forgot-password',
@@ -46,6 +49,7 @@ export function createAppRouter() {
     {
       element: <PublicOnly />,
       children: [
+        { path: PATHS.landing, element: <LandingPage /> },
         { path: PATHS.login, element: <LoginPage /> },
         { path: PATHS.register, element: <RegisterPage /> },
         { path: PATHS.forgotPassword, element: <ForgotPasswordPage /> },
@@ -86,6 +90,6 @@ export function createAppRouter() {
       ],
     },
 
-    { path: '*', element: <Navigate to={PATHS.home} replace /> },
+    { path: '*', element: <Navigate to={PATHS.landing} replace /> },
   ])
 }

@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean
 }
 
-/** Botón principal de los formularios. Un solo estilo: si hace falta otro, va directamente en su `<button>`. */
+/** Botón principal de los formularios*/
 export function Button({ type = 'button', loading = false, disabled, children, ...props }: ButtonProps) {
   return (
     <button

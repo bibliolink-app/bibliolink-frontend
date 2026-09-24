@@ -27,7 +27,7 @@ export function AdminsListPage() {
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Administradores</h1>
-          <p className="mt-2 text-stone-300">Cuentas con permisos de administración de la plataforma.</p>
+         
         </div>
 
         <Link
