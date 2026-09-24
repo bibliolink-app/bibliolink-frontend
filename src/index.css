@@ -4,3 +4,8 @@
 @theme {
   --font-serif: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
 }
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

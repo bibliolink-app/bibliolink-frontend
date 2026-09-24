@@ -1,20 +1,12 @@
-import { BookOpen } from 'lucide-react'
-
+/**
+ * Inicio del lector: aquí irá el catálogo de libros.
+ * Pendiente del endpoint del backend, que consumirá la API externa de libros.
+ */
 export function LibraryHomePage() {
   return (
-    <>
-      <header className="mb-8 max-w-2xl">
-        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Tu biblioteca</h1>
-        <p className="mt-2 text-stone-300">Descubre libros y retoma tu lectura donde la dejaste.</p>
-      </header>
-
-      <div className="grid place-items-center gap-3 rounded-lg bg-stone-300 px-4 py-14 text-center">
-        <BookOpen className="size-10 text-stone-600" />
-        <p className="font-serif text-xl font-semibold text-stone-900">El catálogo está en construcción</p>
-        <p className="max-w-sm text-stone-600">
-          Muy pronto podrás explorar y leer libros directamente desde aquí.
-        </p>
-      </div>
-    </>
+    <header className="max-w-2xl">
+      <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Tu biblioteca</h1>
+      <p className="mt-2 text-stone-300">Descubre libros y retoma tu lectura donde la dejaste.</p>
+    </header>
   )
 }

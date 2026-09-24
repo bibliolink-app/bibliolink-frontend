@@ -51,7 +51,7 @@ export function AdminDashboardPage() {
                 to={to}
                 className="block h-full rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
               >
-                <FeatureCard {...section} pending={false} />
+                <FeatureCard {...section} />
               </Link>
             ) : (
               <FeatureCard {...section} />
