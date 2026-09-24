@@ -1,9 +1,70 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-serif: 'Playfair Display Variable', Georgia, 'Times New Roman', serif;
 }
+
+@theme inline {
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/* BiblioLink no alterna claro/oscuro. Estas superficies usan un gris cálido neutro (stone-800),
+   oscuro pero sin llegar a negro puro, con el mismo texto stone-300 que ya usa el body. */
+:root {
+  --background: var(--color-stone-800);
+  --foreground: var(--color-stone-300);
+  --card: var(--color-stone-800);
+  --card-foreground: var(--color-stone-300);
+  --popover: var(--color-stone-800);
+  --popover-foreground: var(--color-stone-300);
+  --primary: var(--color-yellow-600);
+  --primary-foreground: var(--color-stone-900);
+  --secondary: var(--color-stone-700);
+  --secondary-foreground: var(--color-stone-300);
+  --muted: var(--color-stone-700);
+  --muted-foreground: var(--color-stone-400);
+  --accent: var(--color-stone-700);
+  --accent-foreground: var(--color-stone-300);
+  --destructive: var(--color-rose-900);
+  --destructive-foreground: var(--color-stone-100);
+  --border: color-mix(in oklab, var(--color-stone-300) 15%, transparent);
+  --input: color-mix(in oklab, var(--color-stone-300) 15%, transparent);
+  --ring: var(--color-yellow-800);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

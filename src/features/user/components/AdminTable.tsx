@@ -2,6 +2,17 @@ import { useMemo } from 'react'
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { LoaderCircle } from 'lucide-react'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../../../components/ui/alert-dialog'
 import { useSession } from '../../auth/hooks/useSession'
 import { useDisableUser, useEnableUser } from '../Hook/UserHook'
 import type { UsuarioListado } from '../Models/UserModels'
@@ -59,21 +70,53 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
           // El backend impide que un administrador se desactive a sí mismo.
           const isSelf = target.userId === currentUser?.userId
           const isThisRowPending = isMutating && pendingUserId === target.userId
+          const buttonClassName =
+            'inline-flex items-center gap-1.5 rounded-md border border-stone-500 px-3 py-1.5 text-sm font-semibold text-stone-900 enabled:cursor-pointer enabled:hover:border-rose-900 enabled:hover:bg-rose-900 enabled:hover:text-stone-100 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition-colors'
+
+          if (!isActive) {
+            return (
+              <button
+                type="button"
+                disabled={isMutating}
+                aria-busy={isThisRowPending}
+                onClick={() => enableUser.mutate(target.userId)}
+                className={buttonClassName}
+              >
+                {isThisRowPending && <LoaderCircle className="size-4 motion-safe:animate-spin" />}
+                Habilitar
+              </button>
+            )
+          }
 
           return (
-            <button
-              type="button"
-              disabled={isSelf || isMutating}
-              aria-busy={isThisRowPending}
-              title={isSelf ? 'No puedes cambiar el estado de tu propia cuenta.' : undefined}
-              onClick={() =>
-                isActive ? disableUser.mutate(target.userId) : enableUser.mutate(target.userId)
-              }
-              className="inline-flex items-center gap-1.5 rounded-md border border-stone-500 px-3 py-1.5 text-sm font-semibold text-stone-900 enabled:cursor-pointer enabled:hover:border-rose-900 enabled:hover:bg-rose-900 enabled:hover:text-stone-100 disabled:cursor-not-allowed disabled:opacity-50 motion-safe:transition-colors"
-            >
-              {isThisRowPending && <LoaderCircle className="size-4 motion-safe:animate-spin" />}
-              {isActive ? 'Deshabilitar' : 'Habilitar'}
-            </button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <button
+                  type="button"
+                  disabled={isSelf || isMutating}
+                  aria-busy={isThisRowPending}
+                  title={isSelf ? 'No puedes cambiar el estado de tu propia cuenta.' : undefined}
+                  className={buttonClassName}
+                >
+                  {isThisRowPending && <LoaderCircle className="size-4 motion-safe:animate-spin" />}
+                  Deshabilitar
+                </button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>¿Deshabilitar a {target.username}?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    No podrá iniciar sesión hasta que vuelvas a habilitar su cuenta.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                  <AlertDialogAction variant="destructive" onClick={() => disableUser.mutate(target.userId)}>
+                    Deshabilitar
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           )
         },
       }),

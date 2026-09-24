@@ -1,5 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 
+import { userErrorMessage } from '../lib/userErrorMessage'
 import type { ActualizarUsuarioFormData } from '../Models/UserModels'
 import {
   createAdmin,
@@ -72,6 +74,10 @@ export const useEnableUser = () => {
     mutationFn: enableUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] })
+      toast.success('Usuario habilitado.')
+    },
+    onError: (error) => {
+      toast.error(userErrorMessage(error))
     },
   })
 }
@@ -84,6 +90,10 @@ export const useDisableUser = () => {
     mutationFn: disableUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['users'] })
+      toast.success('Usuario deshabilitado.')
+    },
+    onError: (error) => {
+      toast.error(userErrorMessage(error))
     },
   })
 }

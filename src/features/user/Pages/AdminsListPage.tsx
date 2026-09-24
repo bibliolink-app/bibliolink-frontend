@@ -32,7 +32,7 @@ export function AdminsListPage() {
 
         <Link
           to={PATHS.adminUserNew}
-          className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-rose-900 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
+          className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
         >
           <UserPlus className="size-5" />
           Nuevo administrador
