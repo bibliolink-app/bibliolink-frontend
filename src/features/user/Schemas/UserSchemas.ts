@@ -19,7 +19,7 @@ const contrasenaFuerte = z
     error: 'La contraseña es demasiado larga.',
   })
 
-/** Refleja normalizeLocalDate: formato exacto y que la fecha exista de verdad. */
+/** valida que la fech aexista . */
 const fechaLocal = z
   .string()
   .trim()

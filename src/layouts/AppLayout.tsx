@@ -7,7 +7,7 @@ import { ROLE_LABELS } from '../features/auth/types'
 import { Logo } from '../ui/Logo'
 import { BottomNav } from '../ui/BottomNav'
 import { PATHS } from '../router'
-/** Marco de la zona autenticada: cabecera con la marca, el rol de la sesión y el cierre de sesión. */
+/** el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {
   const { user, isAdmin } = useSession()
 const logout = useLogout()

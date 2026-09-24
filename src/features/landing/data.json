@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "title": "BIBLIO LINK",
+    "subtitle": "Tu biblioteca virtual al alcance de todos",
+    "description": "Una plataforma pensada para acercar la lectura a cualquier persona, desde cualquier lugar. Explora, descubre y encuentra tu próximo libro sin salir de casa.",
+    "loginLabel": "Iniciar sesión"
+  },
+  "nav": [
+    { "label": "¿Qué es?", "href": "#que-es" },
+    { "label": "Características", "href": "#caracteristicas" },
+    { "label": "Beneficios", "href": "#beneficios" }
+  ],
+  "about": {
+    "title": "Biblioteca virtual",
+    "description": "Biblio Link es un servicio que fomenta la lectura en los ciudadanos, brindando acceso a una biblioteca virtual donde los usuarios pueden consultar y descubrir diferentes libros.",
+    "stepsTitle": "¿Cómo acceder al catálogo?",
+    "steps": [
+      {
+        "icon": "UserPlus",
+        "title": "Crear tu cuenta",
+        "description": "Regístrate con un usuario y contraseña."
+      },
+      {
+        "icon": "LogIn",
+        "title": "Iniciar sesión",
+        "description": "Ingresa a Biblio Link con tus datos."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "Explorar el catálogo",
+        "description": "Consulta los libros disponibles en la biblioteca."
+      },
+      {
+        "icon": "Search",
+        "title": "Buscar un libro",
+        "description": "Busca por título, autor o categoría."
+      }
+    ]
+  },
+  "features": {
+    "title": "Características",
+    "description": "Todo lo que encontrarás dentro de la plataforma.",
+    "items": [
+      {
+        "icon": "BookOpen",
+        "title": "Catálogo de libros",
+        "description": "Consulta los diferentes libros disponibles en la biblioteca."
+      },
+      {
+        "icon": "Search",
+        "title": "Búsqueda y filtros",
+        "description": "Encuentra libros por título, autor o categoría."
+      },
+      {
+        "icon": "FileText",
+        "title": "Información de libros",
+        "description": "Consulta la sinopsis y los detalles de cada libro."
+      },
+      {
+        "icon": "UserPlus",
+        "title": "Cuenta personal",
+        "description": "Crea una cuenta para acceder a todas las funcionalidades."
+      }
+    ]
+  },
+  "benefits": {
+    "title": "Beneficios de Biblio Link",
+    "description": "Por qué vale la pena leer con nosotros.",
+    "items": [
+      {
+        "icon": "Heart",
+        "title": "Fomenta la lectura",
+        "description": "Facilita el descubrimiento de nuevos libros y autores."
+      },
+      {
+        "icon": "Compass",
+        "title": "Acceso sencillo",
+        "description": "Consulta la biblioteca virtual de forma fácil y desde cualquier lugar."
+      },
+      {
+        "icon": "LayoutGrid",
+        "title": "Información organizada",
+        "description": "Encuentra libros por categorías, autores y títulos."
+      }
+    
+    ]
+  },
+    "Reading": {
+    "title": "Comienza a leer",
+    "description": "Crea tu cuenta e inicia sesión para comenzar a explorar el catálogo de Biblio Link.",
+    "buttonLabel": "Iniciar sesión"
+  },
+  "footer": {
+    "title": "BIBLIO LINK",
+    "description": "Una biblioteca virtual que fomenta el acceso y descubrimiento de la lectura."
+  }
+}

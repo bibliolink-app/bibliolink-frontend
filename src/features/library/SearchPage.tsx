@@ -1,6 +1,9 @@
 import { Search } from 'lucide-react'
 
-
+/**
+ * Búsqueda del catálogo. El campo ya está habilitado, pero todavía no consulta nada:
+ * falta el endpoint de libros del backend, que será quien hable con el proveedor externo.
+ */
 export function SearchPage() {
   return (
     <>
@@ -13,16 +16,11 @@ export function SearchPage() {
         <Search className="absolute top-1/2 left-3.5 size-5 -translate-y-1/2 text-stone-600" />
         <input
           type="search"
-          disabled
-          placeholder="Búsqueda no disponible todavía"
+          placeholder="Busca por título, autor o categoría"
           aria-label="Buscar libros"
-          className="w-full rounded-md border border-stone-500 bg-stone-100 py-3 pr-3.5 pl-11 text-base text-stone-900 shadow-inner shadow-black/5 disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-md border border-stone-500 bg-stone-100 py-3 pr-3.5 pl-11 text-base text-stone-900 shadow-inner shadow-black/5 hover:border-yellow-800 focus-visible:border-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
         />
       </div>
-
-      <p className="mt-6 text-stone-300">
-        El buscador se activará cuando el catálogo esté conectado.
-      </p>
     </>
   )
 }
