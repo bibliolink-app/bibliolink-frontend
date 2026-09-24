@@ -1,21 +1,12 @@
 import axios, { isAxiosError } from 'axios'
-import { z } from 'zod'
 
 //Conexión con la API del backend: configuración, errores y cliente HTTP.
- 
 
+const API_URL = import.meta.env.VITE_API_URL
 
-const envSchema = z.object({
-  VITE_API_URL: z.url({ error: 'VITE_API_URL debe ser una URL válida.' }),
-})
-
-const envResult = envSchema.safeParse(import.meta.env)
-
-if (!envResult.success) {
-  throw new Error(`Configuración de entorno inválida:\n${z.prettifyError(envResult.error)}`)
+if (!API_URL) {
+  throw new Error('Configuración de entorno inválida: VITE_API_URL no está definida.')
 }
-
-const API_URL = envResult.data.VITE_API_URL
 
 // ─────────────────────────────── Errores ────────────────────────────────
 
@@ -69,7 +60,7 @@ declare module 'axios' {
 }
 
 // Los tokens viajan en cookies httpOnly: no hay interceptor de request porque no hay nada que inyectar.
-export const http = axios.create({
+export const api = axios.create({
   baseURL: API_URL,
   withCredentials: true,
   timeout: 15_000,
@@ -89,7 +80,7 @@ let refreshing: Promise<boolean> | null = null
  * para no cerrar la sesión del usuario por un problema transitorio.
  */
 function refreshSession(): Promise<boolean> {
-  refreshing ??= http
+  refreshing ??= api
     .post('/auth/refresh', undefined, { skipAuthRefresh: true })
     .then(
       () => true,
@@ -105,7 +96,7 @@ function refreshSession(): Promise<boolean> {
   return refreshing
 }
 
-http.interceptors.response.use(undefined, async (error: unknown) => {
+api.interceptors.response.use(undefined, async (error: unknown) => {
   try {
     if (
       isAxiosError(error) &&
@@ -116,7 +107,7 @@ http.interceptors.response.use(undefined, async (error: unknown) => {
     ) {
       error.config._retry = true
 
-      if (await refreshSession()) return await http(error.config)
+      if (await refreshSession()) return await api(error.config)
       onSessionExpired()
     }
   } catch (refreshOrRetryError) {

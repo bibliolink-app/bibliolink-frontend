@@ -48,7 +48,7 @@ const logout = useLogout()
               onClick={() => logout.mutate()}
               disabled={logout.isPending}
               aria-busy={logout.isPending}
-              className="inline-flex items-center justify-center gap-2.5 rounded-md border border-yellow-600 px-4 py-2 font-semibold text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 enabled:cursor-pointer enabled:hover:border-rose-900 enabled:hover:bg-rose-900 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
+              className="inline-flex items-center justify-center gap-2.5 rounded-md border border-yellow-600 px-4 py-2 font-semibold text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
             >
               {logout.isPending ? (
                 <LoaderCircle className="size-4 motion-safe:animate-spin" />
