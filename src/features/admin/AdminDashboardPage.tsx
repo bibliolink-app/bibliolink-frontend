@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { BookOpen, CreditCard, Megaphone, UserCircle, Users } from 'lucide-react'
+import { BookOpen, CreditCard, UserCircle, Users } from 'lucide-react'
 
 import { PATHS } from '../../router'
 import { FeatureCard } from '../../ui/FeatureCard'
@@ -21,7 +21,7 @@ export function AdminDashboardPage() {
     },
     {
       title: 'Catálogo de libros',
-      description: 'Administra libros, proveedores e idiomas de la colección.',
+      description: 'Administra los libros de la colección.',
       icon: <BookOpen className="size-6" />,
     },
     {
@@ -29,11 +29,7 @@ export function AdminDashboardPage() {
       description: 'Supervisa las suscripciones activas y las transacciones de pago.',
       icon: <CreditCard className="size-6" />,
     },
-    {
-      title: 'Publicidad',
-      description: 'Configura los anuncios que ven los usuarios sin suscripción.',
-      icon: <Megaphone className="size-6" />,
-    },
+  
   ]
 
   return (

@@ -4,6 +4,7 @@ import { CircleUser, LoaderCircle, LogOut } from 'lucide-react'
 import { useLogout } from '../features/auth/hooks/useLogout'
 import { useSession } from '../features/auth/hooks/useSession'
 import { ROLE_LABELS } from '../features/auth/types'
+import { useSubscriptionEvents } from '../features/subscriptions/hooks/useSubscriptionEvents'
 import { Logo } from '../ui/Logo'
 import { BottomNav } from '../ui/BottomNav'
 import { PATHS } from '../router'
@@ -11,6 +12,9 @@ import { PATHS } from '../router'
 export function AppLayout() {
   const { user, isAdmin } = useSession()
 const logout = useLogout()
+
+  // Los administradores no tienen suscripción: no hace falta abrir la conexión SSE para ellos.
+  useSubscriptionEvents(!isAdmin)
 
   return (
     <div className="bg-linear-to-b from-mist-700 to-teal-950 flex flex-1 flex-col">

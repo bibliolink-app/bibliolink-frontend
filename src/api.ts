@@ -2,7 +2,7 @@ import axios, { isAxiosError } from 'axios'
 
 //Conexión con la API del backend: configuración, errores y cliente HTTP.
 
-const API_URL = import.meta.env.VITE_API_URL
+export const API_URL = import.meta.env.VITE_API_URL
 
 if (!API_URL) {
   throw new Error('Configuración de entorno inválida: VITE_API_URL no está definida.')
