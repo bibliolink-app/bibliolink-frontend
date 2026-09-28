@@ -1,8 +1,11 @@
 import { CircleAlert } from 'lucide-react'
 
+import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { TextLink } from '../../../ui/TextLink'
 import { useSession } from '../../auth/hooks/useSession'
 import { ROLE_LABELS } from '../../auth/types'
+import { useEntitlements } from '../../subscriptions/hooks/useEntitlements'
 import { useProfile } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 
@@ -19,6 +22,7 @@ function Field({ label, value }: { label: string; value: string }) {
 export function UserProfilePage() {
   const { data: profile, isPending, isError, error } = useProfile()
   const { user } = useSession()
+  const { entitlement, hasPremiumAccess } = useEntitlements()
 
   if (isPending) return <LoadingScreen />
 
@@ -65,6 +69,22 @@ export function UserProfilePage() {
           <Field label="Primer apellido" value={profile.firstSurname} />
           <Field label="Segundo apellido" value={profile.secondSurname ?? '—'} />
         </dl>
+      </article>
+
+      <article className="mt-6 rounded-lg bg-stone-300 p-6 text-stone-900 shadow-xl ring-1 ring-black/25 sm:p-8">
+        <h2 className="font-serif text-2xl font-semibold">Mi plan</h2>
+
+        {hasPremiumAccess ? (
+          <p className="mt-2 text-stone-600">Tienes BiblioLink Pro: sin anuncios y favoritos ilimitados.</p>
+        ) : entitlement.status === 'PENDING' ? (
+          <p className="mt-2 text-stone-600">Tu suscripción a BiblioLink Pro se está activando.</p>
+        ) : (
+          <p className="mt-2 text-stone-600">
+            Estás en el plan gratuito.{' '}
+            <TextLink to={PATHS.subscribe}>Hazte Pro</TextLink> para quitar los anuncios y tener favoritos
+            ilimitados.
+          </p>
+        )}
       </article>
     </>
   )
