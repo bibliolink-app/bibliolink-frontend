@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { BookOpen, CreditCard, Megaphone, UserCircle, Users } from 'lucide-react'
+import {  ChartColumn, CreditCard, UserCircle, Users } from 'lucide-react'
 
 import { PATHS } from '../../router'
 import { FeatureCard } from '../../ui/FeatureCard'
@@ -20,20 +20,18 @@ export function AdminDashboardPage() {
       to: PATHS.adminUsers,
     },
     {
-      title: 'Catálogo de libros',
-      description: 'Administra libros, proveedores e idiomas de la colección.',
-      icon: <BookOpen className="size-6" />,
+      title: 'Estadísticas',
+      description: 'Consulta el crecimiento de usuarios registrados en la plataforma.',
+      icon: <ChartColumn className="size-6" />,
+      to: PATHS.adminAnalytics,
     },
+ 
     {
       title: 'Suscripciones y pagos',
       description: 'Supervisa las suscripciones activas y las transacciones de pago.',
       icon: <CreditCard className="size-6" />,
     },
-    {
-      title: 'Publicidad',
-      description: 'Configura los anuncios que ven los usuarios sin suscripción.',
-      icon: <Megaphone className="size-6" />,
-    },
+
   ]
 
   return (

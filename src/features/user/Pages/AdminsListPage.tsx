@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router'
-import { ArrowLeft, CircleAlert, UserPlus } from 'lucide-react'
+import { ArrowLeft, ChevronRight, CircleAlert, UserPlus, Users } from 'lucide-react'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../ui/LoadingScreen'
@@ -30,13 +30,24 @@ export function AdminsListPage() {
          
         </div>
 
-        <Link
-          to={PATHS.adminUserNew}
-          className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-rose-900 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
-        >
-          <UserPlus className="size-5" />
-          Nuevo administrador
-        </Link>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            to={PATHS.adminUserNew}
+            className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-rose-900 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
+          >
+            <UserPlus className="size-5" />
+            Nuevo administrador
+          </Link>
+
+          <Link
+            to={PATHS.adminNormalUsers}
+            className="inline-flex items-center gap-2 rounded-md border border-yellow-600 px-4 py-3 font-semibold text-stone-300 hover:border-rose-900 hover:bg-rose-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
+          >
+            <Users className="size-5" />
+            Usuarios normales
+            <ChevronRight className="size-4" />
+          </Link>
+        </div>
       </header>
 
       {isPending && <LoadingScreen />}
