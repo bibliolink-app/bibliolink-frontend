@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Libros } from '../book/components/Libros'
 import { useBooks } from '../book/Hook/BookHook'
 import { bookErrorMessage } from '../book/lib/bookErrorMessage'
-import { LoadingScreen } from '../../ui/LoadingScreen'
+import { LoadingScreen } from '../../components/ui/LoadingScreen'
 
 export function LibraryHomePage() {
   const { t } = useTranslation()

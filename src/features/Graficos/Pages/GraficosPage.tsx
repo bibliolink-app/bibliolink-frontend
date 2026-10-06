@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 import { ArrowLeft, ChevronRight, CircleAlert, Crown, Users } from 'lucide-react'
 
 import { PATHS } from '../../../router'
-import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { RegistrationsChart } from '../components/RegistrationsChart'
 import { RegistrationsTable } from '../components/RegistrationsTable'
 import { StatTile } from '../components/CardTotalUsuarios'
