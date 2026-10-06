@@ -2,8 +2,8 @@ import { useSearchParams } from 'react-router'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { CenteredCard } from '../../../ui/CenteredCard'
-import { TextLink } from '../../../ui/TextLink'
+import { CenteredCard } from '../../../components/ui/CenteredCard'
+import { TextLink } from '../../../components/ui/TextLink'
 import { ResetPasswordForm } from '../components/ResetPasswordForm'
 
 // El backend genera el token con 32 bytes en hexadecimal: 64 caracteres. Si no tiene esa forma, ni se intenta.

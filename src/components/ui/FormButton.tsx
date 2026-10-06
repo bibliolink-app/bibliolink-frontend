@@ -1,13 +1,13 @@
 import { LoaderCircle } from 'lucide-react'
 import type { ButtonHTMLAttributes } from 'react'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface FormButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Muestra un indicador de progreso y bloquea el botón mientras se procesa la acción. */
   loading?: boolean
 }
 
 /** Botón principal de los formularios*/
-export function Button({ type = 'button', loading = false, disabled, children, ...props }: ButtonProps) {
+export function FormButton({ type = 'button', loading = false, disabled, children, ...props }: FormButtonProps) {
   return (
     <button
       {...props}

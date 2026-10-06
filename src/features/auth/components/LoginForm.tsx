@@ -3,9 +3,9 @@ import { CircleAlert } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { Button } from '../../../ui/Button'
-import { TextField } from '../../../ui/TextField'
-import { TextLink } from '../../../ui/TextLink'
+import { FormButton } from '../../../components/ui/FormButton'
+import { TextField } from '../../../components/ui/TextField'
+import { TextLink } from '../../../components/ui/TextLink'
 import { useLogin } from '../hooks/useLogin'
 import { loginErrorMessage } from '../lib/loginErrorMessage'
 import { loginSchema } from '../schemas/loginSchema'
@@ -16,8 +16,8 @@ export function LoginForm() {
 
   const form = useForm({
     defaultValues: { email: '', password: '' },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    // Valida en cada cambio desde el inicio, no solo tras el primer intento de envío.
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: loginSchema },
     // El error se muestra con `login.error`. El éxito no navega: al aparecer la sesión, `PublicOnly` redirige.
     onSubmit: ({ value }) => {
@@ -83,9 +83,9 @@ export function LoginForm() {
         </div>
       )}
 
-      <Button type="submit" loading={login.isPending}>
+      <FormButton type="submit" loading={login.isPending}>
         {login.isPending ? t('auth:login.submitting') : t('auth:login.submit')}
-      </Button>
+      </FormButton>
     </form>
   )
 }

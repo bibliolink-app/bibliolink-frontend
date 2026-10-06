@@ -4,7 +4,7 @@ import { ArrowLeft, ChevronRight, CircleAlert, UserPlus, Users } from 'lucide-re
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { AdminsTable } from '../components/AdminTable'
 import { useUsers } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'

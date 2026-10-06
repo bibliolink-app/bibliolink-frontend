@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import { FeatureCard } from '../../../ui/FeatureCard'
+import { FeatureCard } from '../../../components/ui/FeatureCard'
 import { ICONS } from '../icons'
 import type { LandingCardSection } from '../types'
 

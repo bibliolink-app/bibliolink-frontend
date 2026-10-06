@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import { CenteredCard } from '../../../ui/CenteredCard'
+import { CenteredCard } from '../../../components/ui/CenteredCard'
 import { ForgotPasswordForm } from '../components/ForgotPasswordForm'
 
 export function ForgotPasswordPage() {

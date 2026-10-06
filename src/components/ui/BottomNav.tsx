@@ -2,7 +2,7 @@ import { NavLink } from 'react-router'
 import { House, Library, Search } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { PATHS } from '../router'
+import { PATHS } from '../../router'
 
 
 export function BottomNav() {
