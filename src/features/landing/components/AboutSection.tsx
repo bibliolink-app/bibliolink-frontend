@@ -1,20 +1,21 @@
 import { ChevronRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
-import data from '../data.json'
 import { ICONS } from '../icons'
 import type { LandingStep } from '../types'
 
 /** Explica qué es Biblio Link y los pasos para llegar al catálogo. */
 export function AboutSection() {
-  const steps = data.about.steps as LandingStep[]
+  const { t } = useTranslation()
+  const steps = t('landing:about.steps', { returnObjects: true }) as LandingStep[]
 
   return (
     <section id="que-es" className="scroll-mt-20 bg-stone-300 py-20 text-stone-900 sm:py-24">
       <div className="mx-auto w-full max-w-6xl px-4">
-        <h2 className="font-serif text-3xl font-semibold sm:text-4xl">{data.about.title}</h2>
-        <p className="mt-4 max-w-prose text-lg text-stone-600">{data.about.description}</p>
+        <h2 className="font-serif text-3xl font-semibold sm:text-4xl">{t('landing:about.title')}</h2>
+        <p className="mt-4 max-w-prose text-lg text-stone-600">{t('landing:about.description')}</p>
 
-        <h3 className="mt-14 font-serif text-2xl font-semibold">{data.about.stepsTitle}</h3>
+        <h3 className="mt-14 font-serif text-2xl font-semibold">{t('landing:about.stepsTitle')}</h3>
 
         <ol className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {steps.map((step, index) => {

@@ -1,0 +1,94 @@
+{
+  "dashboard": {
+    "title": "Admin panel",
+    "subtitle": "Manage the platform from here.",
+    "sections": {
+      "profile": {
+        "title": "My profile",
+        "description": "View the details of the account you're signed in with."
+      },
+      "users": {
+        "title": "Users",
+        "description": "View accounts, create admins, and manage each user's status."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Track the growth of registered users on the platform."
+      },
+      "catalog": {
+        "title": "Book catalog",
+        "description": "Manage the books in the collection."
+      },
+      "subscriptions": {
+        "title": "Subscriptions & payments",
+        "description": "Monitor active subscriptions and payment transactions."
+      }
+    }
+  },
+  "common": {
+    "backToPanel": "Back to panel"
+  },
+  "profile": {
+    "accountInfo": "Account information",
+    "personalInfo": "Personal information",
+    "fields": {
+      "username": "Username",
+      "email": "Email",
+      "firstName": "First name",
+      "middleName": "Middle name",
+      "firstSurname": "First surname",
+      "secondSurname": "Second surname",
+      "birthDate": "Date of birth"
+    }
+  },
+  "usersList": {
+    "title": "Admins",
+    "newAdmin": "New admin",
+    "normalUsers": "Regular users",
+    "empty": "No admins registered."
+  },
+  "createAdminPage": {
+    "backToList": "Back to list",
+    "title": "New admin",
+    "subtitle": "The account is created with the admin role and is active immediately."
+  },
+  "table": {
+    "headers": {
+      "username": "Username",
+      "fullName": "Full name",
+      "email": "Email",
+      "status": "Status",
+      "createdAt": "Registered on",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "actions": {
+      "enable": "Enable",
+      "disable": "Disable",
+      "selfDisableTitle": "You can't change the status of your own account."
+    },
+    "confirmDisable": {
+      "title": "Disable {{username}}?",
+      "description": "They won't be able to sign in until you re-enable their account.",
+      "cancel": "Cancel",
+      "confirm": "Disable"
+    }
+  },
+  "createAdminForm": {
+    "fields": {
+      "username": "Username",
+      "email": "Email",
+      "firstName": "First name",
+      "middleName": "Middle name (optional)",
+      "firstSurname": "First surname",
+      "secondSurname": "Second surname (optional)",
+      "birthDate": "Date of birth",
+      "password": "Password"
+    },
+    "submitting": "Creating…",
+    "submit": "Create admin"
+  }
+}

@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { ReactNode } from 'react'
 
 import { setSessionExpiredHandler } from './api'
+import { Toaster } from './components/ui/sonner'
 import { useSession } from './features/auth/hooks/useSession'
 import { endSession } from './features/auth/lib/session'
 import { LoadingScreen } from './ui/LoadingScreen'
@@ -25,6 +26,7 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionGate>{children}</SessionGate>
+      <Toaster />
     </QueryClientProvider>
   )
 }

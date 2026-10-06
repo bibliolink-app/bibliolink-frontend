@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import i18n from '@/i18n'
 import { emailSchema } from './emailSchema'
 import { strongPasswordSchema } from './strongPasswordSchema'
 
@@ -16,10 +17,10 @@ export type ForgotPasswordInput = z.output<typeof forgotPasswordSchema>
 export const resetPasswordSchema = z
   .object({
     newPassword: strongPasswordSchema,
-    confirmPassword: z.string().min(1, { error: 'Confirma tu contraseña.' }),
+    confirmPassword: z.string().min(1, { error: () => i18n.t('auth:validation.confirmPassword.required') }),
   })
   .refine((values) => values.newPassword === values.confirmPassword, {
-    error: 'Las contraseñas no coinciden.',
+    error: () => i18n.t('auth:validation.confirmPassword.mismatch'),
     path: ['confirmPassword'],
   })
 

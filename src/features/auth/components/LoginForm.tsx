@@ -1,5 +1,6 @@
 import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { Button } from '../../../ui/Button'
@@ -10,6 +11,7 @@ import { loginErrorMessage } from '../lib/loginErrorMessage'
 import { loginSchema } from '../schemas/loginSchema'
 
 export function LoginForm() {
+  const { t } = useTranslation()
   const login = useLogin()
 
   const form = useForm({
@@ -36,7 +38,7 @@ export function LoginForm() {
       <form.Field name="email">
         {(field) => (
           <TextField
-            label="Correo electrónico"
+            label={t('auth:login.emailLabel')}
             name={field.name}
             type="email"
             autoComplete="email"
@@ -53,7 +55,7 @@ export function LoginForm() {
         <form.Field name="password">
           {(field) => (
             <TextField
-              label="Contraseña"
+              label={t('auth:login.passwordLabel')}
               name={field.name}
               type="password"
               autoComplete="current-password"
@@ -67,7 +69,7 @@ export function LoginForm() {
         </form.Field>
 
         <div className="text-right text-sm">
-          <TextLink to={PATHS.forgotPassword}>¿Olvidaste tu contraseña?</TextLink>
+          <TextLink to={PATHS.forgotPassword}>{t('auth:login.forgotPassword')}</TextLink>
         </div>
       </div>
 
@@ -82,7 +84,7 @@ export function LoginForm() {
       )}
 
       <Button type="submit" loading={login.isPending}>
-        {login.isPending ? 'Iniciando sesión…' : 'Iniciar sesión'}
+        {login.isPending ? t('auth:login.submitting') : t('auth:login.submit')}
       </Button>
     </form>
   )

@@ -1,29 +1,30 @@
 import { z } from 'zod'
 
+import i18n from '../../../i18n'
 
 const contrasenaFuerte = z
   .string()
   .refine((valor) => Array.from(valor).length >= 8, {
-    error: 'La contraseña debe tener al menos 8 caracteres.',
+    error: () => i18n.t('user:validation.password.minLength'),
   })
   .refine((valor) => /\p{L}/u.test(valor), {
-    error: 'La contraseña debe incluir al menos una letra.',
+    error: () => i18n.t('user:validation.password.needsLetter'),
   })
   .refine((valor) => /\p{N}/u.test(valor), {
-    error: 'La contraseña debe incluir al menos un número.',
+    error: () => i18n.t('user:validation.password.needsNumber'),
   })
   .refine((valor) => /[\p{P}\p{S}]/u.test(valor), {
-    error: 'La contraseña debe incluir al menos un carácter especial.',
+    error: () => i18n.t('user:validation.password.needsSpecial'),
   })
   .refine((valor) => new TextEncoder().encode(valor).length <= 72, {
-    error: 'La contraseña es demasiado larga.',
+    error: () => i18n.t('user:validation.password.tooLong'),
   })
 
 /** valida que la fech aexista . */
 const fechaLocal = z
   .string()
   .trim()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'La fecha debe tener el formato AAAA-MM-DD.' })
+  .regex(/^\d{4}-\d{2}-\d{2}$/, { error: () => i18n.t('user:validation.date.format') })
   .refine(
     (valor) => {
       const [anio, mes, dia] = valor.split('-').map(Number)
@@ -31,36 +32,36 @@ const fechaLocal = z
       // Un día inexistente (31 de febrero) desborda al mes siguiente y deja de coincidir.
       return fecha.getFullYear() === anio && fecha.getMonth() === mes - 1 && fecha.getDate() === dia
     },
-    { error: 'Esa fecha no existe.' },
+    { error: () => i18n.t('user:validation.date.invalid') },
   )
 
 const correo = z
   .string()
   .trim()
   .toLowerCase()
-  .min(1, { error: 'El correo electrónico es obligatorio.' })
-  .max(254, { error: 'El correo electrónico no puede superar los 254 caracteres.' })
-  .pipe(z.email({ error: 'Ingresa un correo electrónico válido.' }))
+  .min(1, { error: () => i18n.t('user:validation.email.required') })
+  .max(254, { error: () => i18n.t('user:validation.email.tooLong') })
+  .pipe(z.email({ error: () => i18n.t('user:validation.email.invalid') }))
 
 const nombreUsuario = z
   .string()
   .trim()
-  .min(1, { error: 'El nombre de usuario es obligatorio.' })
-  .max(25, { error: 'El nombre de usuario no puede superar los 25 caracteres.' })
+  .min(1, { error: () => i18n.t('user:validation.username.required') })
+  .max(25, { error: () => i18n.t('user:validation.username.tooLong') })
 
-const nombreObligatorio = (etiqueta: string) =>
+const nombreObligatorio = (labelKey: 'firstName' | 'firstSurname') =>
   z
     .string()
     .trim()
-    .min(1, { error: `${etiqueta} es obligatorio.` })
-    .max(50, { error: `${etiqueta} no puede superar los 50 caracteres.` })
+    .min(1, { error: () => i18n.t('user:validation.required', { label: i18n.t(`user:fields.${labelKey}`) }) })
+    .max(50, { error: () => i18n.t('user:validation.tooLong50', { label: i18n.t(`user:fields.${labelKey}`) }) })
 
 
-const nombreOpcional = (etiqueta: string) =>
+const nombreOpcional = (labelKey: 'middleName' | 'secondSurname') =>
   z
     .string()
     .trim()
-    .max(50, { error: `${etiqueta} no puede superar los 50 caracteres.` })
+    .max(50, { error: () => i18n.t('user:validation.tooLong50', { label: i18n.t(`user:fields.${labelKey}`) }) })
     .transform((valor) => (valor === '' ? null : valor))
 
 // ─── Esquemas ───
@@ -68,10 +69,10 @@ const nombreOpcional = (etiqueta: string) =>
 /** Valida el formulario de admi */
 export const crearAdminSchema = z.object({
   username: nombreUsuario,
-  firstName: nombreObligatorio('El primer nombre'),
-  middleName: nombreOpcional('El segundo nombre'),
-  firstSurname: nombreObligatorio('El primer apellido'),
-  secondSurname: nombreOpcional('El segundo apellido'),
+  firstName: nombreObligatorio('firstName'),
+  middleName: nombreOpcional('middleName'),
+  firstSurname: nombreObligatorio('firstSurname'),
+  secondSurname: nombreOpcional('secondSurname'),
   birthDate: fechaLocal,
   email: correo,
   password: contrasenaFuerte,
@@ -80,10 +81,10 @@ export const crearAdminSchema = z.object({
 /** Valida el formulario */
 export const actualizarUsuarioSchema = z.object({
   username: nombreUsuario.optional(),
-  firstName: nombreObligatorio('El primer nombre').optional(),
-  middleName: nombreOpcional('El segundo nombre').optional(),
-  firstSurname: nombreObligatorio('El primer apellido').optional(),
-  secondSurname: nombreOpcional('El segundo apellido').optional(),
+  firstName: nombreObligatorio('firstName').optional(),
+  middleName: nombreOpcional('middleName').optional(),
+  firstSurname: nombreObligatorio('firstSurname').optional(),
+  secondSurname: nombreOpcional('secondSurname').optional(),
   birthDate: fechaLocal.optional(),
   email: correo.optional(),
 })

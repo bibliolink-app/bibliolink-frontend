@@ -1,0 +1,94 @@
+{
+  "dashboard": {
+    "title": "Panneau d'administration",
+    "subtitle": "Gérez la plateforme depuis ici.",
+    "sections": {
+      "profile": {
+        "title": "Mon profil",
+        "description": "Consultez les informations du compte avec lequel vous êtes connecté."
+      },
+      "users": {
+        "title": "Utilisateurs",
+        "description": "Consultez les comptes, créez des administrateurs et gérez le statut de chaque utilisateur."
+      },
+      "analytics": {
+        "title": "Statistiques",
+        "description": "Suivez la croissance des utilisateurs inscrits sur la plateforme."
+      },
+      "catalog": {
+        "title": "Catalogue de livres",
+        "description": "Gérez les livres de la collection."
+      },
+      "subscriptions": {
+        "title": "Abonnements et paiements",
+        "description": "Suivez les abonnements actifs et les transactions de paiement."
+      }
+    }
+  },
+  "common": {
+    "backToPanel": "Retour au panneau"
+  },
+  "profile": {
+    "accountInfo": "Informations du compte",
+    "personalInfo": "Informations personnelles",
+    "fields": {
+      "username": "Nom d'utilisateur",
+      "email": "E-mail",
+      "firstName": "Prénom",
+      "middleName": "Deuxième prénom",
+      "firstSurname": "Premier nom de famille",
+      "secondSurname": "Second nom de famille",
+      "birthDate": "Date de naissance"
+    }
+  },
+  "usersList": {
+    "title": "Administrateurs",
+    "newAdmin": "Nouvel administrateur",
+    "normalUsers": "Utilisateurs normaux",
+    "empty": "Aucun administrateur enregistré."
+  },
+  "createAdminPage": {
+    "backToList": "Retour à la liste",
+    "title": "Nouvel administrateur",
+    "subtitle": "Le compte est créé avec le rôle d'administrateur et est actif immédiatement."
+  },
+  "table": {
+    "headers": {
+      "username": "Utilisateur",
+      "fullName": "Nom complet",
+      "email": "E-mail",
+      "status": "Statut",
+      "createdAt": "Date d'inscription",
+      "actions": "Actions"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif"
+    },
+    "actions": {
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "selfDisableTitle": "Vous ne pouvez pas changer le statut de votre propre compte."
+    },
+    "confirmDisable": {
+      "title": "Désactiver {{username}} ?",
+      "description": "Il/elle ne pourra pas se connecter jusqu'à ce que vous réactiviez son compte.",
+      "cancel": "Annuler",
+      "confirm": "Désactiver"
+    }
+  },
+  "createAdminForm": {
+    "fields": {
+      "username": "Nom d'utilisateur",
+      "email": "E-mail",
+      "firstName": "Prénom",
+      "middleName": "Deuxième prénom (facultatif)",
+      "firstSurname": "Premier nom de famille",
+      "secondSurname": "Second nom de famille (facultatif)",
+      "birthDate": "Date de naissance",
+      "password": "Mot de passe"
+    },
+    "submitting": "Création…",
+    "submit": "Créer l'administrateur"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "title": "BIBLIO LINK",
+    "subtitle": "Your virtual library, within everyone's reach",
+    "description": "A platform designed to bring reading closer to anyone, from anywhere. Explore, discover, and find your next book without leaving home.",
+    "loginLabel": "Log in"
+  },
+  "nav": {
+    "ariaSections": "Sections",
+    "ariaFooterLinks": "Footer links",
+    "items": [
+      { "label": "What is it?", "href": "#que-es" },
+      { "label": "Features", "href": "#caracteristicas" },
+      { "label": "Benefits", "href": "#beneficios" }
+    ]
+  },
+  "about": {
+    "title": "Virtual library",
+    "description": "Biblio Link is a service that encourages reading among citizens, providing access to a virtual library where users can browse and discover different books.",
+    "stepsTitle": "How do I access the catalog?",
+    "steps": [
+      { "icon": "UserPlus", "title": "Create your account", "description": "Sign up with a username and password." },
+      { "icon": "LogIn", "title": "Log in", "description": "Sign in to Biblio Link with your details." },
+      { "icon": "BookOpen", "title": "Browse the catalog", "description": "Check out the books available in the library." },
+      { "icon": "Search", "title": "Search for a book", "description": "Search by title, author, or category." }
+    ]
+  },
+  "features": {
+    "title": "Features",
+    "description": "Everything you'll find within the platform.",
+    "items": [
+      { "icon": "BookOpen", "title": "Book catalog", "description": "Check out the different books available in the library." },
+      { "icon": "Search", "title": "Search and filters", "description": "Find books by title, author, or category." },
+      { "icon": "FileText", "title": "Book details", "description": "View the synopsis and details of each book." },
+      { "icon": "UserPlus", "title": "Personal account", "description": "Create an account to access all features." }
+    ]
+  },
+  "benefits": {
+    "title": "Benefits of Biblio Link",
+    "description": "Why it's worth reading with us.",
+    "items": [
+      { "icon": "Heart", "title": "Encourages reading", "description": "Makes it easier to discover new books and authors." },
+      { "icon": "Compass", "title": "Easy access", "description": "Browse the virtual library easily, from anywhere." },
+      { "icon": "LayoutGrid", "title": "Organized information", "description": "Find books by category, author, and title." }
+    ]
+  },
+  "reading": {
+    "title": "Start reading",
+    "description": "Create your account and log in to start exploring the Biblio Link catalog.",
+    "buttonLabel": "Log in"
+  },
+  "footer": {
+    "title": "BIBLIO LINK",
+    "description": "A virtual library that encourages access to, and the discovery of, reading."
+  }
+}

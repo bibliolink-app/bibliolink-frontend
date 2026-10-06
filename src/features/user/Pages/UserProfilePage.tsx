@@ -1,8 +1,11 @@
 import { CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
+import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { TextLink } from '../../../ui/TextLink'
 import { useSession } from '../../auth/hooks/useSession'
-import { ROLE_LABELS } from '../../auth/types'
+import { useEntitlements } from '../../subscriptions/hooks/useEntitlements'
 import { useProfile } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 
@@ -17,8 +20,10 @@ function Field({ label, value }: { label: string; value: string }) {
 
 /** Datos de la cuenta del usuario lector. */
 export function UserProfilePage() {
+  const { t } = useTranslation()
   const { data: profile, isPending, isError, error } = useProfile()
   const { user } = useSession()
+  const { entitlement, hasPremiumAccess } = useEntitlements()
 
   if (isPending) return <LoadingScreen />
 
@@ -41,8 +46,8 @@ export function UserProfilePage() {
   return (
     <>
       <header className="mb-8">
-        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Mi perfil</h1>
-        <p className="mt-2 text-stone-300">Los datos de tu cuenta en BiblioLink.</p>
+        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">{t('user:profilePage.title')}</h1>
+        <p className="mt-2 text-stone-300">{t('user:profilePage.subtitle')}</p>
       </header>
 
       <article className="rounded-lg bg-stone-300 p-6 text-stone-900 shadow-xl ring-1 ring-black/25 sm:p-8">
@@ -50,7 +55,7 @@ export function UserProfilePage() {
           <h2 className="font-serif text-2xl font-semibold">{fullName}</h2>
           {user && (
             <span className="rounded-full bg-stone-100 px-3 py-1 text-sm font-semibold text-stone-600 ring-1 ring-stone-500/40">
-              {ROLE_LABELS[user.role]}
+              {t(`common:role.${user.role}`)}
             </span>
           )}
         </div>
@@ -58,13 +63,29 @@ export function UserProfilePage() {
         <p className="mb-6 text-stone-600">@{profile.username}</p>
 
         <dl className="grid gap-5 sm:grid-cols-2">
-          <Field label="Correo electrónico" value={profile.email} />
-          <Field label="Fecha de nacimiento" value={profile.birthDate} />
-          <Field label="Primer nombre" value={profile.firstName} />
-          <Field label="Segundo nombre" value={profile.middleName ?? '—'} />
-          <Field label="Primer apellido" value={profile.firstSurname} />
-          <Field label="Segundo apellido" value={profile.secondSurname ?? '—'} />
+          <Field label={t('user:profilePage.fields.email')} value={profile.email} />
+          <Field label={t('user:profilePage.fields.birthDate')} value={profile.birthDate} />
+          <Field label={t('user:profilePage.fields.firstName')} value={profile.firstName} />
+          <Field label={t('user:profilePage.fields.middleName')} value={profile.middleName ?? '—'} />
+          <Field label={t('user:profilePage.fields.firstSurname')} value={profile.firstSurname} />
+          <Field label={t('user:profilePage.fields.secondSurname')} value={profile.secondSurname ?? '—'} />
         </dl>
+      </article>
+
+      <article className="mt-6 rounded-lg bg-stone-300 p-6 text-stone-900 shadow-xl ring-1 ring-black/25 sm:p-8">
+        <h2 className="font-serif text-2xl font-semibold">{t('user:profilePage.plan.title')}</h2>
+
+        {hasPremiumAccess ? (
+          <p className="mt-2 text-stone-600">{t('user:profilePage.plan.pro')}</p>
+        ) : entitlement.status === 'PENDING' ? (
+          <p className="mt-2 text-stone-600">{t('user:profilePage.plan.pending')}</p>
+        ) : (
+          <p className="mt-2 text-stone-600">
+            {t('user:profilePage.plan.freeLead')}{' '}
+            <TextLink to={PATHS.subscribe}>{t('user:profilePage.plan.upgradeCta')}</TextLink>{' '}
+            {t('user:profilePage.plan.freeTrailing')}
+          </p>
+        )}
       </article>
     </>
   )

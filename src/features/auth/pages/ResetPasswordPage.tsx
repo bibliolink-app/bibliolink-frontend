@@ -1,4 +1,5 @@
 import { useSearchParams } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { CenteredCard } from '../../../ui/CenteredCard'
@@ -9,18 +10,15 @@ import { ResetPasswordForm } from '../components/ResetPasswordForm'
 const TOKEN_FORMAT = /^[0-9a-f]{64}$/i
 
 export function ResetPasswordPage() {
+  const { t } = useTranslation()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token') ?? ''
   const hasValidToken = TOKEN_FORMAT.test(token)
 
   return (
     <CenteredCard
-      title={hasValidToken ? 'Nueva contraseña' : 'Enlace no válido'}
-      description={
-        hasValidToken
-          ? 'Elige una contraseña segura para tu cuenta.'
-          : 'Este enlace de recuperación no es válido o está incompleto.'
-      }
+      title={hasValidToken ? t('auth:resetPassword.title') : t('auth:resetPassword.titleInvalid')}
+      description={hasValidToken ? t('auth:resetPassword.description') : t('auth:resetPassword.descriptionInvalid')}
     >
       {/* El token viaja en la URL: que no se filtre a otros sitios por la cabecera Referer. React 19 lo sube al <head>. */}
       <meta name="referrer" content="no-referrer" />
@@ -29,7 +27,7 @@ export function ResetPasswordPage() {
         <ResetPasswordForm token={token} />
       ) : (
         <p className="text-center">
-          <TextLink to={PATHS.forgotPassword}>Solicitar un enlace nuevo</TextLink>
+          <TextLink to={PATHS.forgotPassword}>{t('auth:resetPassword.requestNewLink')}</TextLink>
         </p>
       )}
     </CenteredCard>

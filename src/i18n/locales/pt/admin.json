@@ -1,0 +1,94 @@
+{
+  "dashboard": {
+    "title": "Painel de administração",
+    "subtitle": "Gerencie a plataforma a partir daqui.",
+    "sections": {
+      "profile": {
+        "title": "Meu perfil",
+        "description": "Veja os dados da conta com a qual você entrou."
+      },
+      "users": {
+        "title": "Usuários",
+        "description": "Veja as contas, crie administradores e gerencie o status de cada usuário."
+      },
+      "analytics": {
+        "title": "Estatísticas",
+        "description": "Acompanhe o crescimento dos usuários registrados na plataforma."
+      },
+      "catalog": {
+        "title": "Catálogo de livros",
+        "description": "Gerencie os livros da coleção."
+      },
+      "subscriptions": {
+        "title": "Assinaturas e pagamentos",
+        "description": "Acompanhe as assinaturas ativas e as transações de pagamento."
+      }
+    }
+  },
+  "common": {
+    "backToPanel": "Voltar ao painel"
+  },
+  "profile": {
+    "accountInfo": "Informações da conta",
+    "personalInfo": "Informações pessoais",
+    "fields": {
+      "username": "Nome de usuário",
+      "email": "E-mail",
+      "firstName": "Primeiro nome",
+      "middleName": "Nome do meio",
+      "firstSurname": "Primeiro sobrenome",
+      "secondSurname": "Segundo sobrenome",
+      "birthDate": "Data de nascimento"
+    }
+  },
+  "usersList": {
+    "title": "Administradores",
+    "newAdmin": "Novo administrador",
+    "normalUsers": "Usuários comuns",
+    "empty": "Nenhum administrador registrado."
+  },
+  "createAdminPage": {
+    "backToList": "Voltar à lista",
+    "title": "Novo administrador",
+    "subtitle": "A conta é criada com a função de administrador e fica ativa imediatamente."
+  },
+  "table": {
+    "headers": {
+      "username": "Usuário",
+      "fullName": "Nome completo",
+      "email": "E-mail",
+      "status": "Status",
+      "createdAt": "Data de registro",
+      "actions": "Ações"
+    },
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
+    "actions": {
+      "enable": "Habilitar",
+      "disable": "Desabilitar",
+      "selfDisableTitle": "Você não pode alterar o status da sua própria conta."
+    },
+    "confirmDisable": {
+      "title": "Desabilitar {{username}}?",
+      "description": "Ele(a) não poderá entrar até que você reative a conta.",
+      "cancel": "Cancelar",
+      "confirm": "Desabilitar"
+    }
+  },
+  "createAdminForm": {
+    "fields": {
+      "username": "Nome de usuário",
+      "email": "E-mail",
+      "firstName": "Primeiro nome",
+      "middleName": "Nome do meio (opcional)",
+      "firstSurname": "Primeiro sobrenome",
+      "secondSurname": "Segundo sobrenome (opcional)",
+      "birthDate": "Data de nascimento",
+      "password": "Senha"
+    },
+    "submitting": "Criando…",
+    "submit": "Criar administrador"
+  }
+}

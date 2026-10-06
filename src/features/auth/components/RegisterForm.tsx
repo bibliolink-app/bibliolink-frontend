@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { CircleAlert, LoaderCircle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { TextField } from '../../../ui/TextField'
 import { useRegister } from '../hooks/useRegister'
@@ -9,6 +10,7 @@ import { registerFormSchema, registerSchema } from '../schemas/registerSchema'
 import { TurnstileWidget } from './TurnstileWidget'
 
 export function RegisterForm() {
+  const { t } = useTranslation()
   const register = useRegister()
   // Los tokens de Turnstile son de un solo uso: tras un error hay que pedir uno nuevo.
   const [captchaAttempt, setCaptchaAttempt] = useState(0)
@@ -57,7 +59,7 @@ export function RegisterForm() {
       <form.Field name="username">
         {(field) => (
           <TextField
-            label="Nombre de usuario"
+            label={t('auth:register.usernameLabel')}
             name={field.name}
             autoComplete="username"
             value={field.state.value}
@@ -73,7 +75,7 @@ export function RegisterForm() {
         <form.Field name="firstName">
           {(field) => (
             <TextField
-              label="Primer nombre"
+              label={t('auth:register.firstNameLabel')}
               name={field.name}
               autoComplete="given-name"
               value={field.state.value}
@@ -88,7 +90,7 @@ export function RegisterForm() {
         <form.Field name="middleName">
           {(field) => (
             <TextField
-              label="Segundo nombre (opcional)"
+              label={t('auth:register.middleNameLabel')}
               name={field.name}
               value={field.state.value}
               onChange={field.handleChange}
@@ -102,7 +104,7 @@ export function RegisterForm() {
         <form.Field name="firstSurname">
           {(field) => (
             <TextField
-              label="Primer apellido"
+              label={t('auth:register.firstSurnameLabel')}
               name={field.name}
               autoComplete="family-name"
               value={field.state.value}
@@ -117,7 +119,7 @@ export function RegisterForm() {
         <form.Field name="secondSurname">
           {(field) => (
             <TextField
-              label="Segundo apellido (opcional)"
+              label={t('auth:register.secondSurnameLabel')}
               name={field.name}
               value={field.state.value}
               onChange={field.handleChange}
@@ -132,7 +134,7 @@ export function RegisterForm() {
       <form.Field name="birthDate">
         {(field) => (
           <TextField
-            label="Fecha de nacimiento"
+            label={t('auth:register.birthDateLabel')}
             name={field.name}
             type="date"
             autoComplete="bday"
@@ -148,7 +150,7 @@ export function RegisterForm() {
       <form.Field name="email">
         {(field) => (
           <TextField
-            label="Correo electrónico"
+            label={t('auth:register.emailLabel')}
             name={field.name}
             type="email"
             autoComplete="email"
@@ -164,7 +166,7 @@ export function RegisterForm() {
       <form.Field name="password">
         {(field) => (
           <TextField
-            label="Contraseña"
+            label={t('auth:register.passwordLabel')}
             name={field.name}
             type="password"
             autoComplete="new-password"
@@ -180,7 +182,7 @@ export function RegisterForm() {
       <form.Field name="confirmPassword">
         {(field) => (
           <TextField
-            label="Confirmar contraseña"
+            label={t('auth:register.confirmPasswordLabel')}
             name={field.name}
             type="password"
             autoComplete="new-password"
@@ -221,10 +223,10 @@ export function RegisterForm() {
         type="submit"
         disabled={register.isPending}
         aria-busy={register.isPending}
-        className="inline-flex items-center justify-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif text-lg font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 enabled:cursor-pointer enabled:hover:bg-rose-900 enabled:hover:text-stone-300 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
+        className="inline-flex items-center justify-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif text-lg font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 enabled:cursor-pointer enabled:hover:bg-yellow-800 enabled:hover:text-stone-300 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
       >
         {register.isPending && <LoaderCircle className="size-5 motion-safe:animate-spin" />}
-        {register.isPending ? 'Creando cuenta…' : 'Crear cuenta'}
+        {register.isPending ? t('auth:register.submitting') : t('auth:register.submit')}
       </button>
     </form>
   )

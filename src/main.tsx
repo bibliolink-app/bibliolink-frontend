@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router/dom'
 
 import '@fontsource-variable/playfair-display'
 import './index.css'
+import './i18n'
 import { Providers } from './providers'
 import { createAppRouter } from './router'
 

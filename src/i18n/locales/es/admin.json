@@ -1,0 +1,94 @@
+{
+  "dashboard": {
+    "title": "Panel de administración",
+    "subtitle": "Desde aquí administras la plataforma.",
+    "sections": {
+      "profile": {
+        "title": "Mi perfil",
+        "description": "Consulta los datos de la cuenta con la que iniciaste sesión."
+      },
+      "users": {
+        "title": "Usuarios",
+        "description": "Consulta las cuentas, crea administradores y gestiona el estado de cada usuario."
+      },
+      "analytics": {
+        "title": "Estadísticas",
+        "description": "Consulta el crecimiento de usuarios registrados en la plataforma."
+      },
+      "catalog": {
+        "title": "Catálogo de libros",
+        "description": "Administra los libros de la colección."
+      },
+      "subscriptions": {
+        "title": "Suscripciones y pagos",
+        "description": "Supervisa las suscripciones activas y las transacciones de pago."
+      }
+    }
+  },
+  "common": {
+    "backToPanel": "Volver al panel"
+  },
+  "profile": {
+    "accountInfo": "Información de cuenta",
+    "personalInfo": "Información personal",
+    "fields": {
+      "username": "Nombre de usuario",
+      "email": "Correo electrónico",
+      "firstName": "Primer nombre",
+      "middleName": "Segundo nombre",
+      "firstSurname": "Primer apellido",
+      "secondSurname": "Segundo apellido",
+      "birthDate": "Fecha de nacimiento"
+    }
+  },
+  "usersList": {
+    "title": "Administradores",
+    "newAdmin": "Nuevo administrador",
+    "normalUsers": "Usuarios normales",
+    "empty": "No hay administradores registrados."
+  },
+  "createAdminPage": {
+    "backToList": "Volver a la lista",
+    "title": "Nuevo administrador",
+    "subtitle": "La cuenta se crea con rol de administrador y queda activa de inmediato."
+  },
+  "table": {
+    "headers": {
+      "username": "Usuario",
+      "fullName": "Nombre completo",
+      "email": "Correo",
+      "status": "Estado",
+      "createdAt": "Fecha de registro",
+      "actions": "Acciones"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo"
+    },
+    "actions": {
+      "enable": "Habilitar",
+      "disable": "Deshabilitar",
+      "selfDisableTitle": "No puedes cambiar el estado de tu propia cuenta."
+    },
+    "confirmDisable": {
+      "title": "¿Deshabilitar a {{username}}?",
+      "description": "No podrá iniciar sesión hasta que vuelvas a habilitar su cuenta.",
+      "cancel": "Cancelar",
+      "confirm": "Deshabilitar"
+    }
+  },
+  "createAdminForm": {
+    "fields": {
+      "username": "Nombre de usuario",
+      "email": "Correo electrónico",
+      "firstName": "Primer nombre",
+      "middleName": "Segundo nombre (opcional)",
+      "firstSurname": "Primer apellido",
+      "secondSurname": "Segundo apellido (opcional)",
+      "birthDate": "Fecha de nacimiento",
+      "password": "Contraseña"
+    },
+    "submitting": "Creando…",
+    "submit": "Crear administrador"
+  }
+}

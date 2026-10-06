@@ -1,44 +1,49 @@
 import { Link } from 'react-router'
-import {  ChartColumn, CreditCard, UserCircle, Users } from 'lucide-react'
+import { BookOpen, ChartColumn, CreditCard, UserCircle, Users } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../router'
 import { FeatureCard } from '../../ui/FeatureCard'
 
 export function AdminDashboardPage() {
+  const { t } = useTranslation()
 
   const SECTIONS = [
     {
-      title: 'Mi perfil',
-      description: 'Consulta los datos de la cuenta con la que iniciaste sesión.',
+      title: t('admin:dashboard.sections.profile.title'),
+      description: t('admin:dashboard.sections.profile.description'),
       icon: <UserCircle className="size-6" />,
       to: PATHS.adminProfile,
     },
     {
-      title: 'Usuarios',
-      description: 'Consulta las cuentas, crea administradores y gestiona el estado de cada usuario.',
+      title: t('admin:dashboard.sections.users.title'),
+      description: t('admin:dashboard.sections.users.description'),
       icon: <Users className="size-6" />,
       to: PATHS.adminUsers,
     },
     {
-      title: 'Estadísticas',
-      description: 'Consulta el crecimiento de usuarios registrados en la plataforma.',
+      title: t('admin:dashboard.sections.analytics.title'),
+      description: t('admin:dashboard.sections.analytics.description'),
       icon: <ChartColumn className="size-6" />,
       to: PATHS.adminAnalytics,
     },
- 
     {
-      title: 'Suscripciones y pagos',
-      description: 'Supervisa las suscripciones activas y las transacciones de pago.',
+      title: t('admin:dashboard.sections.catalog.title'),
+      description: t('admin:dashboard.sections.catalog.description'),
+      icon: <BookOpen className="size-6" />,
+    },
+    {
+      title: t('admin:dashboard.sections.subscriptions.title'),
+      description: t('admin:dashboard.sections.subscriptions.description'),
       icon: <CreditCard className="size-6" />,
     },
-
   ]
 
   return (
     <>
       <header className="mb-8 max-w-2xl">
-        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Panel de administración</h1>
-        <p className="mt-2 text-stone-300">Desde aquí administras la plataforma.</p>
+        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">{t('admin:dashboard.title')}</h1>
+        <p className="mt-2 text-stone-300">{t('admin:dashboard.subtitle')}</p>
       </header>
 
       <ul className="grid gap-5 sm:grid-cols-2">

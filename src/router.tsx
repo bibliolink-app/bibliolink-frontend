@@ -21,6 +21,7 @@ import { FavoritesPage } from './features/library/FavoritesPage'
 import { SearchPage } from './features/library/SearchPage'
 import { UserProfilePage } from './features/user/Pages/UserProfilePage'
 import { LandingPage } from './features/landing/landingPage'
+import { SubscribePage } from './features/subscriptions/pages/SubscribePage'
 
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
  
@@ -43,6 +44,7 @@ export const PATHS = {
     search: '/buscar',
   favorites: '/favoritos',
   profile: '/perfil',
+  subscribe: '/suscripcion',
 } as const
 
 
@@ -79,6 +81,7 @@ export function createAppRouter() {
                                { path: PATHS.search, element: <SearchPage /> },
                  { path: PATHS.favorites, element: <FavoritesPage /> },
                 { path: PATHS.profile, element: <UserProfilePage /> },
+                { path: PATHS.subscribe, element: <SubscribePage /> },
               ],
             },
 

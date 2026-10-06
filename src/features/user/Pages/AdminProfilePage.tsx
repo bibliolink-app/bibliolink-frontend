@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../ui/LoadingScreen'
 import { useSession } from '../../auth/hooks/useSession'
-import { ROLE_LABELS } from '../../auth/types'
 import { useProfile } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 
@@ -41,6 +41,7 @@ function getInitials(fullName: string): string {
 }
 
 export function AdminProfilePage() {
+  const { t } = useTranslation()
   // El perfil trae los datos personales; el rol y el estado vienen de la sesión.
   const { data: profile, isPending, isError, error } = useProfile()
   const { user } = useSession()
@@ -70,7 +71,7 @@ export function AdminProfilePage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500 motion-safe:transition-colors"
       >
         <ArrowLeft className="size-4" />
-        Volver al panel
+        {t('admin:common.backToPanel')}
       </Link>
 
     
@@ -89,24 +90,24 @@ export function AdminProfilePage() {
             <h2 className="font-serif text-2xl font-semibold text-stone-900">{fullName}</h2>
             {user && (
               <span className="mt-1.5 inline-block rounded-full bg-stone-100 px-3 py-1 text-sm font-semibold text-stone-600 ring-1 ring-stone-500/40">
-                {ROLE_LABELS[user.role]}
+                {t(`common:role.${user.role}`)}
               </span>
             )}
           </div>
         </div>
 
         <div className="flex flex-col gap-10 p-6 sm:p-8">
-          <FieldGroup title="Información de cuenta">
-            <Field label="Nombre de usuario" value={profile.username} />
-            <Field label="Correo electrónico" value={profile.email} />
+          <FieldGroup title={t('admin:profile.accountInfo')}>
+            <Field label={t('admin:profile.fields.username')} value={profile.username} />
+            <Field label={t('admin:profile.fields.email')} value={profile.email} />
           </FieldGroup>
 
-          <FieldGroup title="Información personal">
-            <Field label="Primer nombre" value={profile.firstName} />
-            <Field label="Segundo nombre" value={profile.middleName ?? '—'} />
-            <Field label="Primer apellido" value={profile.firstSurname} />
-            <Field label="Segundo apellido" value={profile.secondSurname ?? '—'} />
-            <Field label="Fecha de nacimiento" value={profile.birthDate} />
+          <FieldGroup title={t('admin:profile.personalInfo')}>
+            <Field label={t('admin:profile.fields.firstName')} value={profile.firstName} />
+            <Field label={t('admin:profile.fields.middleName')} value={profile.middleName ?? '—'} />
+            <Field label={t('admin:profile.fields.firstSurname')} value={profile.firstSurname} />
+            <Field label={t('admin:profile.fields.secondSurname')} value={profile.secondSurname ?? '—'} />
+            <Field label={t('admin:profile.fields.birthDate')} value={profile.birthDate} />
           </FieldGroup>
         </div>
       </article>

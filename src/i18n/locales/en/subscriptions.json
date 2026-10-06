@@ -1,0 +1,30 @@
+{
+  "plans": {
+    "pageTitle": "BiblioLink plans",
+    "pageSubtitle": "Choose how you want to read.",
+    "currentPlanBadge": "Your current plan",
+    "free": {
+      "name": "Free",
+      "price": "Free",
+      "features": ["Access to the library", "Limited favorites", "With ads"]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$5.00 USD / month",
+      "features": ["Access to the library", "Unlimited favorites", "No ads"]
+    },
+    "activeUntil": "Active until {{date}}",
+    "renewsOn": "Renews on {{date}}",
+    "paymentPending": "Your payment was registered. Activation may take a few minutes."
+  },
+  "toast": {
+    "paymentRegistered": "Payment registered. Your subscription will activate in a few minutes.",
+    "genericError": "We couldn't process the subscription. Please try again."
+  },
+  "errors": {
+    "generic": "We couldn't start the subscription. Please try again later.",
+    "network": "We couldn't connect to the server. Check your connection and try again.",
+    "inactiveAccount": "Your account is not active.",
+    "alreadySubscribed": "You already have an active or pending subscription."
+  }
+}
