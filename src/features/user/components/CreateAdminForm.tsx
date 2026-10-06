@@ -25,8 +25,8 @@ export function CreateAdminForm() {
       email: '',
       password: '',
     },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    // Valida en cada cambio, desde el principio.
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: crearAdminSchema },
     onSubmit: async ({ value }) => {
       // `parse` aplica los trim y convierte los campos vacíos opcionales en null.
@@ -55,7 +55,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -71,7 +71,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -85,7 +85,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -99,7 +99,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -113,7 +113,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -127,7 +127,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -142,7 +142,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}
@@ -158,7 +158,7 @@ export function CreateAdminForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={createAdmin.isPending}
             />
           )}

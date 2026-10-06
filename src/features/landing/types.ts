@@ -1,21 +1,23 @@
 import type { IconName } from './icons'
 
 
-export interface LandingCard {
-  icon: IconName
-  title: string
-  description: string
-}
-
-export interface LandingCardSection {
-  title: string
-  description: string
-  items: LandingCard[]
-}
-
-/** Un paso del proceso para llegar al catálogo. */
+/** Un paso del recorrido que hace el usuario dentro de Biblio Link. */
 export interface LandingStep {
   icon: IconName
   title: string
   description: string
+}
+
+/** Una función incluida solo en el plan Premium. */
+export interface LandingPremiumItem {
+  icon: IconName
+  title: string
+}
+
+export interface LandingPremium {
+  title: string
+  description: string
+  /** Etiqueta que deja claro que estas funciones no están en el plan gratuito. */
+  badge: string
+  items: LandingPremiumItem[]
 }
