@@ -1,6 +1,4 @@
 import { AboutSection } from "./components/AboutSection";
-import { BenefitsSection } from "./components/Benefits";
-import { FeaturesSection } from "./components/FeatureSection";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -16,8 +14,6 @@ export function LandingPage() {
       <main className="flex-1">
         <Hero />
         <AboutSection />
-        <FeaturesSection />
-        <BenefitsSection/>
         <Reading />
       </main>
 

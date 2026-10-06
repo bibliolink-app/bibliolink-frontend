@@ -1,12 +1,9 @@
-import { Link } from 'react-router'
-import { LogIn } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { PATHS } from '../../../router'
 import { Logo } from '../../../components/ui/Logo'
 import { LanguageSwitcher } from '../../../components/ui/LanguageSwitcher'
+import { LoginButton } from './LoginButton'
 
-/** Barra superior fija: marca a la izquierda, secciones al centro y el acceso al login a la derecha. */
 export function Header() {
   const { t } = useTranslation()
   const navItems = t('landing:nav.items', { returnObjects: true }) as { label: string; href: string }[]
@@ -30,15 +27,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-
-          <Link
-            to={PATHS.login}
-            aria-label={t('landing:hero.loginLabel')}
-            className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-3 py-2 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors sm:px-4"
-          >
-            <LogIn className="size-5" />
-            <span className="hidden sm:inline">{t('landing:hero.loginLabel')}</span>
-          </Link>
+          <LoginButton soloIconoEnMovil />
         </div>
       </div>
     </header>

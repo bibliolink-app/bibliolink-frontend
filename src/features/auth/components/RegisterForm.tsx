@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { revalidateLogic, useForm } from '@tanstack/react-form'
+import { revalidateLogic, useForm, useStore } from '@tanstack/react-form'
 import { CircleAlert, LoaderCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -28,21 +28,25 @@ export function RegisterForm() {
       confirmPassword: '',
       captchaToken: '',
     },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    
+    
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: registerFormSchema },
-    // El éxito no navega: al aparecer la sesión, `PublicOnly` redirige al panel.
+
     onSubmit: ({ value }) => {
-      // `registerSchema` descarta `confirmPassword`, que el backend no acepta.
+      
       register.mutate(registerSchema.parse(value), {
         onError: () => {
-          // El token ya se consumió en el intento fallido: se descarta y se pide otro.
+         
           form.setFieldValue('captchaToken', '')
           setCaptchaAttempt((attempt) => attempt + 1)
         },
       })
     },
   })
+
+  // El error del captcha solo se muestra despues de un intento de envio.
+  const isSubmitted = useStore(form.store, (state) => state.isSubmitted)
 
   const handleToken = useCallback((token: string) => form.setFieldValue('captchaToken', token), [form])
 
@@ -65,7 +69,7 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.errors.map((error) => error?.message)}
+            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
             disabled={register.isPending}
           />
         )}
@@ -81,7 +85,7 @@ export function RegisterForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={register.isPending}
             />
           )}
@@ -95,7 +99,7 @@ export function RegisterForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={register.isPending}
             />
           )}
@@ -110,7 +114,7 @@ export function RegisterForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={register.isPending}
             />
           )}
@@ -124,7 +128,7 @@ export function RegisterForm() {
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
-              errors={field.state.meta.errors.map((error) => error?.message)}
+              errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
               disabled={register.isPending}
             />
           )}
@@ -141,7 +145,7 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.errors.map((error) => error?.message)}
+            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
             disabled={register.isPending}
           />
         )}
@@ -157,7 +161,7 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.errors.map((error) => error?.message)}
+            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
             disabled={register.isPending}
           />
         )}
@@ -173,7 +177,7 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.errors.map((error) => error?.message)}
+            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
             disabled={register.isPending}
           />
         )}
@@ -189,7 +193,7 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.errors.map((error) => error?.message)}
+            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
             disabled={register.isPending}
           />
         )}
@@ -199,7 +203,8 @@ export function RegisterForm() {
         {(field) => (
           <div className="flex flex-col gap-1.5">
             <TurnstileWidget onToken={handleToken} resetKey={captchaAttempt} />
-            {field.state.meta.errors.length > 0 && (
+            {/* El captcha no se escribe: su error solo tiene sentido tras intentar enviar. */}
+            {isSubmitted && field.state.meta.errors.length > 0 && (
               <p className="flex items-start gap-1.5 text-sm font-medium text-rose-900">
                 <CircleAlert className="mt-0.5 size-4 shrink-0" />
                 <span>{field.state.meta.errors[0]?.message}</span>

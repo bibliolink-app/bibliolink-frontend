@@ -1,5 +1,7 @@
 import {
+  Ban,
   BookOpen,
+  BookOpenText,
   Compass,
   FileText,
   Heart,
@@ -12,7 +14,9 @@ import {
 } from 'lucide-react'
 
 export const ICONS = {
+  Ban,
   BookOpen,
+  BookOpenText,
   Compass,
   FileText,
   Heart,
