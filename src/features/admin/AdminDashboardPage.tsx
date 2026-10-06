@@ -3,7 +3,7 @@ import { BookOpen, CreditCard, UserCircle, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../router'
-import { FeatureCard } from '../../ui/FeatureCard'
+import { FeatureCard } from '../../components/ui/FeatureCard'
 
 export function AdminDashboardPage() {
   const { t } = useTranslation()

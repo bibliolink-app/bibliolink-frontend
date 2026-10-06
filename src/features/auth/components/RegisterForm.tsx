@@ -3,7 +3,7 @@ import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { CircleAlert, LoaderCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-import { TextField } from '../../../ui/TextField'
+import { TextField } from '../../../components/ui/TextField'
 import { useRegister } from '../hooks/useRegister'
 import { registerErrorMessage } from '../lib/registerErrorMessage'
 import { registerFormSchema, registerSchema } from '../schemas/registerSchema'

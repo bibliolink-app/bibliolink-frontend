@@ -4,7 +4,7 @@ import { ArrowLeft, CircleAlert } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { useSession } from '../../auth/hooks/useSession'
 import { useProfile } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'

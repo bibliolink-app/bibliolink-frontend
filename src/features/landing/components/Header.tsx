@@ -3,8 +3,8 @@ import { LogIn } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { Logo } from '../../../ui/Logo'
-import { LanguageSwitcher } from '../../../ui/LanguageSwitcher'
+import { Logo } from '../../../components/ui/Logo'
+import { LanguageSwitcher } from '../../../components/ui/LanguageSwitcher'
 
 /** Barra superior fija: marca a la izquierda, secciones al centro y el acceso al login a la derecha. */
 export function Header() {

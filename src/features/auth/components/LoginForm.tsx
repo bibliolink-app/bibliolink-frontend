@@ -3,9 +3,9 @@ import { CircleAlert } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { Button } from '../../../ui/Button'
-import { TextField } from '../../../ui/TextField'
-import { TextLink } from '../../../ui/TextLink'
+import { FormButton } from '../../../components/ui/FormButton'
+import { TextField } from '../../../components/ui/TextField'
+import { TextLink } from '../../../components/ui/TextLink'
 import { useLogin } from '../hooks/useLogin'
 import { loginErrorMessage } from '../lib/loginErrorMessage'
 import { loginSchema } from '../schemas/loginSchema'
@@ -83,9 +83,9 @@ export function LoginForm() {
         </div>
       )}
 
-      <Button type="submit" loading={login.isPending}>
+      <FormButton type="submit" loading={login.isPending}>
         {login.isPending ? t('auth:login.submitting') : t('auth:login.submit')}
-      </Button>
+      </FormButton>
     </form>
   )
 }
