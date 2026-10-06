@@ -1,0 +1,63 @@
+{
+  "profilePage": {
+    "title": "My profile",
+    "subtitle": "Your BiblioLink account details.",
+    "fields": {
+      "email": "Email",
+      "birthDate": "Date of birth",
+      "firstName": "First name",
+      "middleName": "Middle name",
+      "firstSurname": "First surname",
+      "secondSurname": "Second surname"
+    },
+    "plan": {
+      "title": "My plan",
+      "pro": "You have BiblioLink Pro: no ads and unlimited favorites.",
+      "pending": "Your BiblioLink Pro subscription is being activated.",
+      "freeLead": "You're on the free plan.",
+      "upgradeCta": "Go Pro",
+      "freeTrailing": "to remove ads and get unlimited favorites."
+    }
+  },
+  "errors": {
+    "unexpected": "An unexpected error occurred.",
+    "network": "Could not connect to the server. Check your connection.",
+    "forbidden": "You don't have permission to perform this action.",
+    "conflict": "The email or username is already registered.",
+    "generic": "The operation could not be completed."
+  },
+  "toasts": {
+    "userEnabled": "User enabled.",
+    "userDisabled": "User disabled."
+  },
+  "fields": {
+    "firstName": "First name",
+    "middleName": "Middle name",
+    "firstSurname": "First surname",
+    "secondSurname": "Second surname"
+  },
+  "validation": {
+    "required": "{{label}} is required.",
+    "tooLong50": "{{label}} cannot exceed 50 characters.",
+    "password": {
+      "minLength": "Password must be at least 8 characters long.",
+      "needsLetter": "Password must include at least one letter.",
+      "needsNumber": "Password must include at least one number.",
+      "needsSpecial": "Password must include at least one special character.",
+      "tooLong": "Password is too long."
+    },
+    "date": {
+      "format": "Date must be in YYYY-MM-DD format.",
+      "invalid": "That date doesn't exist."
+    },
+    "email": {
+      "required": "Email is required.",
+      "tooLong": "Email cannot exceed 254 characters.",
+      "invalid": "Enter a valid email address."
+    },
+    "username": {
+      "required": "Username is required.",
+      "tooLong": "Username cannot exceed 25 characters."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "app": {
+    "name": "BiblioLink"
+  },
+  "loading": "Chargement…",
+  "nav": {
+    "ariaMain": "Navigation principale",
+    "home": "Accueil",
+    "search": "Rechercher",
+    "favorites": "Favoris"
+  },
+  "layout": {
+    "skipToContent": "Aller au contenu",
+    "myProfile": "Mon profil",
+    "logout": "Se déconnecter"
+  },
+  "role": {
+    "USER": "Utilisateur",
+    "ADMIN": "Administrateur"
+  },
+  "language": {
+    "label": "Langue",
+    "es": "Español",
+    "en": "English",
+    "pt": "Português",
+    "fr": "Français"
+  },
+  "password": {
+    "show": "Afficher le mot de passe",
+    "hide": "Masquer le mot de passe"
+  },
+  "actions": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "close": "Fermer",
+    "back": "Retour"
+  }
+}

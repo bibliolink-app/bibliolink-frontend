@@ -1,0 +1,63 @@
+{
+  "profilePage": {
+    "title": "Meu perfil",
+    "subtitle": "Os dados da sua conta no BiblioLink.",
+    "fields": {
+      "email": "E-mail",
+      "birthDate": "Data de nascimento",
+      "firstName": "Primeiro nome",
+      "middleName": "Nome do meio",
+      "firstSurname": "Primeiro sobrenome",
+      "secondSurname": "Segundo sobrenome"
+    },
+    "plan": {
+      "title": "Meu plano",
+      "pro": "Você tem o BiblioLink Pro: sem anúncios e favoritos ilimitados.",
+      "pending": "Sua assinatura do BiblioLink Pro está sendo ativada.",
+      "freeLead": "Você está no plano gratuito.",
+      "upgradeCta": "Seja Pro",
+      "freeTrailing": "para remover os anúncios e ter favoritos ilimitados."
+    }
+  },
+  "errors": {
+    "unexpected": "Ocorreu um erro inesperado.",
+    "network": "Não foi possível conectar ao servidor. Verifique sua conexão.",
+    "forbidden": "Você não tem permissão para realizar esta ação.",
+    "conflict": "O e-mail ou nome de usuário já está registrado.",
+    "generic": "Não foi possível concluir a operação."
+  },
+  "toasts": {
+    "userEnabled": "Usuário habilitado.",
+    "userDisabled": "Usuário desabilitado."
+  },
+  "fields": {
+    "firstName": "Primeiro nome",
+    "middleName": "Nome do meio",
+    "firstSurname": "Primeiro sobrenome",
+    "secondSurname": "Segundo sobrenome"
+  },
+  "validation": {
+    "required": "{{label}} é obrigatório.",
+    "tooLong50": "{{label}} não pode ter mais de 50 caracteres.",
+    "password": {
+      "minLength": "A senha deve ter pelo menos 8 caracteres.",
+      "needsLetter": "A senha deve incluir pelo menos uma letra.",
+      "needsNumber": "A senha deve incluir pelo menos um número.",
+      "needsSpecial": "A senha deve incluir pelo menos um caractere especial.",
+      "tooLong": "A senha é muito longa."
+    },
+    "date": {
+      "format": "A data deve estar no formato AAAA-MM-DD.",
+      "invalid": "Essa data não existe."
+    },
+    "email": {
+      "required": "O e-mail é obrigatório.",
+      "tooLong": "O e-mail não pode ter mais de 254 caracteres.",
+      "invalid": "Digite um e-mail válido."
+    },
+    "username": {
+      "required": "O nome de usuário é obrigatório.",
+      "tooLong": "O nome de usuário não pode ter mais de 25 caracteres."
+    }
+  }
+}

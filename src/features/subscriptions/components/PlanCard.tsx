@@ -1,5 +1,6 @@
 import { Check } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface PlanCardProps {
   name: string
@@ -10,6 +11,8 @@ interface PlanCardProps {
 }
 
 export function PlanCard({ name, price, features, isCurrent, action }: PlanCardProps) {
+  const { t } = useTranslation()
+
   return (
     <article
       className={
@@ -22,7 +25,7 @@ export function PlanCard({ name, price, features, isCurrent, action }: PlanCardP
         <h2 className="font-serif text-2xl font-semibold text-stone-100">{name}</h2>
         {isCurrent && (
           <span className="rounded-full bg-yellow-600 px-3 py-1 text-xs font-semibold text-stone-900">
-            Tu plan actual
+            {t('subscriptions:plans.currentPlanBadge')}
           </span>
         )}
       </div>

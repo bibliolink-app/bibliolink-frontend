@@ -1,40 +1,42 @@
 import { z } from 'zod'
 
+import i18n from '@/i18n'
 
 
-const name = (label: string) =>
+
+const name = (field: 'firstName' | 'firstSurname') =>
   z
     .string()
     .trim()
-    .min(1, { error: `${label} es obligatorio.` })
-    .max(50, { error: `${label} no puede superar los 50 caracteres.` })
+    .min(1, { error: () => i18n.t(`auth:validation.${field}.required`) })
+    .max(50, { error: () => i18n.t(`auth:validation.${field}.tooLong`) })
 
 
-const optionalName = (label: string) =>
+const optionalName = (field: 'middleName' | 'secondSurname') =>
   z
     .string()
     .trim()
-    .max(50, { error: `${label} no puede superar los 50 caracteres.` })
+    .max(50, { error: () => i18n.t(`auth:validation.${field}.tooLong`) })
     .transform((value) => (value === '' ? null : value))
 
 export const registerSchema = z.object({
   username: z
     .string()
     .trim()
-    .min(1, { error: 'El nombre de usuario es obligatorio.' })
-    .max(25, { error: 'El nombre de usuario no puede superar los 25 caracteres.' }),
+    .min(1, { error: () => i18n.t('auth:validation.username.required') })
+    .max(25, { error: () => i18n.t('auth:validation.username.tooLong') }),
 
-  firstName: name('El primer nombre'),
-  middleName: optionalName('El segundo nombre'),
-  firstSurname: name('El primer apellido'),
-  secondSurname: optionalName('El segundo apellido'),
+  firstName: name('firstName'),
+  middleName: optionalName('middleName'),
+  firstSurname: name('firstSurname'),
+  secondSurname: optionalName('secondSurname'),
 
   // formato exacto y fecha que exista de verdad.
   birthDate: z
     .string()
     .trim()
-    .min(1, { error: 'La fecha de nacimiento es obligatoria.' })
-    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'La fecha debe tener el formato AAAA-MM-DD.' })
+    .min(1, { error: () => i18n.t('auth:validation.birthDate.required') })
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: () => i18n.t('auth:validation.birthDate.format') })
     .refine(
       (value) => {
         const [year, month, day] = value.split('-').map(Number)
@@ -42,42 +44,42 @@ export const registerSchema = z.object({
         // Un día inexistente (31 de febrero) desborda al mes siguiente y deja de coincidir.
         return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day
       },
-      { error: 'Esa fecha no existe.' },
+      { error: () => i18n.t('auth:validation.birthDate.notExist') },
     )
     .refine((value) => new Date(value) <= new Date(), {
-      error: 'La fecha de nacimiento no puede ser futura.',
+      error: () => i18n.t('auth:validation.birthDate.future'),
     }),
 
   email: z
     .string()
     .trim()
     .toLowerCase()
-    .min(1, { error: 'El correo electrónico es obligatorio.' })
-    .max(254, { error: 'El correo electrónico no puede superar los 254 caracteres.' })
-    .pipe(z.email({ error: 'Ingresa un correo electrónico válido.' })),
+    .min(1, { error: () => i18n.t('auth:validation.email.required') })
+    .max(254, { error: () => i18n.t('auth:validation.email.tooLong') })
+    .pipe(z.email({ error: () => i18n.t('auth:validation.email.invalid') })),
 
-  
+
   password: z
     .string()
     .refine((value) => Array.from(value).length >= 8, {
-      error: 'La contraseña debe tener al menos 8 caracteres.',
+      error: () => i18n.t('auth:validation.password.minLength'),
     })
     .refine((value) => /\p{L}/u.test(value), {
-      error: 'La contraseña debe incluir al menos una letra.',
+      error: () => i18n.t('auth:validation.password.needsLetter'),
     })
     .refine((value) => /\p{N}/u.test(value), {
-      error: 'La contraseña debe incluir al menos un número.',
+      error: () => i18n.t('auth:validation.password.needsNumber'),
     })
     .refine((value) => /[\p{P}\p{S}]/u.test(value), {
-      error: 'La contraseña debe incluir al menos un carácter especial.',
+      error: () => i18n.t('auth:validation.password.needsSymbol'),
     })
     .refine((value) => new TextEncoder().encode(value).length <= 72, {
-      error: 'La contraseña es demasiado larga.',
+      error: () => i18n.t('auth:validation.password.tooLong'),
     }),
 
   captchaToken: z
     .string()
-    .min(1, { error: 'Completa la verificación de seguridad.' })
+    .min(1, { error: () => i18n.t('auth:validation.captcha.required') })
     .max(4096),
 })
 
@@ -85,7 +87,7 @@ export const registerSchema = z.object({
 export const registerFormSchema = registerSchema
   .extend({ confirmPassword: z.string() })
   .refine((data) => data.password === data.confirmPassword, {
-    error: 'Las contraseñas no coinciden.',
+    error: () => i18n.t('auth:validation.confirmPassword.mismatch'),
     path: ['confirmPassword'],
   })
 

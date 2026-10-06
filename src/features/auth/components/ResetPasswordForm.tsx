@@ -1,6 +1,7 @@
 import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { CircleAlert } from 'lucide-react'
 import { useNavigate } from 'react-router'
+import { useTranslation } from 'react-i18next'
 
 import { ApiError } from '../../../api'
 import { PATHS } from '../../../router'
@@ -12,6 +13,7 @@ import { resetPasswordErrorMessage } from '../lib/passwordRecoveryErrorMessage'
 import { resetPasswordSchema } from '../schemas/passwordRecoverySchema'
 
 export function ResetPasswordForm({ token }: { token: string }) {
+  const { t } = useTranslation()
   const reset = useResetPassword()
   const navigate = useNavigate()
 
@@ -49,7 +51,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
         <form.Field name="newPassword">
           {(field) => (
             <TextField
-              label="Nueva contraseña"
+              label={t('auth:resetPassword.newPasswordLabel')}
               name={field.name}
               type="password"
               autoComplete="new-password"
@@ -61,13 +63,13 @@ export function ResetPasswordForm({ token }: { token: string }) {
             />
           )}
         </form.Field>
-        <p className="text-sm text-stone-600">Mínimo 8 caracteres, con una letra, un número y un símbolo.</p>
+        <p className="text-sm text-stone-600">{t('auth:resetPassword.passwordHint')}</p>
       </div>
 
       <form.Field name="confirmPassword">
         {(field) => (
           <TextField
-            label="Confirmar contraseña"
+            label={t('auth:resetPassword.confirmPasswordLabel')}
             name={field.name}
             type="password"
             autoComplete="new-password"
@@ -88,13 +90,13 @@ export function ResetPasswordForm({ token }: { token: string }) {
           <CircleAlert className="mt-0.5 size-5 shrink-0" />
           <div className="flex flex-col gap-1.5">
             <p>{resetPasswordErrorMessage(reset.error)}</p>
-            {linkRejected && <TextLink to={PATHS.forgotPassword}>Solicitar un enlace nuevo</TextLink>}
+            {linkRejected && <TextLink to={PATHS.forgotPassword}>{t('auth:resetPassword.requestNewLink')}</TextLink>}
           </div>
         </div>
       )}
 
       <Button type="submit" loading={reset.isPending}>
-        {reset.isPending ? 'Guardando…' : 'Restablecer contraseña'}
+        {reset.isPending ? t('auth:resetPassword.submitting') : t('auth:resetPassword.submit')}
       </Button>
     </form>
   )

@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
+import i18n from '@/i18n'
 
 const SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
 const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
+
+// Turnstile espera 'pt-BR', no nuestro código de locale 'pt'.
+const TURNSTILE_LANGUAGE: Record<string, string> = { pt: 'pt-BR' }
 
 interface TurnstileApi {
   render: (
@@ -38,7 +44,7 @@ function loadTurnstile(): Promise<void> {
     script.src = SCRIPT_SRC
     script.async = true
     script.onload = () => resolve()
-    script.onerror = () => reject(new Error('No se pudo cargar la verificación de seguridad.'))
+    script.onerror = () => reject(new Error(i18n.t('auth:turnstile.loadError')))
     document.head.appendChild(script)
   })
 
@@ -56,6 +62,7 @@ interface TurnstileWidgetProps {
 }
 
 export function TurnstileWidget({ onToken, resetKey = 0 }: TurnstileWidgetProps) {
+  const { t, i18n: i18nInstance } = useTranslation()
   const containerRef = useRef<HTMLDivElement>(null)
   const [loadError, setLoadError] = useState<string | null>(null)
 
@@ -72,7 +79,7 @@ export function TurnstileWidget({ onToken, resetKey = 0 }: TurnstileWidgetProps)
 
         widgetId = window.turnstile.render(containerRef.current, {
           sitekey: SITE_KEY,
-          language: 'es',
+          language: TURNSTILE_LANGUAGE[i18nInstance.language] ?? i18nInstance.language,
           callback: onToken,
           'expired-callback': () => onToken(''),
           'error-callback': () => onToken(''),
@@ -86,9 +93,9 @@ export function TurnstileWidget({ onToken, resetKey = 0 }: TurnstileWidgetProps)
       cancelled = true
       if (widgetId && window.turnstile) window.turnstile.remove(widgetId)
     }
-  }, [onToken, resetKey])
+  }, [onToken, resetKey, i18nInstance.language])
 
-  const error = SITE_KEY ? loadError : 'Falta configurar VITE_TURNSTILE_SITE_KEY en el archivo .env.'
+  const error = SITE_KEY ? loadError : t('auth:turnstile.missingSiteKey')
 
   if (error) {
     return (

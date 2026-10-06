@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next'
+
 import { FeatureCard } from '../../../ui/FeatureCard'
-import data from '../data.json'
 import { ICONS } from '../icons'
 import type { LandingCardSection } from '../types'
 
-/** Sección de características, alimentada desde el data.json. */
+/** Sección de características, alimentada desde las traducciones. */
 export function FeaturesSection() {
-  const { title, description, items } = data.features as LandingCardSection
+  const { t } = useTranslation()
+  const { title, description, items } = t('landing:features', { returnObjects: true }) as LandingCardSection
 
   return (
     <section id="caracteristicas" className="scroll-mt-20 py-20 sm:py-24">

@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
 import { CircleAlert, Eye, EyeOff } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface TextFieldProps {
   label: string
@@ -24,6 +25,7 @@ export function TextField({
   errors = [],
   disabled,
 }: TextFieldProps) {
+  const { t } = useTranslation()
   const id = useId()
   const errorId = `${id}-error`
   const [revealed, setRevealed] = useState(false)
@@ -60,7 +62,7 @@ export function TextField({
             type="button"
             onClick={() => setRevealed((current) => !current)}
             disabled={disabled}
-            aria-label={revealed ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+            aria-label={revealed ? t('common:password.hide') : t('common:password.show')}
             aria-pressed={revealed}
             className="absolute inset-y-0 right-0 grid w-12 place-items-center rounded-r-md text-stone-600 hover:text-rose-900 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-yellow-800 disabled:cursor-not-allowed disabled:opacity-60 motion-safe:transition-colors"
           >

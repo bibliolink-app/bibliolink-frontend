@@ -1,9 +1,11 @@
-import data from '../data.json'
+import { useTranslation } from 'react-i18next'
+
 import type { LandingCardSection } from '../types'
 
 /** Sección de beneficios. Reutiliza la misma tarjeta que Características. */
 export function BenefitsSection() {
-  const { title, description, items } = data.benefits as LandingCardSection
+  const { t } = useTranslation()
+  const { title, description, items } = t('landing:benefits', { returnObjects: true }) as LandingCardSection
 
   return (
     <section id="beneficios" className="scroll-mt-20 bg-teal-900/40 py-20 sm:py-24">

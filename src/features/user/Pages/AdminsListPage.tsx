@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert, UserPlus } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../ui/LoadingScreen'
@@ -9,6 +10,7 @@ import { useUsers } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 
 export function AdminsListPage() {
+  const { t } = useTranslation()
   const { data: users, isPending, isError, error } = useUsers()
 
   //  filtro por rol se hace aquí.
@@ -21,13 +23,13 @@ export function AdminsListPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500"
       >
         <ArrowLeft className="size-4" />
-        Volver al panel
+        {t('admin:common.backToPanel')}
       </Link>
 
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">Administradores</h1>
-         
+          <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">{t('admin:usersList.title')}</h1>
+
         </div>
 
         <Link
@@ -35,7 +37,7 @@ export function AdminsListPage() {
           className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
         >
           <UserPlus className="size-5" />
-          Nuevo administrador
+          {t('admin:usersList.newAdmin')}
         </Link>
       </header>
 
@@ -53,7 +55,7 @@ export function AdminsListPage() {
 
       {!isPending && !isError && admins.length === 0 && (
         <p className="rounded-lg bg-stone-300 px-4 py-6 text-center text-stone-600">
-          No hay administradores registrados.
+          {t('admin:usersList.empty')}
         </p>
       )}
 

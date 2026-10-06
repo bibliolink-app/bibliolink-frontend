@@ -1,0 +1,63 @@
+{
+  "profilePage": {
+    "title": "Mon profil",
+    "subtitle": "Les informations de votre compte BiblioLink.",
+    "fields": {
+      "email": "E-mail",
+      "birthDate": "Date de naissance",
+      "firstName": "Prénom",
+      "middleName": "Deuxième prénom",
+      "firstSurname": "Premier nom de famille",
+      "secondSurname": "Second nom de famille"
+    },
+    "plan": {
+      "title": "Mon forfait",
+      "pro": "Vous avez BiblioLink Pro : sans publicité et favoris illimités.",
+      "pending": "Votre abonnement BiblioLink Pro est en cours d'activation.",
+      "freeLead": "Vous êtes sur le forfait gratuit.",
+      "upgradeCta": "Passer à Pro",
+      "freeTrailing": "pour supprimer les publicités et avoir des favoris illimités."
+    }
+  },
+  "errors": {
+    "unexpected": "Une erreur inattendue s'est produite.",
+    "network": "Impossible de se connecter au serveur. Vérifiez votre connexion.",
+    "forbidden": "Vous n'avez pas la permission d'effectuer cette action.",
+    "conflict": "L'e-mail ou le nom d'utilisateur est déjà enregistré.",
+    "generic": "L'opération n'a pas pu être terminée."
+  },
+  "toasts": {
+    "userEnabled": "Utilisateur activé.",
+    "userDisabled": "Utilisateur désactivé."
+  },
+  "fields": {
+    "firstName": "Prénom",
+    "middleName": "Deuxième prénom",
+    "firstSurname": "Premier nom de famille",
+    "secondSurname": "Second nom de famille"
+  },
+  "validation": {
+    "required": "{{label}} est obligatoire.",
+    "tooLong50": "{{label}} ne peut pas dépasser 50 caractères.",
+    "password": {
+      "minLength": "Le mot de passe doit contenir au moins 8 caractères.",
+      "needsLetter": "Le mot de passe doit inclure au moins une lettre.",
+      "needsNumber": "Le mot de passe doit inclure au moins un chiffre.",
+      "needsSpecial": "Le mot de passe doit inclure au moins un caractère spécial.",
+      "tooLong": "Le mot de passe est trop long."
+    },
+    "date": {
+      "format": "La date doit être au format AAAA-MM-JJ.",
+      "invalid": "Cette date n'existe pas."
+    },
+    "email": {
+      "required": "L'adresse e-mail est obligatoire.",
+      "tooLong": "L'adresse e-mail ne peut pas dépasser 254 caractères.",
+      "invalid": "Saisissez une adresse e-mail valide."
+    },
+    "username": {
+      "required": "Le nom d'utilisateur est obligatoire.",
+      "tooLong": "Le nom d'utilisateur ne peut pas dépasser 25 caractères."
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+import i18n from '@/i18n'
 import { emailSchema } from './emailSchema'
 
 // Sin reglas de fortaleza: en el login solo se exige que haya contraseña,
@@ -8,7 +9,7 @@ export const loginSchema = z.object({
   email: emailSchema,
 
   // Sin `trim`: los espacios pueden formar parte de la contraseña.
-  password: z.string().min(1, { error: 'La contraseña es obligatoria.' }),
+  password: z.string().min(1, { error: () => i18n.t('auth:validation.password.required') }),
 })
 
 export type LoginInput = z.output<typeof loginSchema>

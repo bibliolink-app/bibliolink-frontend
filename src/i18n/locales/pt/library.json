@@ -1,0 +1,17 @@
+{
+  "favorites": {
+    "title": "Favoritos",
+    "subtitle": "Os livros que você guarda para ter sempre à mão.",
+    "empty": "Ainda não há favoritos"
+  },
+  "home": {
+    "title": "Sua biblioteca",
+    "subtitle": "Descubra livros e continue sua leitura de onde parou."
+  },
+  "search": {
+    "title": "Buscar",
+    "subtitle": "Encontre livros por título, autor ou categoria.",
+    "placeholder": "Busque por título, autor ou categoria",
+    "ariaLabel": "Buscar livros"
+  }
+}
