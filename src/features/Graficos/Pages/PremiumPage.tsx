@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert } from 'lucide-react'
 
 import { PATHS } from '../../../router'
-import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { PremiumChart } from '../components/PremiumChart'
 import { PremiumSummary } from '../components/PremiumSummary'
 import { useSummary } from '../Hook/GraficosHook'

@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert } from 'lucide-react'
 
 import { PATHS } from '../../../router'
-import { LoadingScreen } from '../../../ui/LoadingScreen'
+import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { AdminsTable } from '../components/AdminTable'
 import { useUsers } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
