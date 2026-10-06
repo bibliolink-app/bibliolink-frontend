@@ -3,10 +3,26 @@
     "title": "Panneau d'administration",
     "subtitle": "Gérez la plateforme depuis ici.",
     "sections": {
-      "profile": { "title": "Mon profil", "description": "Consultez les informations du compte avec lequel vous êtes connecté." },
-      "users": { "title": "Utilisateurs", "description": "Consultez les comptes, créez des administrateurs et gérez le statut de chaque utilisateur." },
-      "catalog": { "title": "Catalogue de livres", "description": "Gérez les livres de la collection." },
-      "subscriptions": { "title": "Abonnements et paiements", "description": "Suivez les abonnements actifs et les transactions de paiement." }
+      "profile": {
+        "title": "Mon profil",
+        "description": "Consultez les informations du compte avec lequel vous êtes connecté."
+      },
+      "users": {
+        "title": "Utilisateurs",
+        "description": "Consultez les comptes, créez des administrateurs et gérez le statut de chaque utilisateur."
+      },
+      "analytics": {
+        "title": "Statistiques",
+        "description": "Suivez la croissance des utilisateurs inscrits sur la plateforme."
+      },
+      "catalog": {
+        "title": "Catalogue de livres",
+        "description": "Gérez les livres de la collection."
+      },
+      "subscriptions": {
+        "title": "Abonnements et paiements",
+        "description": "Suivez les abonnements actifs et les transactions de paiement."
+      }
     }
   },
   "common": {
@@ -28,6 +44,7 @@
   "usersList": {
     "title": "Administrateurs",
     "newAdmin": "Nouvel administrateur",
+    "normalUsers": "Utilisateurs normaux",
     "empty": "Aucun administrateur enregistré."
   },
   "createAdminPage": {
@@ -44,7 +61,10 @@
       "createdAt": "Date d'inscription",
       "actions": "Actions"
     },
-    "status": { "active": "Actif", "inactive": "Inactif" },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif"
+    },
     "actions": {
       "enable": "Activer",
       "disable": "Désactiver",
