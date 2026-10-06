@@ -16,8 +16,8 @@ export function ForgotPasswordForm() {
 
   const form = useForm({
     defaultValues: { email: '' },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    // Valida en cada cambio desde el inicio, no solo tras el primer intento de envío.
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: forgotPasswordSchema },
     onSubmit: ({ value }) => {
       forgot.mutate(forgotPasswordSchema.parse(value))

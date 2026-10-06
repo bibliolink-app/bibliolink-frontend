@@ -16,8 +16,8 @@ export function LoginForm() {
 
   const form = useForm({
     defaultValues: { email: '', password: '' },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    // Valida en cada cambio desde el inicio, no solo tras el primer intento de envío.
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: loginSchema },
     // El error se muestra con `login.error`. El éxito no navega: al aparecer la sesión, `PublicOnly` redirige.
     onSubmit: ({ value }) => {

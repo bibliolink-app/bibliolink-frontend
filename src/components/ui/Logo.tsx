@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 
-import bibliolinkIcon from '../../assets/bibliolink.jpeg'
+import bibliolinkIcon from '../../assets/bibliolink-icon.png'
 import { PATHS } from '../../router'
 
 export function Logo({ size = 'lg' }: { size?: 'lg' | 'sm' }) {
@@ -9,7 +9,7 @@ export function Logo({ size = 'lg' }: { size?: 'lg' | 'sm' }) {
       <img
         src={bibliolinkIcon}
         alt="BiblioLink"
-        className={`rounded-md object-contain ${size === 'lg' ? 'size-9' : 'size-6'}`}
+        className={`object-contain ${size === 'lg' ? 'size-9' : 'size-6'}`}
       />
       <span className={`font-serif font-semibold tracking-wide text-stone-300 ${size === 'lg' ? 'text-4xl' : 'text-2xl'}`}>
         BiblioLink
