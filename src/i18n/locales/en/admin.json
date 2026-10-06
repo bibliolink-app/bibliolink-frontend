@@ -3,10 +3,26 @@
     "title": "Admin panel",
     "subtitle": "Manage the platform from here.",
     "sections": {
-      "profile": { "title": "My profile", "description": "View the details of the account you're signed in with." },
-      "users": { "title": "Users", "description": "View accounts, create admins, and manage each user's status." },
-      "catalog": { "title": "Book catalog", "description": "Manage the books in the collection." },
-      "subscriptions": { "title": "Subscriptions & payments", "description": "Monitor active subscriptions and payment transactions." }
+      "profile": {
+        "title": "My profile",
+        "description": "View the details of the account you're signed in with."
+      },
+      "users": {
+        "title": "Users",
+        "description": "View accounts, create admins, and manage each user's status."
+      },
+      "analytics": {
+        "title": "Analytics",
+        "description": "Track the growth of registered users on the platform."
+      },
+      "catalog": {
+        "title": "Book catalog",
+        "description": "Manage the books in the collection."
+      },
+      "subscriptions": {
+        "title": "Subscriptions & payments",
+        "description": "Monitor active subscriptions and payment transactions."
+      }
     }
   },
   "common": {
@@ -28,6 +44,7 @@
   "usersList": {
     "title": "Admins",
     "newAdmin": "New admin",
+    "normalUsers": "Regular users",
     "empty": "No admins registered."
   },
   "createAdminPage": {
@@ -44,7 +61,10 @@
       "createdAt": "Registered on",
       "actions": "Actions"
     },
-    "status": { "active": "Active", "inactive": "Inactive" },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
     "actions": {
       "enable": "Enable",
       "disable": "Disable",

@@ -3,10 +3,26 @@
     "title": "Painel de administração",
     "subtitle": "Gerencie a plataforma a partir daqui.",
     "sections": {
-      "profile": { "title": "Meu perfil", "description": "Veja os dados da conta com a qual você entrou." },
-      "users": { "title": "Usuários", "description": "Veja as contas, crie administradores e gerencie o status de cada usuário." },
-      "catalog": { "title": "Catálogo de livros", "description": "Gerencie os livros da coleção." },
-      "subscriptions": { "title": "Assinaturas e pagamentos", "description": "Acompanhe as assinaturas ativas e as transações de pagamento." }
+      "profile": {
+        "title": "Meu perfil",
+        "description": "Veja os dados da conta com a qual você entrou."
+      },
+      "users": {
+        "title": "Usuários",
+        "description": "Veja as contas, crie administradores e gerencie o status de cada usuário."
+      },
+      "analytics": {
+        "title": "Estatísticas",
+        "description": "Acompanhe o crescimento dos usuários registrados na plataforma."
+      },
+      "catalog": {
+        "title": "Catálogo de livros",
+        "description": "Gerencie os livros da coleção."
+      },
+      "subscriptions": {
+        "title": "Assinaturas e pagamentos",
+        "description": "Acompanhe as assinaturas ativas e as transações de pagamento."
+      }
     }
   },
   "common": {
@@ -28,6 +44,7 @@
   "usersList": {
     "title": "Administradores",
     "newAdmin": "Novo administrador",
+    "normalUsers": "Usuários comuns",
     "empty": "Nenhum administrador registrado."
   },
   "createAdminPage": {
@@ -44,7 +61,10 @@
       "createdAt": "Data de registro",
       "actions": "Ações"
     },
-    "status": { "active": "Ativo", "inactive": "Inativo" },
+    "status": {
+      "active": "Ativo",
+      "inactive": "Inativo"
+    },
     "actions": {
       "enable": "Habilitar",
       "disable": "Desabilitar",

@@ -9,10 +9,13 @@ import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
 import { LoginPage } from './features/auth/pages/LoginPage'
 import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
+import { GraficosPage } from './features/Graficos/Pages/GraficosPage'
+import { PremiumPage } from './features/Graficos/Pages/PremiumPage'
 import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
 import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
 import { AdminsListPage } from './features/user/Pages/AdminsListPage'
+import { NormalUsersListPage } from './features/user/Pages/UsersListPage'
 import { CreateAdminPage } from './features/user/Pages/CreateAdminPage'
 import { FavoritesPage } from './features/library/FavoritesPage'
 import { SearchPage } from './features/library/SearchPage'
@@ -35,6 +38,9 @@ export const PATHS = {
     adminProfile: '/admin/perfil',
   adminUsers: '/admin/usuarios',
   adminUserNew: '/admin/usuarios/nuevo',
+  adminNormalUsers: '/admin/usuarios/normales',
+  adminAnalytics: '/admin/analytics',
+  adminAnalyticsPremium: '/admin/analytics/premium',
     search: '/buscar',
   favorites: '/favoritos',
   profile: '/perfil',
@@ -86,6 +92,9 @@ export function createAppRouter() {
                 { path: PATHS.adminProfile, element: <AdminProfilePage /> },
                 { path: PATHS.adminUsers, element: <AdminsListPage /> },
                 { path: PATHS.adminUserNew, element: <CreateAdminPage /> },
+                { path: PATHS.adminNormalUsers, element: <NormalUsersListPage /> },
+                { path: PATHS.adminAnalytics, element: <GraficosPage /> },
+                { path: PATHS.adminAnalyticsPremium, element: <PremiumPage /> },
               ],
             },
           ],
