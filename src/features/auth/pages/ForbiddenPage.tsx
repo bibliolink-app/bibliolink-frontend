@@ -1,9 +1,12 @@
 import { Shield } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { TextLink } from '../../../ui/TextLink'
 
 export function ForbiddenPage() {
+  const { t } = useTranslation()
+
   return (
     <section
       aria-labelledby="forbidden-title"
@@ -13,10 +16,10 @@ export function ForbiddenPage() {
         <Shield className="size-7" />
       </span>
       <h1 id="forbidden-title" className="font-serif text-2xl font-semibold text-stone-900">
-        Acceso restringido
+        {t('auth:forbidden.title')}
       </h1>
-      <p className="text-stone-600">No tienes permisos para ver esta sección.</p>
-      <TextLink to={PATHS.home}>Volver al inicio</TextLink>
+      <p className="text-stone-600">{t('auth:forbidden.description')}</p>
+      <TextLink to={PATHS.home}>{t('auth:forbidden.backHome')}</TextLink>
     </section>
   )
 }

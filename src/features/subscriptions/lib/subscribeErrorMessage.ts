@@ -1,19 +1,19 @@
+import i18n from '@/i18n'
+
 import { ApiError } from '../../../api'
 
-const GENERIC = 'No se pudo iniciar la suscripción. Inténtalo de nuevo más tarde.'
-
 export function subscribeErrorMessage(error: unknown): string {
-  if (!(error instanceof ApiError)) return GENERIC
+  if (!(error instanceof ApiError)) return i18n.t('subscriptions:errors.generic')
 
   switch (error.status) {
     case 0:
-      return 'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.'
+      return i18n.t('subscriptions:errors.network')
     case 403:
-      return 'Tu cuenta no está activa.'
+      return i18n.t('subscriptions:errors.inactiveAccount')
     case 409:
       // Una reserva PENDING abandonada (o una suscripción vigente) bloquea nuevos intentos.
-      return 'Ya tienes una suscripción vigente o en proceso.'
+      return i18n.t('subscriptions:errors.alreadySubscribed')
     default:
-      return GENERIC
+      return i18n.t('subscriptions:errors.generic')
   }
 }

@@ -1,6 +1,7 @@
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { useRef } from 'react'
 import { toast } from 'sonner'
+import { useTranslation } from 'react-i18next'
 
 import { useConfirmSubscription, useReserveSubscription } from '../hooks/useSubscribe'
 import { subscribeErrorMessage } from '../lib/subscribeErrorMessage'
@@ -18,6 +19,7 @@ if (!PAYPAL_CLIENT_ID || !PAYPAL_PLAN_ID) {
  * webhook de PayPal que nos notifica que el pago fue exitoso.
  */
 export function SubscribeButton() {
+  const { t } = useTranslation()
   const reserveSubscription = useReserveSubscription()
   const confirmSubscription = useConfirmSubscription()
   const pendingSubscriptionId = useRef<number | null>(null)
@@ -56,11 +58,11 @@ export function SubscribeButton() {
             externalSubscriptionReference: data.subscriptionID,
           })
 
-          toast.success('Pago registrado. Tu suscripción se activará en unos minutos.')
+          toast.success(t('subscriptions:toast.paymentRegistered'))
         }}
         onError={() => {
           if (reserveErrorShown.current) return
-          toast.error('No se pudo procesar la suscripción. Intenta de nuevo.')
+          toast.error(t('subscriptions:toast.genericError'))
         }}
       />
     </PayPalScriptProvider>

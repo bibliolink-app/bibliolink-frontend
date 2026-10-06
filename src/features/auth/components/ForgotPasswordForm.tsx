@@ -1,5 +1,6 @@
 import { revalidateLogic, useForm } from '@tanstack/react-form'
 import { CircleAlert, MailCheck } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { Button } from '../../../ui/Button'
@@ -10,6 +11,7 @@ import { forgotPasswordErrorMessage } from '../lib/passwordRecoveryErrorMessage'
 import { forgotPasswordSchema } from '../schemas/passwordRecoverySchema'
 
 export function ForgotPasswordForm() {
+  const { t } = useTranslation()
   const forgot = useForgotPassword()
 
   const form = useForm({
@@ -27,13 +29,9 @@ export function ForgotPasswordForm() {
     return (
       <div role="status" className="flex flex-col items-center gap-4 text-center">
         <MailCheck className="size-10 text-yellow-800" />
-        <p className="text-stone-900">
-          Si existe una cuenta asociada a ese correo, te enviaremos las instrucciones para restablecer tu contraseña.
-        </p>
-        <p className="text-sm text-stone-600">
-          Revisa también la carpeta de spam. El enlace tiene una duración limitada.
-        </p>
-        <TextLink to={PATHS.login}>Volver a iniciar sesión</TextLink>
+        <p className="text-stone-900">{t('auth:forgotPassword.successMessage')}</p>
+        <p className="text-sm text-stone-600">{t('auth:forgotPassword.successHint')}</p>
+        <TextLink to={PATHS.login}>{t('auth:forgotPassword.backToLogin')}</TextLink>
       </div>
     )
   }
@@ -51,7 +49,7 @@ export function ForgotPasswordForm() {
       <form.Field name="email">
         {(field) => (
           <TextField
-            label="Correo electrónico"
+            label={t('auth:forgotPassword.emailLabel')}
             name={field.name}
             type="email"
             autoComplete="email"
@@ -75,11 +73,11 @@ export function ForgotPasswordForm() {
       )}
 
       <Button type="submit" loading={forgot.isPending}>
-        {forgot.isPending ? 'Enviando…' : 'Enviar instrucciones'}
+        {forgot.isPending ? t('auth:forgotPassword.submitting') : t('auth:forgotPassword.submit')}
       </Button>
 
       <p className="text-center text-sm">
-        <TextLink to={PATHS.login}>Volver a iniciar sesión</TextLink>
+        <TextLink to={PATHS.login}>{t('auth:forgotPassword.backToLogin')}</TextLink>
       </p>
     </form>
   )

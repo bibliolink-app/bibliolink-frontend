@@ -1,0 +1,30 @@
+{
+  "plans": {
+    "pageTitle": "Offres BiblioLink",
+    "pageSubtitle": "Choisissez votre façon de lire.",
+    "currentPlanBadge": "Votre offre actuelle",
+    "free": {
+      "name": "Free",
+      "price": "Gratuit",
+      "features": ["Accès à la bibliothèque", "Favoris limités", "Avec publicités"]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "5,00 $ USD / mois",
+      "features": ["Accès à la bibliothèque", "Favoris illimités", "Sans publicité"]
+    },
+    "activeUntil": "Actif jusqu'au {{date}}",
+    "renewsOn": "Renouvellement le {{date}}",
+    "paymentPending": "Votre paiement a été enregistré. L'activation peut prendre quelques minutes."
+  },
+  "toast": {
+    "paymentRegistered": "Paiement enregistré. Votre abonnement sera activé dans quelques minutes.",
+    "genericError": "Impossible de traiter l'abonnement. Réessayez."
+  },
+  "errors": {
+    "generic": "Impossible de démarrer l'abonnement. Réessayez plus tard.",
+    "network": "Impossible de se connecter au serveur. Vérifiez votre connexion et réessayez.",
+    "inactiveAccount": "Votre compte n'est pas actif.",
+    "alreadySubscribed": "Vous avez déjà un abonnement actif ou en cours."
+  }
+}

@@ -1,22 +1,20 @@
 import { ApiError } from '../../../api'
-
-const GENERIC = 'No se pudo iniciar sesión. Inténtalo de nuevo más tarde.'
-
+import i18n from '@/i18n'
 
 export function loginErrorMessage(error: unknown): string {
-  if (!(error instanceof ApiError)) return GENERIC
+  if (!(error instanceof ApiError)) return i18n.t('auth:errors.login.generic')
 
   switch (error.status) {
     case 0:
-      return 'No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.'
+      return i18n.t('auth:errors.common.connection')
     case 400:
-      return error.messages.join(' ') || GENERIC
+      return error.messages.join(' ') || i18n.t('auth:errors.login.generic')
     case 401:
-      return 'Credenciales incorrectas.'
+      return i18n.t('auth:errors.login.invalidCredentials')
     case 429:
       // El throttler del backend responde en inglés: se traduce aquí.
-      return 'Demasiados intentos. Espera un minuto e inténtalo de nuevo.'
+      return i18n.t('auth:errors.common.tooManyAttempts')
     default:
-      return GENERIC
+      return i18n.t('auth:errors.login.generic')
   }
 }

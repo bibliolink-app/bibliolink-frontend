@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { createColumnHelper, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { LoaderCircle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import {
   AlertDialog,
@@ -20,18 +21,21 @@ import type { UsuarioListado } from '../Models/UserModels'
 const columnHelper = createColumnHelper<UsuarioListado>()
 
 function StatusBadge({ active }: { active: boolean }) {
+  const { t } = useTranslation()
+
   return (
     <span
       className={`inline-block rounded-full px-2.5 py-1 text-xs font-semibold ring-1 ${
         active ? 'bg-emerald-100 text-emerald-900 ring-emerald-700/40' : 'bg-stone-100 text-stone-600 ring-stone-500/40'
       }`}
     >
-      {active ? 'Activo' : 'Inactivo'}
+      {active ? t('admin:table.status.active') : t('admin:table.status.inactive')}
     </span>
   )
 }
 
 export function AdminsTable({ users }: { users: UsuarioListado[] }) {
+  const { t, i18n } = useTranslation()
   const { user: currentUser } = useSession()
   const enableUser = useEnableUser()
   const disableUser = useDisableUser()
@@ -41,29 +45,29 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor('username', { header: 'Usuario' }),
+      columnHelper.accessor('username', { header: t('admin:table.headers.username') }),
 
       columnHelper.accessor(
         (row) => [row.firstName, row.middleName, row.firstSurname, row.secondSurname].filter(Boolean).join(' '),
-        { id: 'fullName', header: 'Nombre completo' },
+        { id: 'fullName', header: t('admin:table.headers.fullName') },
       ),
 
-      columnHelper.accessor('email', { header: 'Correo' }),
+      columnHelper.accessor('email', { header: t('admin:table.headers.email') }),
 
       columnHelper.accessor('status', {
-        header: 'Estado',
+        header: t('admin:table.headers.status'),
         cell: (info) => <StatusBadge active={info.getValue() === 'ACTIVE'} />,
       }),
 
       columnHelper.accessor('createdAt', {
-        header: 'Fecha de registro',
+        header: t('admin:table.headers.createdAt'),
         // Llega como ISO string: se convierte solo para mostrarlo.
-        cell: (info) => new Date(info.getValue()).toLocaleDateString('es-CR'),
+        cell: (info) => new Date(info.getValue()).toLocaleDateString(i18n.language),
       }),
 
       columnHelper.display({
         id: 'actions',
-        header: 'Acciones',
+        header: t('admin:table.headers.actions'),
         cell: ({ row }) => {
           const target = row.original
           const isActive = target.status === 'ACTIVE'
@@ -83,7 +87,7 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
                 className={buttonClassName}
               >
                 {isThisRowPending && <LoaderCircle className="size-4 motion-safe:animate-spin" />}
-                Habilitar
+                {t('admin:table.actions.enable')}
               </button>
             )
           }
@@ -95,24 +99,24 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
                   type="button"
                   disabled={isSelf || isMutating}
                   aria-busy={isThisRowPending}
-                  title={isSelf ? 'No puedes cambiar el estado de tu propia cuenta.' : undefined}
+                  title={isSelf ? t('admin:table.actions.selfDisableTitle') : undefined}
                   className={buttonClassName}
                 >
                   {isThisRowPending && <LoaderCircle className="size-4 motion-safe:animate-spin" />}
-                  Deshabilitar
+                  {t('admin:table.actions.disable')}
                 </button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>¿Deshabilitar a {target.username}?</AlertDialogTitle>
+                  <AlertDialogTitle>{t('admin:table.confirmDisable.title', { username: target.username })}</AlertDialogTitle>
                   <AlertDialogDescription>
-                    No podrá iniciar sesión hasta que vuelvas a habilitar su cuenta.
+                    {t('admin:table.confirmDisable.description')}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                  <AlertDialogCancel>{t('admin:table.confirmDisable.cancel')}</AlertDialogCancel>
                   <AlertDialogAction variant="destructive" onClick={() => disableUser.mutate(target.userId)}>
-                    Deshabilitar
+                    {t('admin:table.confirmDisable.confirm')}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
@@ -121,7 +125,7 @@ export function AdminsTable({ users }: { users: UsuarioListado[] }) {
         },
       }),
     ],
-    [currentUser?.userId, disableUser, enableUser, isMutating, pendingUserId],
+    [currentUser?.userId, disableUser, enableUser, isMutating, pendingUserId, t],
   )
 
   const table = useReactTable({

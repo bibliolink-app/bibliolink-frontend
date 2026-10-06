@@ -1,0 +1,17 @@
+{
+  "favorites": {
+    "title": "Favorites",
+    "subtitle": "The books you save to keep close at hand.",
+    "empty": "No favorites yet"
+  },
+  "home": {
+    "title": "Your library",
+    "subtitle": "Discover books and pick up your reading where you left off."
+  },
+  "search": {
+    "title": "Search",
+    "subtitle": "Find books by title, author, or category.",
+    "placeholder": "Search by title, author, or category",
+    "ariaLabel": "Search books"
+  }
+}
