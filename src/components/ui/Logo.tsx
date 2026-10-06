@@ -5,7 +5,7 @@ import { PATHS } from '../../router'
 
 interface LogoProps {
   size?: 'lg' | 'sm'
-  
+  asLink?: boolean
 }
 
 export function Logo({ size = 'lg', asLink = true }: LogoProps) {
