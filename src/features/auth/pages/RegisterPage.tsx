@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { CenteredCard } from '../../../ui/CenteredCard'
-import { TextLink } from '../../../ui/TextLink'
+import { CenteredCard } from '../../../components/ui/CenteredCard'
+import { TextLink } from '../../../components/ui/TextLink'
 import { RegisterForm } from '../components/RegisterForm'
 
 export function RegisterPage() {

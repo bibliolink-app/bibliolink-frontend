@@ -5,7 +5,7 @@ import { setSessionExpiredHandler } from './api'
 import { Toaster } from './components/ui/sonner'
 import { useSession } from './features/auth/hooks/useSession'
 import { endSession } from './features/auth/lib/session'
-import { LoadingScreen } from './ui/LoadingScreen'
+import { LoadingScreen } from './components/ui/LoadingScreen'
 
 const queryClient = new QueryClient()
 

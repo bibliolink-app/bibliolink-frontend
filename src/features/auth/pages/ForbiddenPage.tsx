@@ -2,7 +2,7 @@ import { Shield } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { TextLink } from '../../../ui/TextLink'
+import { TextLink } from '../../../components/ui/TextLink'
 
 export function ForbiddenPage() {
   const { t } = useTranslation()

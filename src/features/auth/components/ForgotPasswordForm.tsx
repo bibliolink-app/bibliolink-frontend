@@ -3,9 +3,9 @@ import { CircleAlert, MailCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { Button } from '../../../ui/Button'
-import { TextField } from '../../../ui/TextField'
-import { TextLink } from '../../../ui/TextLink'
+import { FormButton } from '../../../components/ui/FormButton'
+import { TextField } from '../../../components/ui/TextField'
+import { TextLink } from '../../../components/ui/TextLink'
 import { useForgotPassword } from '../hooks/usePasswordRecovery'
 import { forgotPasswordErrorMessage } from '../lib/passwordRecoveryErrorMessage'
 import { forgotPasswordSchema } from '../schemas/passwordRecoverySchema'
@@ -16,8 +16,8 @@ export function ForgotPasswordForm() {
 
   const form = useForm({
     defaultValues: { email: '' },
-    // Valida al enviar por primera vez y, a partir de ahí, en cada cambio.
-    validationLogic: revalidateLogic(),
+    // Valida en cada cambio desde el inicio, no solo tras el primer intento de envío.
+    validationLogic: revalidateLogic({ mode: 'change' }),
     validators: { onDynamic: forgotPasswordSchema },
     onSubmit: ({ value }) => {
       forgot.mutate(forgotPasswordSchema.parse(value))
@@ -72,9 +72,9 @@ export function ForgotPasswordForm() {
         </div>
       )}
 
-      <Button type="submit" loading={forgot.isPending}>
+      <FormButton type="submit" loading={forgot.isPending}>
         {forgot.isPending ? t('auth:forgotPassword.submitting') : t('auth:forgotPassword.submit')}
-      </Button>
+      </FormButton>
 
       <p className="text-center text-sm">
         <TextLink to={PATHS.login}>{t('auth:forgotPassword.backToLogin')}</TextLink>

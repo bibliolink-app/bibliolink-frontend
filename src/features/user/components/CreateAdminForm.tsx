@@ -4,7 +4,7 @@ import { CircleAlert, LoaderCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
-import { TextField } from '../../../ui/TextField'
+import { TextField } from '../../../components/ui/TextField'
 import { useCreateAdmin } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 import { crearAdminSchema } from '../Schemas/UserSchemas'

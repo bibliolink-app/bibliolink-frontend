@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
 
-import { Logo } from '../../../ui/Logo'
-import { LanguageSwitcher } from '../../../ui/LanguageSwitcher'
+import { Logo } from '../../../components/ui/Logo'
+import { LanguageSwitcher } from '../../../components/ui/LanguageSwitcher'
 import { LoginButton } from './LoginButton'
-
 
 export function Header() {
   const { t } = useTranslation()
@@ -28,7 +27,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
-          <LoginButton />
+          <LoginButton soloIconoEnMovil />
         </div>
       </div>
     </header>

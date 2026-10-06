@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next'
 import { useLogout } from '../features/auth/hooks/useLogout'
 import { useSession } from '../features/auth/hooks/useSession'
 import { useSubscriptionEvents } from '../features/subscriptions/hooks/useSubscriptionEvents'
-import { Logo } from '../ui/Logo'
-import { BottomNav } from '../ui/BottomNav'
-import { LanguageSwitcher } from '../ui/LanguageSwitcher'
+import { Logo } from '../components/ui/Logo'
+import { BottomNav } from '../components/ui/BottomNav'
+import { LanguageSwitcher } from '../components/ui/LanguageSwitcher'
 import { PATHS } from '../router'
 /** el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {

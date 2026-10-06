@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next'
 
 import { ApiError } from '../../../api'
 import { PATHS } from '../../../router'
-import { Button } from '../../../ui/Button'
-import { TextField } from '../../../ui/TextField'
-import { TextLink } from '../../../ui/TextLink'
+import { FormButton } from '../../../components/ui/FormButton'
+import { TextField } from '../../../components/ui/TextField'
+import { TextLink } from '../../../components/ui/TextLink'
 import { useResetPassword } from '../hooks/usePasswordRecovery'
 import { resetPasswordErrorMessage } from '../lib/passwordRecoveryErrorMessage'
 import { resetPasswordSchema } from '../schemas/passwordRecoverySchema'
@@ -95,9 +95,9 @@ export function ResetPasswordForm({ token }: { token: string }) {
         </div>
       )}
 
-      <Button type="submit" loading={reset.isPending}>
+      <FormButton type="submit" loading={reset.isPending}>
         {reset.isPending ? t('auth:resetPassword.submitting') : t('auth:resetPassword.submit')}
-      </Button>
+      </FormButton>
     </form>
   )
 }
