@@ -1,22 +1,20 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { getBook, getBooks } from '../Services/BookServices'
 
-export const useBooks = (pagina: number, query?: string) => {
+export const useBooks = () => {
   return useQuery({
-    queryKey: ['books', 'search', pagina, query ?? ''],
-    queryFn: () => getBooks(pagina, query),
+    queryKey: ['books'],
+    queryFn: getBooks,
     staleTime: 5 * 60 * 1000, // 5 minutos
-    // Al cambiar de página conserva la anterior en pantalla y evita el parpadeo.
-    placeholderData: keepPreviousData,
   })
 }
 
-export const useBook = (reference: string) => {
+export const useBook = (bookId: number) => {
   return useQuery({
-    queryKey: ['books', 'detail', reference],
-    queryFn: () => getBook(reference),
+    queryKey: ['books', bookId],
+    queryFn: () => getBook(bookId),
     staleTime: 5 * 60 * 1000, // 5 minutos
-    enabled: reference.length > 0,
+    enabled: Number.isInteger(bookId) && bookId > 0,
   })
 }

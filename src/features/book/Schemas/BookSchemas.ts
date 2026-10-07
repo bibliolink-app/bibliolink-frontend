@@ -5,34 +5,25 @@ const textoOpcional = z
   .nullish()
   .transform((valor) => valor ?? null)
 
-const listaDeTextos = z
-  .array(z.string())
-  .nullish()
-  .transform((valor) => valor ?? [])
-
 export const libroSchema = z.object({
+  bookId: z.number().int().positive(),
   providerCode: z.string(),
   externalReference: z.string(),
   title: z.string(),
   description: textoOpcional,
   coverUrl: textoOpcional,
-  authors: listaDeTextos,
-  languageCodes: listaDeTextos,
+  authors: z
+    .array(z.string())
+    .nullish()
+    .transform((valor) => valor ?? []),
+  languages: z
+    .array(z.object({ languageCode: z.string(), name: z.string() }))
+    .nullish()
+    .transform((valor) => valor ?? []),
+  categories: z
+    .array(z.string())
+    .nullish()
+    .transform((valor) => valor ?? []),
 })
 
-const paginaProveedorSchema = z.object({
-  providerCode: z.string(),
-  items: z.array(libroSchema),
-  page: z.number(),
-  pageSize: z.number(),
-  totalItems: z.number().nullable(),
-  hasNextPage: z.boolean(),
-})
-
-export const busquedaSchema = z.object({
-  query: z.string(),
-  page: z.number(),
-  pageSize: z.number(),
-  results: z.array(paginaProveedorSchema),
-  unavailableProviders: z.array(z.string()),
-})
+export const librosSchema = z.array(libroSchema)

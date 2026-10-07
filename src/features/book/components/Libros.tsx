@@ -17,12 +17,9 @@ export function Libros({ libros }: { libros: Libro[] }) {
   return (
     <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {libros.map((libro) => (
-        <li key={`${libro.providerCode}-${libro.externalReference}`} className="group relative">
-          {/* El libro viaja con el enlace: el detalle trae los mismos campos
-              que la lista, así se evita volver a pedirlo al proveedor. */}
+        <li key={libro.bookId} className="group relative">
           <Link
-            to={rutaLibro(libro.externalReference)}
-            state={{ libro }}
+            to={rutaLibro(libro.bookId)}
             className="block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
           >
             <div className="relative aspect-2/3 w-full overflow-hidden rounded-xl bg-teal-900 shadow-lg shadow-black/40 ring-1 ring-stone-100/10 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-black/50 motion-safe:transition-all">

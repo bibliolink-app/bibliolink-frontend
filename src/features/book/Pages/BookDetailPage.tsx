@@ -1,21 +1,14 @@
-import { Link, useLocation, useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { ArrowLeft, BookOpen, CircleAlert } from 'lucide-react'
 
-import { PATHS } from '../../../router'
+import { PATHS, rutaLector } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { useBook } from '../Hook/BookHook'
 import { bookErrorMessage } from '../lib/bookErrorMessage'
-import type { Libro } from '../Models/BookModels'
 
 export function BookDetailPage() {
-  const { reference = '' } = useParams()
-  const { state } = useLocation()
-
-
-  const libroDelEnlace = (state as { libro?: Libro } | null)?.libro
-  const consulta = useBook(libroDelEnlace ? '' : reference)
-
-  const libro = libroDelEnlace ?? consulta.data
+  const bookId = Number(useParams().bookId)
+  const { data: libro, isPending, isError, error } = useBook(bookId)
 
   return (
     <div className="mx-auto max-w-4xl">
@@ -27,15 +20,15 @@ export function BookDetailPage() {
         Volver al catálogo
       </Link>
 
-      {!libro && consulta.isPending && <LoadingScreen />}
+      {isPending && <LoadingScreen />}
 
-      {!libro && consulta.isError && (
+      {isError && (
         <div
           role="alert"
           className="flex items-start gap-2.5 rounded-xl border border-rose-300 bg-rose-100 px-4 py-3.5 text-rose-900"
         >
           <CircleAlert className="mt-0.5 size-5 shrink-0" />
-          <p>{bookErrorMessage(consulta.error)}</p>
+          <p>{bookErrorMessage(error)}</p>
         </div>
       )}
 
@@ -60,14 +53,22 @@ export function BookDetailPage() {
               <p className="mt-2 text-lg text-stone-300">{libro.authors.join(', ')}</p>
             )}
 
-            {libro.languageCodes.length > 0 && (
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {libro.languageCodes.map((codigo) => (
+            <Link
+              to={rutaLector(libro.bookId)}
+              className="mt-6 inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
+            >
+              <BookOpen className="size-5" />
+              Leer
+            </Link>
+
+            {libro.languages.length > 0 && (
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {libro.languages.map((idioma) => (
                   <li
-                    key={codigo}
+                    key={idioma.languageCode}
                     className="rounded-full bg-yellow-600/15 px-3 py-1 text-xs font-bold tracking-wide text-yellow-500 uppercase ring-1 ring-yellow-600/30"
                   >
-                    {codigo}
+                    {idioma.name}
                   </li>
                 ))}
               </ul>

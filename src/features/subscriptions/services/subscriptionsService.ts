@@ -6,6 +6,17 @@ export const subscriptionsService = {
 
   confirm: (input: ConfirmSubscriptionInput) => api.post<void>('/subscriptions/confirm', input).then(() => undefined),
 
-  // Pendiente en el backend: debe devolver `null` cuando el usuario nunca se suscribió.
-  me: () => api.get<Entitlement | null>('/subscriptions/me').then((response) => response.data),
+  // El backend ya resuelve si la suscripción está vigente y responde
+  // `FREE` o `PREMIUM`. Aquí se traduce al modelo local, que además maneja
+  // los estados intermedios que llegan por SSE (`PENDING`, `CANCELED`).
+  // `currentPeriodEnd: null` significa "el backend ya confirmó el acceso".
+  me: async (): Promise<Entitlement | null> => {
+    const { data } = await api.get<{ membership: 'FREE' | 'PREMIUM' }>(
+      '/subscriptions/membership',
+    )
+
+    return data.membership === 'PREMIUM'
+      ? { status: 'ACTIVE', currentPeriodEnd: null }
+      : null
+  },
 }
