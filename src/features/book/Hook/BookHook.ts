@@ -1,23 +1,22 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
 
-import { getBookById, getBooks } from '../Services/BookServices'
+import { getBook, getBooks } from '../Services/BookServices'
 
-export const useBooks = () => {
+export const useBooks = (pagina: number, query?: string) => {
   return useQuery({
-    queryKey: ['books'],
-    queryFn: getBooks,
+    queryKey: ['books', 'search', pagina, query ?? ''],
+    queryFn: () => getBooks(pagina, query),
     staleTime: 5 * 60 * 1000, // 5 minutos
-    // Mientras el backend no devuelva libros el fallo es seguro, no vale reintentar.
-    retry: false,
+    // Al cambiar de página conserva la anterior en pantalla y evita el parpadeo.
+    placeholderData: keepPreviousData,
   })
 }
 
-export const useBook = (bookId: number) => {
+export const useBook = (reference: string) => {
   return useQuery({
-    queryKey: ['books', bookId],
-    queryFn: () => getBookById(bookId),
+    queryKey: ['books', 'detail', reference],
+    queryFn: () => getBook(reference),
     staleTime: 5 * 60 * 1000, // 5 minutos
-    retry: false,
-    enabled: Number.isInteger(bookId) && bookId > 0,
+    enabled: reference.length > 0,
   })
 }

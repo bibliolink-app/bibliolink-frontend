@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 
 import logo from '../../../assets/bibliolink.jpeg'
 
-/** Primera pantalla: presenta la marca. El acceso al login vive en la cabecera. */
+
 export function Hero() {
   const { t } = useTranslation()
 

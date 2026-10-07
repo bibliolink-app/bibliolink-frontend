@@ -1,5 +1,7 @@
-import { BookOpen, Library } from 'lucide-react'
+import { Link } from 'react-router'
+import { BookOpen, Heart, Library } from 'lucide-react'
 
+import { rutaLibro } from '../../../router'
 import type { Libro } from '../Models/BookModels'
 
 export function Libros({ libros }: { libros: Libro[] }) {
@@ -13,36 +15,56 @@ export function Libros({ libros }: { libros: Libro[] }) {
   }
 
   return (
-    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+    <ul className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {libros.map((libro) => (
-        <li
-          key={libro.bookId}
-          className="flex flex-col overflow-hidden rounded-lg bg-stone-100 shadow-lg shadow-black/20 ring-1 ring-stone-500/20"
-        >
-          <div className="aspect-2/3 w-full bg-stone-300">
-            {libro.coverUrl ? (
-              <img
-                src={libro.coverUrl}
-                alt=""
-                loading="lazy"
-                className="size-full object-cover"
-              />
-            ) : (
-              <div className="grid size-full place-items-center text-stone-600">
-                <BookOpen className="size-10" />
-              </div>
-            )}
-          </div>
+        <li key={`${libro.providerCode}-${libro.externalReference}`} className="group relative">
+          {/* El libro viaja con el enlace: el detalle trae los mismos campos
+              que la lista, así se evita volver a pedirlo al proveedor. */}
+          <Link
+            to={rutaLibro(libro.externalReference)}
+            state={{ libro }}
+            className="block rounded-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-500"
+          >
+            <div className="relative aspect-2/3 w-full overflow-hidden rounded-xl bg-teal-900 shadow-lg shadow-black/40 ring-1 ring-stone-100/10 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-black/50 motion-safe:transition-all">
+              {libro.coverUrl ? (
+                <img
+                  src={libro.coverUrl}
+                  alt=""
+                  loading="lazy"
+                  className="size-full object-cover group-hover:scale-[1.03] motion-safe:transition-transform motion-safe:duration-300"
+                />
+              ) : (
+                <div className="grid size-full place-items-center text-stone-400">
+                  <BookOpen className="size-10" />
+                </div>
+              )}
 
-          <div className="flex flex-1 flex-col gap-1 p-3.5">
-            <h3 className="font-serif text-base leading-snug font-semibold text-stone-900">
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 to-transparent px-3 pt-8 pb-3 text-center text-xs font-bold tracking-wide text-stone-100 uppercase opacity-0 group-hover:opacity-100 motion-safe:transition-opacity">
+                Ver libro
+              </span>
+            </div>
+
+            <h3 className="mt-3 line-clamp-2 font-serif text-sm leading-snug font-semibold text-stone-100">
               {libro.title}
             </h3>
 
             {libro.authors.length > 0 && (
-              <p className="text-sm text-stone-600">{libro.authors.join(', ')}</p>
+              <p className="mt-0.5 line-clamp-1 text-xs text-stone-400">
+                {libro.authors.join(', ')}
+              </p>
             )}
-          </div>
+          </Link>
+
+          {/* Fuera del enlace para no anidar dos elementos interactivos. */}
+          <button
+            type="button"
+            disabled
+            aria-label={`Guardar ${libro.title} en favoritos`}
+            title="Guardar en favoritos estará disponible pronto"
+            className="absolute top-2 right-2 grid size-8 place-items-center rounded-full bg-black/45 text-stone-200 opacity-0 backdrop-blur-sm group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed motion-safe:transition-opacity"
+          >
+            <Heart className="size-4" />
+          </button>
         </li>
       ))}
     </ul>

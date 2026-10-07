@@ -1,6 +1,5 @@
 import { ApiError } from '../../../api'
 
-/** El backend respondió, pero no con libros. */
 export class CatalogoNoDisponibleError extends Error {
   constructor() {
     super('El catálogo todavía no está disponible.')

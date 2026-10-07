@@ -1,25 +1,38 @@
 import { z } from 'zod'
 
-// Los opcionales se aceptan ausentes o nulos y se dejan en null.
 const textoOpcional = z
   .string()
   .nullish()
   .transform((valor) => valor ?? null)
 
+const listaDeTextos = z
+  .array(z.string())
+  .nullish()
+  .transform((valor) => valor ?? [])
+
 export const libroSchema = z.object({
-  bookId: z.number().int().positive(),
+  providerCode: z.string(),
+  externalReference: z.string(),
   title: z.string(),
   description: textoOpcional,
   coverUrl: textoOpcional,
-  contentReference: textoOpcional,
-  authors: z
-    .array(z.string())
-    .nullish()
-    .transform((valor) => valor ?? []),
-  languages: z
-    .array(z.string())
-    .nullish()
-    .transform((valor) => valor ?? []),
+  authors: listaDeTextos,
+  languageCodes: listaDeTextos,
 })
 
-export const librosSchema = z.array(libroSchema)
+const paginaProveedorSchema = z.object({
+  providerCode: z.string(),
+  items: z.array(libroSchema),
+  page: z.number(),
+  pageSize: z.number(),
+  totalItems: z.number().nullable(),
+  hasNextPage: z.boolean(),
+})
+
+export const busquedaSchema = z.object({
+  query: z.string(),
+  page: z.number(),
+  pageSize: z.number(),
+  results: z.array(paginaProveedorSchema),
+  unavailableProviders: z.array(z.string()),
+})
