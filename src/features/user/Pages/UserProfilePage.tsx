@@ -23,7 +23,7 @@ export function UserProfilePage() {
   const { t } = useTranslation()
   const { data: profile, isPending, isError, error } = useProfile()
   const { user } = useSession()
-  const { entitlement, hasPremiumAccess } = useEntitlements()
+  const { hasPremiumAccess } = useEntitlements()
 
   if (isPending) return <LoadingScreen />
 
@@ -77,8 +77,6 @@ export function UserProfilePage() {
 
         {hasPremiumAccess ? (
           <p className="mt-2 text-stone-600">{t('user:profilePage.plan.pro')}</p>
-        ) : entitlement.status === 'PENDING' ? (
-          <p className="mt-2 text-stone-600">{t('user:profilePage.plan.pending')}</p>
         ) : (
           <p className="mt-2 text-stone-600">
             {t('user:profilePage.plan.freeLead')}{' '}

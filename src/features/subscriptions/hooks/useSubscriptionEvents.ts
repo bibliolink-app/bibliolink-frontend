@@ -2,18 +2,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 import { API_URL } from '../../../api'
-import { entitlementKeys } from '../lib/entitlementKeys'
-import type { Entitlement } from '../types'
-
-interface SubscriptionStreamPayload {
-  subscriptionId: number
-  currentPeriodEnd: string
-}
+import { membershipKeys } from '../lib/membershipKeys'
 
 /**
- * Escucha en tiempo real los cambios de suscripción (SSE) y actualiza `useEntitlements` sin
- * esperar a que la query se revalide sola. En local, sin webhook de PayPal alcanzable, estos
- * eventos nunca llegan y el estado se queda como lo haya devuelto `GET /subscriptions/me`.
+ * Escucha en tiempo real los cambios de suscripción (SSE) e invalida `useEntitlements` para que
+ * vuelva a pedir `GET /subscriptions/membership`, sin esperar a que la query se revalide sola. En
+ * local, sin webhook de PayPal alcanzable, estos eventos nunca llegan y el estado se queda como lo
+ * haya devuelto la última consulta a `membership`.
  */
 export function useSubscriptionEvents(enabled: boolean): void {
   const queryClient = useQueryClient()
@@ -23,26 +18,16 @@ export function useSubscriptionEvents(enabled: boolean): void {
 
     const source = new EventSource(`${API_URL}/subscriptions/events`, { withCredentials: true })
 
-    const setEntitlement = (entitlement: Entitlement) => {
-      queryClient.setQueryData(entitlementKeys.entitlement, entitlement)
+    const refetchMembership = () => {
+      void queryClient.invalidateQueries({ queryKey: membershipKeys.membership })
     }
 
-    const onActivated = (event: MessageEvent<string>) => {
-      const payload = JSON.parse(event.data) as SubscriptionStreamPayload
-      setEntitlement({ status: 'ACTIVE', currentPeriodEnd: payload.currentPeriodEnd })
-    }
-
-    const onCanceled = (event: MessageEvent<string>) => {
-      const payload = JSON.parse(event.data) as SubscriptionStreamPayload
-      setEntitlement({ status: 'CANCELED', currentPeriodEnd: payload.currentPeriodEnd })
-    }
-
-    source.addEventListener('subscription.activated', onActivated)
-    source.addEventListener('subscription.canceled', onCanceled)
+    source.addEventListener('subscription.activated', refetchMembership)
+    source.addEventListener('subscription.canceled', refetchMembership)
 
     return () => {
-      source.removeEventListener('subscription.activated', onActivated)
-      source.removeEventListener('subscription.canceled', onCanceled)
+      source.removeEventListener('subscription.activated', refetchMembership)
+      source.removeEventListener('subscription.canceled', refetchMembership)
       source.close()
     }
   }, [enabled, queryClient])

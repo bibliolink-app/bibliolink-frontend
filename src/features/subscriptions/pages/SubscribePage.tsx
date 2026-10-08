@@ -4,17 +4,9 @@ import { PlanCard } from '../components/PlanCard'
 import { SubscribeButton } from '../components/SubscribeButton'
 import { useEntitlements } from '../hooks/useEntitlements'
 
-function formatPeriodEnd(currentPeriodEnd: string | null, locale: string): string | null {
-  if (!currentPeriodEnd) return null
-  return new Date(currentPeriodEnd).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })
-}
-
 export function SubscribePage() {
-  const { t, i18n } = useTranslation()
-  const { entitlement, hasPremiumAccess } = useEntitlements()
-  const isPending = entitlement.status === 'PENDING'
-  const isProCurrent = hasPremiumAccess || isPending
-  const periodEnd = formatPeriodEnd(entitlement.currentPeriodEnd, i18n.resolvedLanguage ?? i18n.language)
+  const { t } = useTranslation()
+  const { hasPremiumAccess } = useEntitlements()
 
   const freeFeatures = t('subscriptions:plans.free.features', { returnObjects: true }) as string[]
   const proFeatures = t('subscriptions:plans.pro.features', { returnObjects: true }) as string[]
@@ -31,26 +23,16 @@ export function SubscribePage() {
           name={t('subscriptions:plans.free.name')}
           price={t('subscriptions:plans.free.price')}
           features={freeFeatures}
-          isCurrent={!isProCurrent}
+          isCurrent={!hasPremiumAccess}
         />
 
         <PlanCard
           name={t('subscriptions:plans.pro.name')}
           price={t('subscriptions:plans.pro.price')}
           features={proFeatures}
-          isCurrent={isProCurrent}
+          isCurrent={hasPremiumAccess}
           action={
-            hasPremiumAccess ? (
-              periodEnd && (
-                <p className="text-sm text-stone-600">
-                  {entitlement.status === 'CANCELED'
-                    ? t('subscriptions:plans.activeUntil', { date: periodEnd })
-                    : t('subscriptions:plans.renewsOn', { date: periodEnd })}
-                </p>
-              )
-            ) : isPending ? (
-              <p className="text-sm text-stone-600">{t('subscriptions:plans.paymentPending')}</p>
-            ) : (
+            !hasPremiumAccess && (
               <div className="cursor-not-allowed">
                 <div className="pointer-events-none opacity-60">
                   <SubscribeButton />
