@@ -8,8 +8,9 @@ import { LoadingScreen } from '../../components/ui/LoadingScreen'
 
 export function LibraryHomePage() {
   const { t } = useTranslation()
-  const { data: libros, isPending, isError, error } = useBooks()
 
+  const { data: libros, isPending, isError, error } = useBooks()
+ 
   return (
     <>
       <header className="mb-8 max-w-2xl">
@@ -32,6 +33,9 @@ export function LibraryHomePage() {
       )}
 
       {!isPending && !isError && <Libros libros={libros} />}
+    
+        
     </>
+    
   )
 }

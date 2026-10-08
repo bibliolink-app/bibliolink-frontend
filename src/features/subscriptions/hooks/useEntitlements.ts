@@ -21,12 +21,13 @@ export function useEntitlements() {
 
   const entitlement = data ?? NO_SUBSCRIPTION
 
-  // Espejo de `hasPremiumAccess` del backend: el `status` puede quedar desactualizado
-  // (no hay ningún proceso que lo pase a EXPIRED), así que la fecha manda siempre.
+  // Hay dos orígenes: `GET /subscriptions/membership`, donde el backend ya
+  // resolvió la vigencia y deja `currentPeriodEnd` en `null`; y los eventos
+  // SSE, que sí traen la fecha. Cuando hay fecha, manda la fecha.
   const hasPremiumAccess =
     (entitlement.status === 'ACTIVE' || entitlement.status === 'CANCELED') &&
-    entitlement.currentPeriodEnd !== null &&
-    new Date(entitlement.currentPeriodEnd) > new Date()
+    (entitlement.currentPeriodEnd === null ||
+      new Date(entitlement.currentPeriodEnd) > new Date())
 
   return { entitlement, hasPremiumAccess, isPending }
 }

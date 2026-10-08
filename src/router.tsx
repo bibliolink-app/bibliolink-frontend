@@ -11,6 +11,8 @@ import { RegisterPage } from './features/auth/pages/RegisterPage'
 import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
 import { GraficosPage } from './features/Graficos/Pages/GraficosPage'
 import { PremiumPage } from './features/Graficos/Pages/PremiumPage'
+import { BookDetailPage } from './features/book/Pages/BookDetailPage'
+import { LectorPage } from './features/book/Pages/LectorPage'
 import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
 import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
@@ -42,10 +44,16 @@ export const PATHS = {
   adminAnalytics: '/admin/analytics',
   adminAnalyticsPremium: '/admin/analytics/premium',
     search: '/buscar',
+  bookDetail: '/libro/:bookId',
+  reader: '/leer/:bookId',
   favorites: '/favoritos',
   profile: '/perfil',
   subscribe: '/suscripcion',
 } as const
+
+/** `PATHS.bookDetail` lleva un parámetro; esto arma la URL de un libro concreto. */
+export const rutaLibro = (bookId: number) => `/libro/${bookId}`
+export const rutaLector = (bookId: number) => `/leer/${bookId}`
 
 
  // sitio donde se declaran todas las rutas y quién puede entrar a cada una.
@@ -79,6 +87,8 @@ export function createAppRouter() {
               element: <RedirectAdmins to={PATHS.admin} />,
               children: [{ path: PATHS.home, element: <LibraryHomePage /> },
                                { path: PATHS.search, element: <SearchPage /> },
+                 { path: PATHS.bookDetail, element: <BookDetailPage /> },
+                 { path: PATHS.reader, element: <LectorPage /> },
                  { path: PATHS.favorites, element: <FavoritesPage /> },
                 { path: PATHS.profile, element: <UserProfilePage /> },
                 { path: PATHS.subscribe, element: <SubscribePage /> },

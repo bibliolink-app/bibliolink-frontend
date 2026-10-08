@@ -3,6 +3,8 @@ import type { Libro } from '../Models/BookModels'
 import { libroSchema, librosSchema } from '../Schemas/BookSchemas'
 import { CatalogoNoDisponibleError } from '../lib/bookErrorMessage'
 
+// Los libros ya importados a la base. Traen `bookId`, que es lo que
+// necesitan lectura y favoritos; el catálogo externo no lo tiene.
 export const getBooks = async (): Promise<Libro[]> => {
   const response = await api.get('/books')
 
@@ -12,7 +14,7 @@ export const getBooks = async (): Promise<Libro[]> => {
   return resultado.data
 }
 
-export const getBookById = async (bookId: number): Promise<Libro> => {
+export const getBook = async (bookId: number): Promise<Libro> => {
   const response = await api.get(`/books/${bookId}`)
 
   const resultado = libroSchema.safeParse(response.data)

@@ -1,11 +1,20 @@
-// Basado en la entidad Book del backend y en la forma de sus DTOs de respuesta.
+export interface IdiomaLibro {
+  languageCode: string
+  name: string
+}
+export interface CategoriaLibro {
+  code: string
+  name: string
+}
+
 export interface Libro {
   bookId: number
+  providerCode: string
+  externalReference: string
   title: string
   description: string | null
   coverUrl: string | null
-  /** URL del archivo EPUB. */
-  contentReference: string | null
   authors: string[]
-  languages: string[]
+  languages: IdiomaLibro[]
+  categories: CategoriaLibro[]
 }
