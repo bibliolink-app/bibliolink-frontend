@@ -1,0 +1,48 @@
+{
+  "detail": {
+    "backToCatalog": "Back to catalog",
+    "read": "Read"
+  },
+  "catalog": {
+    "inFavorites": "In favorites",
+    "viewBook": "View book",
+    "empty": "No books in the catalog yet."
+  },
+  "categories": {
+    "all": "All categories",
+    "label": "Categories"
+  },
+  "reader": {
+    "backToBook": "Back to book",
+    "rewardExhaustedTitle": "You've run out of free reading time",
+    "blockedTitle": "You can't read this book right now",
+    "rewardExhaustedHint": "Come back later or go Premium to read without interruptions.",
+    "blockedHint": "Check your plan or try again later.",
+    "viewPremium": "View Premium",
+    "saveHint": "Save this book to your favorites to pick up reading where you left off.",
+    "pagesNav": "Book pages",
+    "previous": "Previous",
+    "next": "Next",
+    "pageNumber": "Page {{number}}"
+  },
+  "favoriteButton": {
+    "remove": "Remove from favorites",
+    "add": "Save to favorites",
+    "confirmTitle": "Remove \"{{titulo}}\" from favorites?",
+    "confirmDescription": "You'll also lose the page you were on. You can save it again anytime.",
+    "confirmAction": "Remove"
+  },
+  "errors": {
+    "catalogUnavailable": "The catalog isn't available yet.",
+    "catalogUnavailableHint": "The catalog isn't available yet. We're working on it.",
+    "catalogGeneric": "Could not load the catalog.",
+    "bookNotFound": "We couldn't find that book.",
+    "readingUnavailable": "The book could not be opened.",
+    "readingForbidden": "Your account doesn't have permission to read this book.",
+    "pageNotFound": "We couldn't find that page of the book.",
+    "providerUnavailable": "The content provider isn't responding. Try again in a moment.",
+    "favoritesGeneric": "Could not load your favorites.",
+    "favoriteBookNotFound": "That book doesn't exist.",
+    "sessionExpired": "Your session expired. Sign in again."
+  }
+}

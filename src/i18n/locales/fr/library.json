@@ -12,6 +12,11 @@
     "title": "Rechercher",
     "subtitle": "Trouvez des livres par titre, auteur ou catégorie.",
     "placeholder": "Rechercher par titre, auteur ou catégorie",
-    "ariaLabel": "Rechercher des livres"
+    "ariaLabel": "Rechercher des livres",
+    "resultCount_one": "{{count}} livre",
+    "resultCount_other": "{{count}} livres",
+    "inCategory": "en {{category}}",
+    "forQuery": "pour « {{query}} »",
+    "noResults": "Nous n'avons trouvé aucun livre correspondant à ces critères."
   }
 }

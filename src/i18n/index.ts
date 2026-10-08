@@ -4,6 +4,7 @@ import { initReactI18next } from 'react-i18next'
 
 import adminEn from './locales/en/admin.json'
 import authEn from './locales/en/auth.json'
+import bookEn from './locales/en/book.json'
 import commonEn from './locales/en/common.json'
 import graficosEn from './locales/en/graficos.json'
 import landingEn from './locales/en/landing.json'
@@ -13,6 +14,7 @@ import userEn from './locales/en/user.json'
 
 import adminEs from './locales/es/admin.json'
 import authEs from './locales/es/auth.json'
+import bookEs from './locales/es/book.json'
 import commonEs from './locales/es/common.json'
 import graficosEs from './locales/es/graficos.json'
 import landingEs from './locales/es/landing.json'
@@ -22,6 +24,7 @@ import userEs from './locales/es/user.json'
 
 import adminFr from './locales/fr/admin.json'
 import authFr from './locales/fr/auth.json'
+import bookFr from './locales/fr/book.json'
 import commonFr from './locales/fr/common.json'
 import graficosFr from './locales/fr/graficos.json'
 import landingFr from './locales/fr/landing.json'
@@ -31,6 +34,7 @@ import userFr from './locales/fr/user.json'
 
 import adminPt from './locales/pt/admin.json'
 import authPt from './locales/pt/auth.json'
+import bookPt from './locales/pt/book.json'
 import commonPt from './locales/pt/common.json'
 import graficosPt from './locales/pt/graficos.json'
 import landingPt from './locales/pt/landing.json'
@@ -52,10 +56,10 @@ export const LANGUAGE_LABELS: Record<SupportedLanguage, string> = {
 export const defaultNS = 'common'
 
 export const resources = {
-  es: { common: commonEs, auth: authEs, landing: landingEs, library: libraryEs, subscriptions: subscriptionsEs, admin: adminEs, user: userEs, graficos: graficosEs },
-  en: { common: commonEn, auth: authEn, landing: landingEn, library: libraryEn, subscriptions: subscriptionsEn, admin: adminEn, user: userEn, graficos: graficosEn },
-  pt: { common: commonPt, auth: authPt, landing: landingPt, library: libraryPt, subscriptions: subscriptionsPt, admin: adminPt, user: userPt, graficos: graficosPt },
-  fr: { common: commonFr, auth: authFr, landing: landingFr, library: libraryFr, subscriptions: subscriptionsFr, admin: adminFr, user: userFr, graficos: graficosFr },
+  es: { common: commonEs, auth: authEs, landing: landingEs, library: libraryEs, subscriptions: subscriptionsEs, admin: adminEs, user: userEs, graficos: graficosEs, book: bookEs },
+  en: { common: commonEn, auth: authEn, landing: landingEn, library: libraryEn, subscriptions: subscriptionsEn, admin: adminEn, user: userEn, graficos: graficosEn, book: bookEn },
+  pt: { common: commonPt, auth: authPt, landing: landingPt, library: libraryPt, subscriptions: subscriptionsPt, admin: adminPt, user: userPt, graficos: graficosPt, book: bookPt },
+  fr: { common: commonFr, auth: authFr, landing: landingFr, library: libraryFr, subscriptions: subscriptionsFr, admin: adminFr, user: userFr, graficos: graficosFr, book: bookFr },
 } as const
 
 void i18n
