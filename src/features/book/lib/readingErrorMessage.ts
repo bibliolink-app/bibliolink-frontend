@@ -1,31 +1,30 @@
+import i18n from '../../../i18n'
 import { ApiError } from '../../../api'
 
 export class LecturaNoDisponibleError extends Error {
   constructor() {
-    super('No se pudo abrir el libro.')
+    super(i18n.t('book:errors.readingUnavailable'))
     this.name = 'LecturaNoDisponibleError'
   }
 }
 
-const GENERIC = 'No se pudo abrir el libro.'
-
 export function readingErrorMessage(error: unknown): string {
   if (error instanceof LecturaNoDisponibleError) return error.message
 
-  if (!(error instanceof ApiError)) return GENERIC
+  if (!(error instanceof ApiError)) return i18n.t('book:errors.readingUnavailable')
 
   switch (error.status) {
     case 0:
-      return 'No se pudo conectar con el servidor. Revisa tu conexión.'
+      return i18n.t('user:errors.network')
     case 401:
-      return 'Tu sesión expiró. Vuelve a iniciar sesión.'
+      return i18n.t('book:errors.sessionExpired')
     case 403:
-      return 'Tu cuenta no tiene permiso para leer este libro.'
+      return i18n.t('book:errors.readingForbidden')
     case 404:
-      return 'No encontramos esa página del libro.'
+      return i18n.t('book:errors.pageNotFound')
     case 503:
-      return 'El proveedor del contenido no responde. Inténtalo de nuevo en un momento.'
+      return i18n.t('book:errors.providerUnavailable')
     default:
-      return error.messages.join(' ') || GENERIC
+      return error.messages.join(' ') || i18n.t('book:errors.readingUnavailable')
   }
 }

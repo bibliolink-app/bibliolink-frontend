@@ -12,6 +12,11 @@
     "title": "Search",
     "subtitle": "Find books by title, author, or category.",
     "placeholder": "Search by title, author, or category",
-    "ariaLabel": "Search books"
+    "ariaLabel": "Search books",
+    "resultCount_one": "{{count}} book",
+    "resultCount_other": "{{count}} books",
+    "inCategory": "in {{category}}",
+    "forQuery": "for \"{{query}}\"",
+    "noResults": "We couldn't find books matching those criteria."
   }
 }

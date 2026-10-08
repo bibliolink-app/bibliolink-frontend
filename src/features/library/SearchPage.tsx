@@ -11,12 +11,15 @@ import { filtrarLibros } from '../book/lib/filtrarLibros'
 import { LoadingScreen } from '../../components/ui/LoadingScreen'
 
 export function SearchPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [busqueda, setBusqueda] = useState('')
   const [categoria, setCategoria] = useState('')
   const { data: libros, isPending, isError, error } = useBooks()
 
-  const categorias = useMemo(() => categoriasDeLibros(libros ?? []), [libros])
+  const categorias = useMemo(
+    () => categoriasDeLibros(libros ?? [], i18n.language),
+    [libros, i18n.language],
+  )
 
   const resultados = useMemo(
     () => filtrarLibros(filtrarPorCategoria(libros ?? [], categoria), busqueda),
@@ -67,16 +70,16 @@ export function SearchPage() {
         {!isPending && !isError && (
           <>
             <p aria-live="polite" className="mb-5 text-sm text-stone-400">
-              {resultados.length === 1 ? '1 libro' : `${resultados.length} libros`}
-                           {categoria !== '' &&
-                ` en ${categorias.find((c) => c.code === categoria)?.nombre ?? ''}`}
-              {buscando && ` para «${busqueda.trim()}»`}
+              {t('library:search.resultCount', { count: resultados.length })}
+              {categoria !== '' &&
+                ` ${t('library:search.inCategory', { category: categorias.find((c) => c.code === categoria)?.nombre ?? '' })}`}
+              {buscando && ` ${t('library:search.forQuery', { query: busqueda.trim() })}`}
             </p>
 
             {sinResultados ? (
               <div className="flex flex-col items-center gap-3 rounded-xl bg-stone-100/10 px-4 py-16 text-center ring-1 ring-stone-100/15">
                 <SearchX className="size-9 text-stone-400" />
-                <p className="text-stone-300">No encontramos libros con esos criterios.</p>
+                <p className="text-stone-300">{t('library:search.noResults')}</p>
               </div>
             ) : (
               <Libros libros={resultados} />

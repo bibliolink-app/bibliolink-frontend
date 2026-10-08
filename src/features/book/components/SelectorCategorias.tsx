@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, ChevronDown, Tags } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import type { CategoriaConConteo } from '../lib/categorias'
 
@@ -10,6 +11,7 @@ interface SelectorCategoriasProps {
 }
 
 export function SelectorCategorias({ categorias, valor, onChange }: SelectorCategoriasProps) {
+  const { t } = useTranslation()
   const [abierto, setAbierto] = useState(false)
   const contenedor = useRef<HTMLDivElement>(null)
 
@@ -70,7 +72,7 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
         }`}
       >
         <Tags className="size-5 shrink-0" />
-        <span className="max-w-40 truncate">{activa?.nombre ?? 'Categorías'}</span>
+        <span className="max-w-40 truncate">{activa?.nombre ?? t('book:categories.label')}</span>
         <ChevronDown
           aria-hidden
           className={`size-4 shrink-0 motion-safe:transition-transform ${abierto ? 'rotate-180' : ''}`}
@@ -80,7 +82,7 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
       {abierto && (
         <div className="absolute right-0 z-20 mt-2 max-h-80 w-72 overflow-y-auto rounded-xl border border-yellow-600/40 bg-teal-950 p-2 shadow-xl shadow-black/50">
           <ul>
-            {opcion('', 'Todas las categorías')}
+            {opcion('', t('book:categories.all'))}
             {categorias.map((categoria) =>
               opcion(categoria.code, categoria.nombre, categoria.cantidad),
             )}

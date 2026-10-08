@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
@@ -9,6 +10,7 @@ import { useSummary } from '../Hook/GraficosHook'
 import { analyticsErrorMessage } from '../lib/AnalyticsErrorMessage'
 
 export function PremiumPage() {
+  const { t } = useTranslation()
   const { data, isPending, isError, error } = useSummary()
 
   return (
@@ -18,15 +20,15 @@ export function PremiumPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500 motion-safe:transition-colors"
       >
         <ArrowLeft className="size-4" />
-        Volver a usuarios normales
+        {t('graficos:premiumPage.backToUsers')}
       </Link>
 
       <header className="mb-8 max-w-2xl">
         <h1 className="font-serif text-3xl font-semibold text-stone-100 sm:text-4xl">
-          Usuarios Premium
+          {t('graficos:premiumPage.title')}
         </h1>
         <p className="mt-2.5 text-stone-300">
-          Consulta cuántas cuentas mantienen una suscripción activa.
+          {t('graficos:premiumPage.subtitle')}
         </p>
       </header>
 

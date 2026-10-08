@@ -47,6 +47,12 @@
     "normalUsers": "Regular users",
     "empty": "No admins registered."
   },
+  "normalUsersList": {
+    "backToAdmins": "Back to admins",
+    "title": "Regular users",
+    "subtitle": "Accounts registered by the public, both free and Premium.",
+    "empty": "No users registered."
+  },
   "createAdminPage": {
     "backToList": "Back to list",
     "title": "New admin",

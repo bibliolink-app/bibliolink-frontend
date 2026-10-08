@@ -1,4 +1,5 @@
 import { Heart } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import {
   AlertDialog,
@@ -20,12 +21,13 @@ interface BotonFavoritoProps {
 }
 
 export function BotonFavorito({ bookId, titulo, conTexto = false }: BotonFavoritoProps) {
+  const { t } = useTranslation()
   const { esFavorito } = useEsFavorito(bookId)
   const agregar = useAgregarFavorito()
   const quitar = useQuitarFavorito()
 
   const trabajando = agregar.isPending || quitar.isPending
-  const etiqueta = esFavorito ? 'Quitar de favoritos' : 'Guardar en favoritos'
+  const etiqueta = esFavorito ? t('book:favoriteButton.remove') : t('book:favoriteButton.add')
 
   const clases = conTexto
     ? `inline-flex items-center gap-2 rounded-md border border-yellow-600 px-4 py-2.5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:opacity-50 motion-safe:transition-colors ${
@@ -75,17 +77,16 @@ export function BotonFavorito({ bookId, titulo, conTexto = false }: BotonFavorit
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>¿Quitar «{titulo}» de favoritos?</AlertDialogTitle>
+          <AlertDialogTitle>{t('book:favoriteButton.confirmTitle', { titulo })}</AlertDialogTitle>
           <AlertDialogDescription>
-            También se perderá la página en la que ibas leyendo. Puedes volver a guardarlo cuando
-            quieras.
+            {t('book:favoriteButton.confirmDescription')}
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+          <AlertDialogCancel>{t('common:actions.cancel')}</AlertDialogCancel>
           <AlertDialogAction variant="destructive" onClick={() => quitar.mutate(bookId)}>
-            Quitar
+            {t('book:favoriteButton.confirmAction')}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

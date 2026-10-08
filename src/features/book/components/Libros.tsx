@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { BookOpen, Library } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { rutaLibro } from '../../../router'
 import { BotonFavorito } from '../../favoritebook/components/BotonFavorito'
@@ -7,6 +8,7 @@ import { useEsFavorito } from '../../favoritebook/Hook/FavoritesHook'
 import type { Libro } from '../Models/BookModels'
 
 function TarjetaLibro({ libro }: { libro: Libro }) {
+  const { t } = useTranslation()
   const { esFavorito } = useEsFavorito(libro.bookId)
 
   return (
@@ -31,12 +33,12 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
 
           {esFavorito && (
             <span className="absolute top-2 left-2 rounded-full bg-yellow-600 px-2.5 py-1 text-[0.65rem] font-bold tracking-wide text-stone-900 uppercase shadow-md shadow-black/30">
-              En favoritos
+              {t('book:catalog.inFavorites')}
             </span>
           )}
 
           <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-linear-to-t from-black/80 to-transparent px-3 pt-8 pb-3 text-center text-xs font-bold tracking-wide text-stone-100 uppercase opacity-0 group-hover:opacity-100 motion-safe:transition-opacity">
-            Ver libro
+            {t('book:catalog.viewBook')}
           </span>
         </div>
 
@@ -58,11 +60,13 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
 }
 
 export function Libros({ libros }: { libros: Libro[] }) {
+  const { t } = useTranslation()
+
   if (libros.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 rounded-xl bg-stone-100/10 px-4 py-16 text-center ring-1 ring-stone-100/15">
         <Library className="size-9 text-stone-400" />
-        <p className="text-stone-300">Todavía no hay libros en el catálogo.</p>
+        <p className="text-stone-300">{t('book:catalog.empty')}</p>
       </div>
     )
   }

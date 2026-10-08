@@ -9,7 +9,7 @@ export interface CategoriaConConteo {
 
 const MINIMO_LIBROS = 2
 
-export function categoriasDeLibros(libros: Libro[]): CategoriaConConteo[] {
+export function categoriasDeLibros(libros: Libro[], locale: string): CategoriaConConteo[] {
   const conteo = new Map<string, CategoriaConConteo>()
 
   for (const libro of libros) {
@@ -26,7 +26,7 @@ export function categoriasDeLibros(libros: Libro[]): CategoriaConConteo[] {
 
   return [...conteo.values()]
     .filter((categoria) => categoria.cantidad >= MINIMO_LIBROS)
-    .sort((a, b) => b.cantidad - a.cantidad || a.nombre.localeCompare(b.nombre, 'es'))
+    .sort((a, b) => b.cantidad - a.cantidad || a.nombre.localeCompare(b.nombre, locale))
 }
 
 /** Deja solo los libros de una categoría. Con cadena vacía devuelve todo. */

@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router'
 import { ArrowLeft, BookOpen, CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS, rutaLector } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
@@ -8,6 +9,7 @@ import { bookErrorMessage } from '../lib/bookErrorMessage'
 import { BotonFavorito } from '../../favoritebook/components/BotonFavorito'
 
 export function BookDetailPage() {
+  const { t } = useTranslation()
   const bookId = Number(useParams().bookId)
   const { data: libro, isPending, isError, error } = useBook(bookId)
 
@@ -18,7 +20,7 @@ export function BookDetailPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500 motion-safe:transition-colors"
       >
         <ArrowLeft className="size-4" />
-        Volver al catálogo
+        {t('book:detail.backToCatalog')}
       </Link>
 
       {isPending && <LoadingScreen />}
@@ -60,7 +62,7 @@ export function BookDetailPage() {
                 className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
               >
                 <BookOpen className="size-5" />
-                Leer
+                {t('book:detail.read')}
               </Link>
 
               <BotonFavorito bookId={libro.bookId} titulo={libro.title} conTexto />
