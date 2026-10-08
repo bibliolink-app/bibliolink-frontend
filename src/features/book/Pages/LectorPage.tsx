@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { ArrowLeft, ChevronLeft, ChevronRight, CircleAlert, Crown } from 'lucide-react'
+import { ArrowLeft, ChevronLeft, ChevronRight, CircleAlert, Crown, Heart } from 'lucide-react'
 
 import { PATHS, rutaLibro } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { useBook } from '../Hook/BookHook'
-import { useReadingAccess, useReadingPage } from '../Hook/ReadingHook'
+import { useGuardarProgreso, useReadingAccess, useReadingPage } from '../Hook/ReadingHook'
 import { readingErrorMessage } from '../lib/readingErrorMessage'
 
 const BOTON =
@@ -13,12 +13,34 @@ const BOTON =
 
 export function LectorPage() {
   const bookId = Number(useParams().bookId)
-  const [pagina, setPagina] = useState(1)
+  const [paginaElegida, setPaginaElegida] = useState<number | null>(null)
 
   const libro = useBook(bookId)
   const acceso = useReadingAccess(bookId)
+  const guardarProgreso = useGuardarProgreso(bookId)
+
+  const estado = acceso.data?.readingState ?? null
+  // `readingState` es `null` justo cuando el libro no está en favoritos,
+  // que es donde vive el progreso.
+  const puedeGuardar = estado !== null
+
+  // Mientras no se navegue, se abre donde quedó la última vez.
+  const paginaGuardada = Number(estado?.readingLocation) || 1
+  const pagina = paginaElegida ?? paginaGuardada
+
   const puedeLeer = acceso.data?.canRead === true
   const contenido = useReadingPage(bookId, pagina, puedeLeer)
+
+  const irAPagina = (nueva: number) => {
+    setPaginaElegida(nueva)
+
+    if (estado !== null) {
+      guardarProgreso.mutate({
+        progressPercent: estado.progressPercent,
+        readingLocation: String(nueva),
+      })
+    }
+  }
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -79,6 +101,13 @@ export function LectorPage() {
 
       {puedeLeer && (
         <>
+          {!puedeGuardar && (
+            <p className="mb-5 flex items-start gap-2.5 rounded-xl border border-yellow-600/40 bg-yellow-600/10 px-4 py-3 text-sm text-stone-300">
+              <Heart className="mt-0.5 size-4 shrink-0 text-yellow-500" />
+              Guarda este libro en favoritos para retomar la lectura donde la dejaste.
+            </p>
+          )}
+
           {contenido.isPending && <LoadingScreen />}
 
           {contenido.isError && (
@@ -100,10 +129,13 @@ export function LectorPage() {
                 dangerouslySetInnerHTML={{ __html: contenido.data.content }}
               />
 
-              <nav aria-label="Páginas del libro" className="mt-8 flex items-center justify-center gap-5">
+              <nav
+                aria-label="Páginas del libro"
+                className="mt-8 flex items-center justify-center gap-5"
+              >
                 <button
                   type="button"
-                  onClick={() => setPagina((actual) => Math.max(1, actual - 1))}
+                  onClick={() => irAPagina(Math.max(1, pagina - 1))}
                   disabled={pagina === 1}
                   className={BOTON}
                 >
@@ -115,7 +147,7 @@ export function LectorPage() {
 
                 <button
                   type="button"
-                  onClick={() => setPagina((actual) => actual + 1)}
+                  onClick={() => irAPagina(pagina + 1)}
                   disabled={!contenido.data.hasNextPage}
                   className={BOTON}
                 >

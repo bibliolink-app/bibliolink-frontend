@@ -21,7 +21,7 @@ export const libroSchema = z.object({
     .nullish()
     .transform((valor) => valor ?? []),
   categories: z
-    .array(z.string())
+    .array(z.object({ code: z.string(), name: z.string() }))
     .nullish()
     .transform((valor) => valor ?? []),
 })

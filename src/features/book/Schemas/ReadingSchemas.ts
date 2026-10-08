@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const estadoLecturaSchema = z.object({
+export const estadoLecturaSchema = z.object({
   progressPercent: z.number(),
   readingLocation: z.string().nullable(),
   lastReadAt: z.string().nullable(),

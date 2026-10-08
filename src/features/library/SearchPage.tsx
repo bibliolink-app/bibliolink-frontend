@@ -6,7 +6,7 @@ import { Libros } from '../book/components/Libros'
 import { SelectorCategorias } from '../book/components/SelectorCategorias'
 import { useBooks } from '../book/Hook/BookHook'
 import { bookErrorMessage } from '../book/lib/bookErrorMessage'
-import { categoriasDeLibros, filtrarPorCategoria, nombreVisible } from '../book/lib/categorias'
+import { categoriasDeLibros, filtrarPorCategoria } from '../book/lib/categorias'
 import { filtrarLibros } from '../book/lib/filtrarLibros'
 import { LoadingScreen } from '../../components/ui/LoadingScreen'
 
@@ -68,7 +68,8 @@ export function SearchPage() {
           <>
             <p aria-live="polite" className="mb-5 text-sm text-stone-400">
               {resultados.length === 1 ? '1 libro' : `${resultados.length} libros`}
-              {categoria !== '' && ` en ${nombreVisible(categoria)}`}
+                           {categoria !== '' &&
+                ` en ${categorias.find((c) => c.code === categoria)?.nombre ?? ''}`}
               {buscando && ` para «${busqueda.trim()}»`}
             </p>
 

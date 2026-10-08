@@ -5,6 +5,7 @@ import { PATHS, rutaLector } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { useBook } from '../Hook/BookHook'
 import { bookErrorMessage } from '../lib/bookErrorMessage'
+import { BotonFavorito } from '../../favoritebook/components/BotonFavorito'
 
 export function BookDetailPage() {
   const bookId = Number(useParams().bookId)
@@ -53,13 +54,17 @@ export function BookDetailPage() {
               <p className="mt-2 text-lg text-stone-300">{libro.authors.join(', ')}</p>
             )}
 
-            <Link
-              to={rutaLector(libro.bookId)}
-              className="mt-6 inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
-            >
-              <BookOpen className="size-5" />
-              Leer
-            </Link>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                to={rutaLector(libro.bookId)}
+                className="inline-flex items-center gap-2.5 rounded-md bg-yellow-600 px-5 py-3 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
+              >
+                <BookOpen className="size-5" />
+                Leer
+              </Link>
+
+              <BotonFavorito bookId={libro.bookId} titulo={libro.title} conTexto />
+            </div>
 
             {libro.languages.length > 0 && (
               <ul className="mt-6 flex flex-wrap gap-2">

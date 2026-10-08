@@ -21,3 +21,8 @@ export interface PaginaLectura {
   content: string
   hasNextPage: boolean
 }
+
+export interface ProgresoLectura {
+  progressPercent: number
+  readingLocation: string
+}

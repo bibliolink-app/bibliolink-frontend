@@ -26,7 +26,9 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionGate>{children}</SessionGate>
-      <Toaster />
+      {/* Arriba a la derecha: los avisos quedan a la vista aunque la página
+          sea larga y el usuario esté leyendo abajo. */}
+      <Toaster position="top-right" />
     </QueryClientProvider>
   )
 }

@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, ChevronDown, Tags } from 'lucide-react'
 
-import { nombreVisible, type CategoriaConConteo } from '../lib/categorias'
+import type { CategoriaConConteo } from '../lib/categorias'
 
 interface SelectorCategoriasProps {
   categorias: CategoriaConConteo[]
   valor: string
-  onChange: (categoria: string) => void
+  onChange: (code: string) => void
 }
 
 export function SelectorCategorias({ categorias, valor, onChange }: SelectorCategoriasProps) {
   const [abierto, setAbierto] = useState(false)
   const contenedor = useRef<HTMLDivElement>(null)
 
+  // Se cierra al tocar fuera del panel o al presionar Escape.
   useEffect(() => {
     if (!abierto) return
 
@@ -35,24 +36,23 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
     }
   }, [abierto])
 
-  const elegir = (categoria: string) => {
-    onChange(categoria)
+  const elegir = (code: string) => {
+    onChange(code)
     setAbierto(false)
   }
 
-  const opcion = (categoria: string, etiqueta: string, cantidad?: number) => (
-    <li key={categoria || 'todas'}>
+  const activa = categorias.find((categoria) => categoria.code === valor)
+
+  const opcion = (code: string, etiqueta: string, cantidad?: number) => (
+    <li key={code || 'todas'}>
       <button
         type="button"
-        onClick={() => elegir(categoria)}
+        onClick={() => elegir(code)}
         className={`flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm hover:bg-yellow-600/15 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors ${
-          valor === categoria ? 'font-semibold text-yellow-500' : 'text-stone-300'
+          valor === code ? 'font-semibold text-yellow-500' : 'text-stone-300'
         }`}
       >
-        <Check
-          aria-hidden
-          className={`size-4 shrink-0 ${valor === categoria ? '' : 'invisible'}`}
-        />
+        <Check aria-hidden className={`size-4 shrink-0 ${valor === code ? '' : 'invisible'}`} />
         <span className="min-w-0 flex-1 truncate">{etiqueta}</span>
         {cantidad !== undefined && <span className="text-xs text-stone-500">{cantidad}</span>}
       </button>
@@ -65,16 +65,12 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
         type="button"
         onClick={() => setAbierto((actual) => !actual)}
         aria-expanded={abierto}
-        className={`inline-flex items-center gap-2 rounded-md border px-4 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors ${
-          valor === ''
-            ? 'border-yellow-600 text-stone-300 hover:bg-yellow-600/10'
-            : 'border-yellow-600 bg-yellow-600 text-stone-900'
+        className={`inline-flex items-center gap-2 rounded-md border border-yellow-600 px-4 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors ${
+          activa ? 'bg-yellow-600 text-stone-900' : 'text-stone-300 hover:bg-yellow-600/10'
         }`}
       >
         <Tags className="size-5 shrink-0" />
-        <span className="max-w-40 truncate">
-          {valor === '' ? 'Categorías' : nombreVisible(valor)}
-        </span>
+        <span className="max-w-40 truncate">{activa?.nombre ?? 'Categorías'}</span>
         <ChevronDown
           aria-hidden
           className={`size-4 shrink-0 motion-safe:transition-transform ${abierto ? 'rotate-180' : ''}`}
@@ -86,7 +82,7 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
           <ul>
             {opcion('', 'Todas las categorías')}
             {categorias.map((categoria) =>
-              opcion(categoria.nombre, nombreVisible(categoria.nombre), categoria.cantidad),
+              opcion(categoria.code, categoria.nombre, categoria.cantidad),
             )}
           </ul>
         </div>
