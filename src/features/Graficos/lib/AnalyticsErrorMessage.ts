@@ -1,18 +1,17 @@
+import i18n from '../../../i18n'
 import { ApiError } from '../../../api'
 
-const GENERIC = 'No se pudieron cargar las estadísticas.'
-
 export function analyticsErrorMessage(error: unknown): string {
-  if (!(error instanceof ApiError)) return GENERIC
+  if (!(error instanceof ApiError)) return i18n.t('graficos:errors.generic')
 
   switch (error.status) {
     case 0:
-      return 'No se pudo conectar con el servidor. Revisa tu conexión.'
+      return i18n.t('user:errors.network')
     case 400:
-      return error.messages.join(' ') || GENERIC
+      return error.messages.join(' ') || i18n.t('graficos:errors.generic')
     case 403:
-      return 'No tienes permisos para ver estas estadísticas.'
+      return i18n.t('graficos:errors.forbidden')
     default:
-      return GENERIC
+      return i18n.t('graficos:errors.generic')
   }
 }

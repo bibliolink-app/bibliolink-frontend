@@ -47,6 +47,12 @@
     "normalUsers": "Usuários comuns",
     "empty": "Nenhum administrador registrado."
   },
+  "normalUsersList": {
+    "backToAdmins": "Voltar aos administradores",
+    "title": "Usuários comuns",
+    "subtitle": "Contas registradas pelo público, tanto gratuitas quanto Premium.",
+    "empty": "Nenhum usuário registrado."
+  },
   "createAdminPage": {
     "backToList": "Voltar à lista",
     "title": "Novo administrador",

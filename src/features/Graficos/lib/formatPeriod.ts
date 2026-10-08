@@ -9,8 +9,8 @@ function capitalizar(texto: string): string {
 }
 
 
-function diaYMes(fecha: Date): string {
-  return fecha.toLocaleDateString('es-CR', { day: 'numeric', month: 'short' })
+function diaYMes(fecha: Date, locale: string): string {
+  return fecha.toLocaleDateString(locale, { day: 'numeric', month: 'short' })
 }
 
 
@@ -21,28 +21,28 @@ function finDeSemana(lunes: Date): Date {
 }
 
 
-export function formatMes(period: string): string {
+export function formatMes(period: string, locale: string): string {
   const fecha = parsePeriod(period)
 
-  return `${capitalizar(fecha.toLocaleDateString('es-CR', { month: 'long' }))} ${fecha.getFullYear()}`
+  return `${capitalizar(fecha.toLocaleDateString(locale, { month: 'long' }))} ${fecha.getFullYear()}`
 }
 
 
-export function formatMesCorto(period: string): string {
+export function formatMesCorto(period: string, locale: string): string {
   const fecha = parsePeriod(period)
-  return `${capitalizar(fecha.toLocaleDateString('es-CR', { month: 'short' }))} ${fecha.getFullYear()}`
+  return `${capitalizar(fecha.toLocaleDateString(locale, { month: 'short' }))} ${fecha.getFullYear()}`
 }
 
 // ─── Semanas ───
 
 
-export function formatSemana(period: string): string {
+export function formatSemana(period: string, locale: string): string {
   const inicio = parsePeriod(period)
   const fin = finDeSemana(inicio)
-  return `${diaYMes(inicio)} - ${diaYMes(fin)} ${inicio.getFullYear()}`
+  return `${diaYMes(inicio, locale)} - ${diaYMes(fin, locale)} ${inicio.getFullYear()}`
 }
 
-export function formatSemanaCorta(period: string): string {
+export function formatSemanaCorta(period: string, locale: string): string {
   const inicio = parsePeriod(period)
-  return `${diaYMes(inicio)} - ${diaYMes(finDeSemana(inicio))}`
+  return `${diaYMes(inicio, locale)} - ${diaYMes(finDeSemana(inicio), locale)}`
 }

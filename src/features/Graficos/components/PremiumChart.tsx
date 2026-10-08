@@ -10,6 +10,7 @@ import {
   YAxis,
   type TooltipContentProps,
 } from 'recharts'
+import { useTranslation } from 'react-i18next'
 
 import type { ResumenUsuarios } from '../Models/GraficosModels'
 import {
@@ -29,6 +30,8 @@ interface BarraTipo {
 
 
 function ChartTooltip({ active, payload }: TooltipContentProps) {
+  const { t } = useTranslation()
+
   if (!active || !payload?.length) return null
 
   const punto = payload[0].payload as BarraTipo
@@ -37,7 +40,7 @@ function ChartTooltip({ active, payload }: TooltipContentProps) {
     <div className="rounded-lg bg-stone-900 px-3 py-2 text-xs text-stone-100 shadow-xl ring-1 ring-black/20">
       <p className="font-semibold">{punto.tipo}</p>
       <p className="mt-0.5 text-stone-300">
-        {punto.users} {punto.users === 1 ? 'usuario' : 'usuarios'}
+        {t('graficos:charts.tooltipUsers', { count: punto.users })}
       </p>
     </div>
   )
@@ -45,9 +48,11 @@ function ChartTooltip({ active, payload }: TooltipContentProps) {
 
 
 export function PremiumChart({ data }: { data: ResumenUsuarios }) {
+  const { t } = useTranslation()
+
   const barras: BarraTipo[] = [
-    { tipo: 'Premium', users: data.premiumUsers, color: CHART_COLORS.premium },
-    { tipo: 'Gratuitos', users: data.freeUsers, color: CHART_COLORS.gratuito },
+    { tipo: t('graficos:common.premium'), users: data.premiumUsers, color: CHART_COLORS.premium },
+    { tipo: t('graficos:common.free'), users: data.freeUsers, color: CHART_COLORS.gratuito },
   ]
 
   return (
@@ -59,10 +64,10 @@ export function PremiumChart({ data }: { data: ResumenUsuarios }) {
 
         <div className="min-w-0">
           <h2 className="font-serif text-xl font-semibold text-stone-900 sm:text-2xl">
-            Distribución de usuarios
+            {t('graficos:premiumChart.title')}
           </h2>
           <p className="mt-1 text-sm text-stone-600">
-            Comparación entre cuentas Premium y cuentas gratuitas.
+            {t('graficos:premiumChart.description')}
           </p>
         </div>
       </header>
@@ -93,7 +98,7 @@ export function PremiumChart({ data }: { data: ResumenUsuarios }) {
               tick={AXIS_TICK}
               width={58}
               label={{
-                value: 'Usuarios',
+                value: t('graficos:common.users'),
                 angle: -90,
                 position: 'insideLeft',
                 style: AXIS_LABEL_STYLE,

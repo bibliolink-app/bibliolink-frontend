@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router'
 import { ArrowLeft, CircleAlert } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
@@ -10,6 +11,7 @@ import { userErrorMessage } from '../lib/userErrorMessage'
 
 
 export function NormalUsersListPage() {
+  const { t } = useTranslation()
   const { data: users, isPending, isError, error } = useUsers()
 
 
@@ -22,15 +24,15 @@ export function NormalUsersListPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500 motion-safe:transition-colors"
       >
         <ArrowLeft className="size-4" />
-        Volver a administradores
+        {t('admin:normalUsersList.backToAdmins')}
       </Link>
 
       <header className="mb-8">
         <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">
-          Usuarios normales
+          {t('admin:normalUsersList.title')}
         </h1>
         <p className="mt-2 text-stone-300">
-          Cuentas registradas por el público, tanto gratuitas como Premium.
+          {t('admin:normalUsersList.subtitle')}
         </p>
       </header>
 
@@ -48,7 +50,7 @@ export function NormalUsersListPage() {
 
       {!isPending && !isError && normales.length === 0 && (
         <p className="rounded-lg bg-stone-300 px-4 py-6 text-center text-stone-600">
-          No hay usuarios registrados.
+          {t('admin:normalUsersList.empty')}
         </p>
       )}
 

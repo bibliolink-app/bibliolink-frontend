@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { ArrowLeft, ChevronRight, CircleAlert, Crown, Users } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
@@ -10,6 +11,7 @@ import { useRegistrations } from '../Hook/GraficosHook'
 import { analyticsErrorMessage } from '../lib/AnalyticsErrorMessage'
 
 export function GraficosPage() {
+  const { t } = useTranslation()
 
   const porMes = useRegistrations('month')
   const porSemana = useRegistrations('week')
@@ -28,18 +30,18 @@ export function GraficosPage() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-stone-300 hover:text-yellow-500 motion-safe:transition-colors"
       >
         <ArrowLeft className="size-4" />
-        Volver al panel
+        {t('admin:common.backToPanel')}
       </Link>
 
       <div className="mb-8 flex flex-wrap items-start justify-between gap-4">
         <header className="max-w-2xl">
           <h1 className="font-serif text-3xl font-semibold text-stone-100 sm:text-4xl">
-            Usuarios registrados
+            {t('graficos:page.title')}
           </h1>
           <p className="mt-2.5 text-stone-300">
-            Visualiza el crecimiento de los usuarios registrados en el sistema.
+            {t('graficos:page.subtitle')}
           </p>
-          <p className="text-stone-300">No se incluyen administradores.</p>
+          <p className="text-stone-300">{t('graficos:page.subtitleNote')}</p>
         </header>
 
         <Link
@@ -47,7 +49,7 @@ export function GraficosPage() {
           className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-4 py-2.5 font-semibold text-stone-900 shadow-md shadow-black/20 hover:bg-rose-900 hover:text-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
         >
           <Crown className="size-5" />
-          Usuarios Premium
+          {t('graficos:page.premiumLink')}
           <ChevronRight className="size-4" />
         </Link>
       </div>
@@ -69,9 +71,9 @@ export function GraficosPage() {
         <div className="space-y-8">
           <div className="max-w-md">
             <StatTile
-              label="Total de usuarios registrados"
+              label={t('graficos:stats.totalLabel')}
               value={total}
-              hint="No incluye administradores"
+              hint={t('graficos:stats.totalHint')}
               icon={<Users className="size-6" />}
             />
           </div>
@@ -80,8 +82,8 @@ export function GraficosPage() {
           <RegistrationsChart
             data={porMes.data}
             period="month"
-            title="Usuarios registrados por mes"
-            description="Cantidad de nuevos usuarios registrados en cada mes."
+            title={t('graficos:charts.byMonth.title')}
+            description={t('graficos:charts.byMonth.description')}
           >
             <RegistrationsTable data={porMes.data} period="month" />
           </RegistrationsChart>
@@ -89,8 +91,8 @@ export function GraficosPage() {
           <RegistrationsChart
             data={porSemana.data}
             period="week"
-            title="Usuarios registrados por semana"
-            description="Cantidad de nuevos usuarios registrados en cada semana."
+            title={t('graficos:charts.byWeek.title')}
+            description={t('graficos:charts.byWeek.description')}
           >
             <RegistrationsTable data={porSemana.data} period="week" />
           </RegistrationsChart>

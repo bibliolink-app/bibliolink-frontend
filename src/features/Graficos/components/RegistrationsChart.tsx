@@ -10,6 +10,7 @@ import {
   YAxis,
   type TooltipContentProps,
 } from 'recharts'
+import { useTranslation } from 'react-i18next'
 
 import type { RegistroPorPeriodo } from '../Models/GraficosModels'
 import {
@@ -24,8 +25,8 @@ import { formatMes, formatMesCorto, formatSemana, formatSemanaCorta } from '../l
 
 
 const FORMATOS = {
-  month: { corto: formatMesCorto, largo: formatMes, nota: 'los meses', Icon: ChartColumn },
-  week: { corto: formatSemanaCorta, largo: formatSemana, nota: 'las semanas', Icon: TrendingUp },
+  month: { corto: formatMesCorto, largo: formatMes, Icon: ChartColumn },
+  week: { corto: formatSemanaCorta, largo: formatSemana, Icon: TrendingUp },
 } as const
 
 
@@ -36,6 +37,8 @@ interface PuntoGrafica extends RegistroPorPeriodo {
 
 
 function ChartTooltip({ active, payload }: TooltipContentProps) {
+  const { t } = useTranslation()
+
   if (!active || !payload?.length) return null
 
   const punto = payload[0].payload as PuntoGrafica
@@ -44,7 +47,7 @@ function ChartTooltip({ active, payload }: TooltipContentProps) {
     <div className="rounded-lg bg-stone-900 px-3 py-2 text-xs text-stone-100 shadow-xl ring-1 ring-black/20">
       <p className="font-semibold">{punto.etiquetaLarga}</p>
       <p className="mt-0.5 text-stone-300">
-        {punto.users} {punto.users === 1 ? 'usuario' : 'usuarios'}
+        {t('graficos:charts.tooltipUsers', { count: punto.users })}
       </p>
     </div>
   )
@@ -65,13 +68,14 @@ export function RegistrationsChart({
   description,
   children,
 }: RegistrationsChartProps) {
+  const { t, i18n } = useTranslation()
   const { corto, largo, Icon } = FORMATOS[period]
 
-  // Las etiquetas se calculan 
+  // Las etiquetas se calculan
   const puntos: PuntoGrafica[] = data.map((item) => ({
     ...item,
-    etiquetaCorta: corto(item.period),
-    etiquetaLarga: largo(item.period),
+    etiquetaCorta: corto(item.period, i18n.language),
+    etiquetaLarga: largo(item.period, i18n.language),
   }))
 
   return (
@@ -90,7 +94,7 @@ export function RegistrationsChart({
 
       {data.length === 0 ? (
         <p className="mt-6 rounded-lg bg-stone-200/60 px-4 py-12 text-center text-stone-600">
-          Todavía no hay usuarios registrados.
+          {t('graficos:charts.empty')}
         </p>
       ) : (
         <>
@@ -124,19 +128,19 @@ export function RegistrationsChart({
                   tick={AXIS_TICK}
                   width={58}
                   label={{
-                    value: 'Usuarios',
+                    value: t('graficos:common.users'),
                     angle: -90,
                     position: 'insideLeft',
                     style: AXIS_LABEL_STYLE,
                   }}
                 />
 
-               
+
                 <Tooltip content={ChartTooltip} cursor={TOOLTIP_CURSOR} />
 
                 <Bar
                   dataKey="users"
-                  name="Usuarios registrados"
+                  name={t('graficos:charts.seriesName')}
                   fill={CHART_COLORS.serie}
                   radius={[6, 6, 0, 0]}
                   maxBarSize={56}
