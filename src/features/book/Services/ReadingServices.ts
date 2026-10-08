@@ -3,7 +3,6 @@ import type { AccesoLectura, EstadoLectura, PaginaLectura, ProgresoLectura } fro
 import { accesoLecturaSchema, estadoLecturaSchema, paginaLecturaSchema } from '../Schemas/ReadingSchemas'
 import { LecturaNoDisponibleError } from '../lib/readingErrorMessage'
 
-// Es POST porque abre un periodo de lectura en el servidor, no solo consulta.
 export const postAccess = async (bookId: number): Promise<AccesoLectura> => {
   const response = await api.post(`/reading/books/${bookId}/access`)
 
