@@ -12,10 +12,7 @@
       "name": "Pro",
       "price": "5,00 $ USD / mois",
       "features": ["Accès à la bibliothèque", "Favoris illimités", "Sans publicité"]
-    },
-    "activeUntil": "Actif jusqu'au {{date}}",
-    "renewsOn": "Renouvellement le {{date}}",
-    "paymentPending": "Votre paiement a été enregistré. L'activation peut prendre quelques minutes."
+    }
   },
   "toast": {
     "paymentRegistered": "Paiement enregistré. Votre abonnement sera activé dans quelques minutes.",

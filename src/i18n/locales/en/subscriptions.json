@@ -12,10 +12,7 @@
       "name": "Pro",
       "price": "$5.00 USD / month",
       "features": ["Access to the library", "Unlimited favorites", "No ads"]
-    },
-    "activeUntil": "Active until {{date}}",
-    "renewsOn": "Renews on {{date}}",
-    "paymentPending": "Your payment was registered. Activation may take a few minutes."
+    }
   },
   "toast": {
     "paymentRegistered": "Payment registered. Your subscription will activate in a few minutes.",
