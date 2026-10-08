@@ -20,11 +20,10 @@ export function LectorPage() {
   const guardarProgreso = useGuardarProgreso(bookId)
 
   const estado = acceso.data?.readingState ?? null
-  // `readingState` es `null` justo cuando el libro no está en favoritos,
-  // que es donde vive el progreso.
+ 
   const puedeGuardar = estado !== null
 
-  // Mientras no se navegue, se abre donde quedó la última vez.
+
   const paginaGuardada = Number(estado?.readingLocation) || 1
   const pagina = paginaElegida ?? paginaGuardada
 
