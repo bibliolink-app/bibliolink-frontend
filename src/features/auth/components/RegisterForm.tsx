@@ -66,6 +66,7 @@ export function RegisterForm() {
             label={t('auth:register.usernameLabel')}
             name={field.name}
             autoComplete="username"
+            maxLength={25}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
@@ -82,6 +83,7 @@ export function RegisterForm() {
               label={t('auth:register.firstNameLabel')}
               name={field.name}
               autoComplete="given-name"
+              maxLength={50}
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
@@ -96,6 +98,7 @@ export function RegisterForm() {
             <TextField
               label={t('auth:register.middleNameLabel')}
               name={field.name}
+              maxLength={50}
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
@@ -111,6 +114,7 @@ export function RegisterForm() {
               label={t('auth:register.firstSurnameLabel')}
               name={field.name}
               autoComplete="family-name"
+              maxLength={50}
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
@@ -125,6 +129,7 @@ export function RegisterForm() {
             <TextField
               label={t('auth:register.secondSurnameLabel')}
               name={field.name}
+              maxLength={50}
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
@@ -158,6 +163,7 @@ export function RegisterForm() {
             name={field.name}
             type="email"
             autoComplete="email"
+            maxLength={254}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
@@ -174,6 +180,7 @@ export function RegisterForm() {
             name={field.name}
             type="password"
             autoComplete="new-password"
+            maxLength={72}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
@@ -190,6 +197,7 @@ export function RegisterForm() {
             name={field.name}
             type="password"
             autoComplete="new-password"
+            maxLength={72}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
