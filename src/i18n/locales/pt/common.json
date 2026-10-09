@@ -29,6 +29,9 @@
     "show": "Mostrar senha",
     "hide": "Ocultar senha"
   },
+  "field": {
+    "maxLengthReached": "Você atingiu o limite de {{count}} caracteres."
+  },
   "actions": {
     "cancel": "Cancelar",
     "confirm": "Confirmar",

@@ -53,6 +53,7 @@ export function ForgotPasswordForm() {
             name={field.name}
             type="email"
             autoComplete="email"
+            maxLength={254}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}

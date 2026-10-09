@@ -12,6 +12,7 @@ interface TextFieldProps {
   autoComplete?: string
   errors?: ReadonlyArray<string | undefined>
   disabled?: boolean
+  maxLength?: number
 }
 
 export function TextField({
@@ -24,15 +25,18 @@ export function TextField({
   autoComplete,
   errors = [],
   disabled,
+  maxLength,
 }: TextFieldProps) {
   const { t } = useTranslation()
   const id = useId()
   const errorId = `${id}-error`
+  const limitId = `${id}-limit`
   const [revealed, setRevealed] = useState(false)
 
   const messages = errors.filter((message): message is string => Boolean(message))
   const invalid = messages.length > 0
   const isPassword = type === 'password'
+  const atLimit = maxLength !== undefined && value.length >= maxLength
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -49,11 +53,12 @@ export function TextField({
           onChange={(event) => onChange(event.target.value)}
           onBlur={onBlur}
           autoComplete={autoComplete}
+          maxLength={maxLength}
           autoCapitalize={type === 'email' ? 'none' : undefined}
           spellCheck={type === 'text' ? undefined : false}
           disabled={disabled}
           aria-invalid={invalid}
-          aria-describedby={invalid ? errorId : undefined}
+          aria-describedby={invalid ? errorId : atLimit ? limitId : undefined}
           className={`w-full rounded-md border border-stone-500 bg-stone-100 px-3.5 py-3 text-base text-stone-900 shadow-inner shadow-black/5 hover:border-yellow-800 focus-visible:border-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 disabled:cursor-not-allowed disabled:opacity-60 aria-invalid:border-rose-900 aria-invalid:ring-1 aria-invalid:ring-rose-900 motion-safe:transition-colors ${isPassword ? 'pr-12' : ''}`}
         />
 
@@ -75,6 +80,13 @@ export function TextField({
         <p id={errorId} className="flex items-start gap-1.5 text-sm font-medium text-rose-900">
           <CircleAlert className="mt-0.5 size-4 shrink-0" />
           <span>{messages.join(' ')}</span>
+        </p>
+      )}
+
+      {!invalid && atLimit && (
+        <p id={limitId} role="status" className="flex items-start gap-1.5 text-sm font-medium text-yellow-800">
+          <CircleAlert className="mt-0.5 size-4 shrink-0" />
+          <span>{t('common:field.maxLengthReached', { count: maxLength })}</span>
         </p>
       )}
     </div>
