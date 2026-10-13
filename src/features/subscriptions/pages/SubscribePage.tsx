@@ -31,15 +31,7 @@ export function SubscribePage() {
           price={t('subscriptions:plans.pro.price')}
           features={proFeatures}
           isCurrent={hasPremiumAccess}
-          action={
-            !hasPremiumAccess && (
-              <div className="cursor-not-allowed">
-                <div className="pointer-events-none opacity-60">
-                  <SubscribeButton />
-                </div>
-              </div>
-            )
-          }
+          action={!hasPremiumAccess && <SubscribeButton />}
         />
       </div>
     </div>
