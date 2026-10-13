@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router'
-import { House, Library, Search } from 'lucide-react'
+import { Heart, House, Search } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../router'
@@ -11,7 +11,7 @@ export function BottomNav() {
   const sections = [
     { to: PATHS.home, label: t('common:nav.home'), Icon: House },
     { to: PATHS.search, label: t('common:nav.search'), Icon: Search },
-    { to: PATHS.favorites, label: t('common:nav.favorites'), Icon: Library },
+    { to: PATHS.favorites, label: t('common:nav.favorites'), Icon: Heart },
   ]
 
   return (

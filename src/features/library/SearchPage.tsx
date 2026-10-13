@@ -9,11 +9,14 @@ import { bookErrorMessage } from '../book/lib/bookErrorMessage'
 import { categoriasDeLibros, filtrarPorCategoria } from '../book/lib/categorias'
 import { filtrarLibros } from '../book/lib/filtrarLibros'
 import { LoadingScreen } from '../../components/ui/LoadingScreen'
+import { paginar, totalDePaginas } from '../book/lib/paginar'
+import { Paginacion } from '../book/components/Paginacion'
 
 export function SearchPage() {
   const { t, i18n } = useTranslation()
   const [busqueda, setBusqueda] = useState('')
   const [categoria, setCategoria] = useState('')
+  const[pagina, setPagina] = useState(1)
   const { data: libros, isPending, isError, error } = useBooks()
 
   const categorias = useMemo(
@@ -26,10 +29,23 @@ export function SearchPage() {
     [libros, categoria, busqueda],
   )
 
+  const totalPaginas = totalDePaginas(resultados.length)
+  const visibles = paginar(resultados, pagina)
+
+ 
+  const cambiarBusqueda = (valor: string) => {
+    setBusqueda(valor)
+    setPagina(1)
+  }
+
+  const cambiarCategoria = (code: string) => {
+    setCategoria(code)
+    setPagina(1)
+  }
   const buscando = busqueda.trim() !== ''
   const sinResultados = resultados.length === 0 && (buscando || categoria !== '')
 
-  return (
+ return (
     <>
       <header className="mb-8 max-w-2xl">
         <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">
@@ -44,14 +60,14 @@ export function SearchPage() {
           <input
             type="search"
             value={busqueda}
-            onChange={(event) => setBusqueda(event.target.value)}
+            onChange={(event) => cambiarBusqueda(event.target.value)}
             placeholder={t('library:search.placeholder')}
             aria-label={t('library:search.ariaLabel')}
             className="w-full rounded-md border border-stone-500 bg-stone-100 py-3 pr-3.5 pl-11 text-base text-stone-900 shadow-inner shadow-black/5 hover:border-yellow-800 focus-visible:border-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-800 motion-safe:transition-colors"
           />
         </div>
 
-        <SelectorCategorias categorias={categorias} valor={categoria} onChange={setCategoria} />
+        <SelectorCategorias categorias={categorias} valor={categoria} onChange={cambiarCategoria} />
       </div>
 
       <div className="mt-8">
@@ -82,7 +98,10 @@ export function SearchPage() {
                 <p className="text-stone-300">{t('library:search.noResults')}</p>
               </div>
             ) : (
-              <Libros libros={resultados} />
+              <>
+                <Libros libros={visibles} />
+                <Paginacion pagina={pagina} totalPaginas={totalPaginas} onCambiar={setPagina} />
+              </>
             )}
           </>
         )}
