@@ -29,6 +29,9 @@
     "show": "Show password",
     "hide": "Hide password"
   },
+  "field": {
+    "maxLengthReached": "You've reached the {{count}}-character limit."
+  },
   "actions": {
     "cancel": "Cancel",
     "confirm": "Confirm",

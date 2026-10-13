@@ -55,6 +55,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
               name={field.name}
               type="password"
               autoComplete="new-password"
+              maxLength={72}
               value={field.state.value}
               onChange={field.handleChange}
               onBlur={field.handleBlur}
@@ -73,6 +74,7 @@ export function ResetPasswordForm({ token }: { token: string }) {
             name={field.name}
             type="password"
             autoComplete="new-password"
+            maxLength={72}
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}

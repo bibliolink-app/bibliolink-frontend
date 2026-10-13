@@ -29,6 +29,9 @@
     "show": "Afficher le mot de passe",
     "hide": "Masquer le mot de passe"
   },
+  "field": {
+    "maxLengthReached": "Vous avez atteint la limite de {{count}} caractères."
+  },
   "actions": {
     "cancel": "Annuler",
     "confirm": "Confirmer",
