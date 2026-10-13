@@ -1,0 +1,56 @@
+{
+  "page": {
+    "title": "Registered users",
+    "subtitle": "View the growth of registered users in the system.",
+    "subtitleNote": "Admins are not included.",
+    "premiumLink": "Premium users"
+  },
+  "stats": {
+    "totalLabel": "Total registered users",
+    "totalHint": "Does not include admins"
+  },
+  "charts": {
+    "byMonth": {
+      "title": "Users registered by month",
+      "description": "Number of new users registered each month."
+    },
+    "byWeek": {
+      "title": "Users registered by week",
+      "description": "Number of new users registered each week."
+    },
+    "empty": "No users registered yet.",
+    "seriesName": "Registered users",
+    "tooltipUsers_one": "{{count}} user",
+    "tooltipUsers_other": "{{count}} users"
+  },
+  "table": {
+    "toggle": "View data as a table",
+    "month": "Month",
+    "week": "Week"
+  },
+  "premiumPage": {
+    "backToUsers": "Back to regular users",
+    "title": "Premium users",
+    "subtitle": "See how many accounts have an active subscription."
+  },
+  "premiumChart": {
+    "title": "User distribution",
+    "description": "Comparison between Premium and free accounts."
+  },
+  "premiumSummary": {
+    "title": "Premium and free",
+    "description": "Current totals of accounts with an active subscription and free accounts.",
+    "total": "Total",
+    "premiumOfTotal": "Premium of total",
+    "ariaLabel": "{{premiumUsers}} Premium users and {{freeUsers}} free, out of {{totalUsers}} total"
+  },
+  "common": {
+    "users": "Users",
+    "premium": "Premium",
+    "free": "Free"
+  },
+  "errors": {
+    "generic": "Could not load the statistics.",
+    "forbidden": "You don't have permission to view these statistics."
+  }
+}

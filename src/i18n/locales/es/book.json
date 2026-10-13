@@ -1,0 +1,48 @@
+{
+  "detail": {
+    "backToCatalog": "Volver al catálogo",
+    "read": "Leer"
+  },
+  "catalog": {
+    "inFavorites": "En favoritos",
+    "viewBook": "Ver libro",
+    "empty": "Todavía no hay libros en el catálogo."
+  },
+  "categories": {
+    "all": "Todas las categorías",
+    "label": "Categorías"
+  },
+  "reader": {
+    "backToBook": "Volver al libro",
+    "rewardExhaustedTitle": "Se agotó tu tiempo de lectura gratuito",
+    "blockedTitle": "No puedes leer este libro ahora",
+    "rewardExhaustedHint": "Vuelve más tarde o hazte Premium para leer sin interrupciones.",
+    "blockedHint": "Revisa tu plan o inténtalo de nuevo más tarde.",
+    "viewPremium": "Ver Premium",
+    "saveHint": "Guarda este libro en favoritos para retomar la lectura donde la dejaste.",
+    "pagesNav": "Páginas del libro",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "pageNumber": "Página {{number}}"
+  },
+  "favoriteButton": {
+    "remove": "Quitar de favoritos",
+    "add": "Guardar en favoritos",
+    "confirmTitle": "¿Quitar «{{titulo}}» de favoritos?",
+    "confirmDescription": "También se perderá la página en la que ibas leyendo. Puedes volver a guardarlo cuando quieras.",
+    "confirmAction": "Quitar"
+  },
+  "errors": {
+    "catalogUnavailable": "El catálogo todavía no está disponible.",
+    "catalogUnavailableHint": "El catálogo todavía no está disponible. Estamos trabajando en ello.",
+    "catalogGeneric": "No se pudo cargar el catálogo.",
+    "bookNotFound": "No encontramos ese libro.",
+    "readingUnavailable": "No se pudo abrir el libro.",
+    "readingForbidden": "Tu cuenta no tiene permiso para leer este libro.",
+    "pageNotFound": "No encontramos esa página del libro.",
+    "providerUnavailable": "El proveedor del contenido no responde. Inténtalo de nuevo en un momento.",
+    "favoritesGeneric": "No se pudieron cargar tus favoritos.",
+    "favoriteBookNotFound": "Ese libro no existe.",
+    "sessionExpired": "Tu sesión expiró. Vuelve a iniciar sesión."
+  }
+}

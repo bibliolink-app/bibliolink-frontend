@@ -1,0 +1,56 @@
+{
+  "page": {
+    "title": "Usuarios registrados",
+    "subtitle": "Visualiza el crecimiento de los usuarios registrados en el sistema.",
+    "subtitleNote": "No se incluyen administradores.",
+    "premiumLink": "Usuarios Premium"
+  },
+  "stats": {
+    "totalLabel": "Total de usuarios registrados",
+    "totalHint": "No incluye administradores"
+  },
+  "charts": {
+    "byMonth": {
+      "title": "Usuarios registrados por mes",
+      "description": "Cantidad de nuevos usuarios registrados en cada mes."
+    },
+    "byWeek": {
+      "title": "Usuarios registrados por semana",
+      "description": "Cantidad de nuevos usuarios registrados en cada semana."
+    },
+    "empty": "Todavía no hay usuarios registrados.",
+    "seriesName": "Usuarios registrados",
+    "tooltipUsers_one": "{{count}} usuario",
+    "tooltipUsers_other": "{{count}} usuarios"
+  },
+  "table": {
+    "toggle": "Ver los datos en tabla",
+    "month": "Mes",
+    "week": "Semana"
+  },
+  "premiumPage": {
+    "backToUsers": "Volver a usuarios normales",
+    "title": "Usuarios Premium",
+    "subtitle": "Consulta cuántas cuentas mantienen una suscripción activa."
+  },
+  "premiumChart": {
+    "title": "Distribución de usuarios",
+    "description": "Comparación entre cuentas Premium y cuentas gratuitas."
+  },
+  "premiumSummary": {
+    "title": "Premium y gratuitos",
+    "description": "Totales actuales de cuentas con suscripción activa y cuentas gratuitas.",
+    "total": "Total",
+    "premiumOfTotal": "Premium del total",
+    "ariaLabel": "{{premiumUsers}} usuarios Premium y {{freeUsers}} gratuitos, de {{totalUsers}} en total"
+  },
+  "common": {
+    "users": "Usuarios",
+    "premium": "Premium",
+    "free": "Gratuitos"
+  },
+  "errors": {
+    "generic": "No se pudieron cargar las estadísticas.",
+    "forbidden": "No tienes permisos para ver estas estadísticas."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "detail": {
+    "backToCatalog": "Retour au catalogue",
+    "read": "Lire"
+  },
+  "catalog": {
+    "inFavorites": "Dans les favoris",
+    "viewBook": "Voir le livre",
+    "empty": "Il n'y a pas encore de livres dans le catalogue."
+  },
+  "categories": {
+    "all": "Toutes les catégories",
+    "label": "Catégories"
+  },
+  "reader": {
+    "backToBook": "Retour au livre",
+    "rewardExhaustedTitle": "Votre temps de lecture gratuit est épuisé",
+    "blockedTitle": "Vous ne pouvez pas lire ce livre pour le moment",
+    "rewardExhaustedHint": "Revenez plus tard ou passez à Premium pour lire sans interruption.",
+    "blockedHint": "Vérifiez votre forfait ou réessayez plus tard.",
+    "viewPremium": "Voir Premium",
+    "saveHint": "Enregistrez ce livre dans vos favoris pour reprendre la lecture où vous l'aviez laissée.",
+    "pagesNav": "Pages du livre",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "pageNumber": "Page {{number}}"
+  },
+  "favoriteButton": {
+    "remove": "Retirer des favoris",
+    "add": "Ajouter aux favoris",
+    "confirmTitle": "Retirer « {{titulo}} » des favoris ?",
+    "confirmDescription": "Vous perdrez aussi la page où vous en étiez. Vous pourrez l'enregistrer à nouveau quand vous voudrez.",
+    "confirmAction": "Retirer"
+  },
+  "errors": {
+    "catalogUnavailable": "Le catalogue n'est pas encore disponible.",
+    "catalogUnavailableHint": "Le catalogue n'est pas encore disponible. Nous y travaillons.",
+    "catalogGeneric": "Impossible de charger le catalogue.",
+    "bookNotFound": "Nous n'avons pas trouvé ce livre.",
+    "readingUnavailable": "Impossible d'ouvrir le livre.",
+    "readingForbidden": "Votre compte n'a pas la permission de lire ce livre.",
+    "pageNotFound": "Nous n'avons pas trouvé cette page du livre.",
+    "providerUnavailable": "Le fournisseur de contenu ne répond pas. Réessayez dans un instant.",
+    "favoritesGeneric": "Impossible de charger vos favoris.",
+    "favoriteBookNotFound": "Ce livre n'existe pas.",
+    "sessionExpired": "Votre session a expiré. Reconnectez-vous."
+  }
+}

@@ -1,0 +1,43 @@
+import { NavLink } from 'react-router'
+import { Heart, House, Search } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+
+import { PATHS } from '../../router'
+
+
+export function BottomNav() {
+  const { t } = useTranslation()
+
+  const sections = [
+    { to: PATHS.home, label: t('common:nav.home'), Icon: House },
+    { to: PATHS.search, label: t('common:nav.search'), Icon: Search },
+    { to: PATHS.favorites, label: t('common:nav.favorites'), Icon: Heart },
+  ]
+
+  return (
+    <nav
+      aria-label={t('common:nav.ariaMain')}
+      className="sticky bottom-0 z-10 border-t border-yellow-600/30 bg-teal-950/95 backdrop-blur"
+    >
+            <ul className="mx-auto flex w-full max-w-6xl">
+        {sections.map(({ to, label, Icon }) => (
+          <li key={to} className="flex-1">
+            <NavLink
+              to={to}
+              end
+              aria-label={label}
+              title={label}
+              className={({ isActive }) =>
+                `flex items-center justify-center py-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors ${
+                  isActive ? 'text-yellow-500' : 'text-stone-300 hover:text-yellow-500'
+                }`
+              }
+            >
+              {({ isActive }) => <Icon className="size-6" strokeWidth={isActive ? 2.5 : 2} />}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}

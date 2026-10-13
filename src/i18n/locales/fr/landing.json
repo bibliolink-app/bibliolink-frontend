@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "BIBLIO LINK",
+    "subtitle": "Votre bibliothèque virtuelle, à la portée de tous",
+    "description": "Une plateforme pensée pour rapprocher la lecture de chacun, depuis n'importe où. Explorez, découvrez et trouvez votre prochain livre sans sortir de chez vous.",
+    "loginLabel": "Se connecter"
+  },
+  "nav": {
+    "ariaSections": "Sections",
+    "ariaFooterLinks": "Liens du pied de page",
+    "items": [
+      {
+        "label": "Qu'est-ce que c'est ?",
+        "href": "#que-es"
+      }
+    ]
+  },
+  "about": {
+    "title": "Bibliothèque virtuelle",
+    "description": "Biblio Link est un service qui encourage la lecture chez les citoyens, en donnant accès à une bibliothèque virtuelle où les utilisateurs peuvent consulter et découvrir différents livres.",
+    "stepsTitle": "Comment fonctionne BiblioLink ?",
+    "stepsSubtitle": "Découvrez votre prochaine lecture en quelques étapes.",
+    "steps": [
+      {
+        "icon": "UserPlus",
+        "title": "Créez votre compte",
+        "description": "Inscrivez-vous sur BiblioLink pour profiter de la plateforme."
+      },
+      {
+        "icon": "LogIn",
+        "title": "Connectez-vous",
+        "description": "Accédez à votre compte BiblioLink avec vos identifiants."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "Explorez le catalogue",
+        "description": "Consultez les livres disponibles et découvrez de nouvelles lectures."
+      },
+      {
+        "icon": "Search",
+        "title": "Trouvez votre livre",
+        "description": "Cherchez des livres par titre, auteur ou catégorie."
+      },
+      {
+        "icon": "BookOpenText",
+        "title": "Découvrez et lisez",
+        "description": "Consultez les détails du livre et commencez votre lecture."
+      }
+    ],
+    "premium": {
+      "title": "Profitez-en plus avec Premium",
+      "description": "Débloquez des fonctionnalités supplémentaires pour une expérience de lecture plus complète.",
+      "badge": "Premium uniquement",
+      "items": [
+        {
+          "icon": "Heart",
+          "title": "Enregistrer des livres en favoris"
+        },
+        {
+          "icon": "Ban",
+          "title": "Lire sans publicité"
+        }
+      ]
+    }
+  },
+  "reading": {
+    "title": "Commencez à lire",
+    "description": "Créez votre compte et connectez-vous pour commencer à explorer le catalogue de Biblio Link.",
+    "buttonLabel": "Se connecter"
+  },
+  "footer": {
+    "title": "BIBLIO LINK",
+    "description": "Une bibliothèque virtuelle qui favorise l'accès à la lecture et sa découverte."
+  }
+}
