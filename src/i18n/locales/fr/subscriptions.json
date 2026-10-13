@@ -14,6 +14,9 @@
       "features": ["Accès à la bibliothèque", "Favoris illimités", "Sans publicité"]
     }
   },
+  "actions": {
+    "subscribe": "S'abonner"
+  },
   "toast": {
     "paymentRegistered": "Paiement enregistré. Votre abonnement sera activé dans quelques minutes.",
     "genericError": "Impossible de traiter l'abonnement. Réessayez."
