@@ -26,3 +26,15 @@ export interface ProgresoLectura {
   progressPercent: number
   readingLocation: string
 }
+
+
+export interface RetoRecompensa {
+  token: string
+  expiresAt: string
+}
+
+export interface RecompensaLectura {
+  canRead: boolean
+  expiresAt: string
+  serverTime: string
+}

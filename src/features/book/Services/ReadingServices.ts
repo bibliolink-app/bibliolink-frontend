@@ -1,6 +1,19 @@
 import { api } from '../../../api'
-import type { AccesoLectura, EstadoLectura, PaginaLectura, ProgresoLectura } from '../Models/ReadingModels'
-import { accesoLecturaSchema, estadoLecturaSchema, paginaLecturaSchema } from '../Schemas/ReadingSchemas'
+import type {
+  AccesoLectura,
+  EstadoLectura,
+  PaginaLectura,
+  ProgresoLectura,
+  RecompensaLectura,
+  RetoRecompensa,
+} from '../Models/ReadingModels'
+import {
+  accesoLecturaSchema,
+  estadoLecturaSchema,
+  paginaLecturaSchema,
+  recompensaLecturaSchema,
+  retoRecompensaSchema,
+} from '../Schemas/ReadingSchemas'
 import { LecturaNoDisponibleError } from '../lib/readingErrorMessage'
 
 export const postAccess = async (bookId: number): Promise<AccesoLectura> => {
@@ -28,6 +41,26 @@ export const saveProgress = async (
   const response = await api.patch(`/favorites/books/${bookId}/progress`, data)
 
   const resultado = estadoLecturaSchema.safeParse(response.data)
+  if (!resultado.success) throw new LecturaNoDisponibleError()
+
+  return resultado.data
+}
+
+/** Pide el token de un anuncio recompensado para desbloquear otro periodo de lectura. */
+export const postRewardChallenge = async (): Promise<RetoRecompensa> => {
+  const response = await api.post('/reading/reward-challenge')
+
+  const resultado = retoRecompensaSchema.safeParse(response.data)
+  if (!resultado.success) throw new LecturaNoDisponibleError()
+
+  return resultado.data
+}
+
+/** Canjea el token tras "ver" el anuncio y extiende el periodo de lectura. */
+export const postReward = async (token: string): Promise<RecompensaLectura> => {
+  const response = await api.post('/reading/reward', { token })
+
+  const resultado = recompensaLecturaSchema.safeParse(response.data)
   if (!resultado.success) throw new LecturaNoDisponibleError()
 
   return resultado.data
