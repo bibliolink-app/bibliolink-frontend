@@ -1,6 +1,6 @@
-import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { getPage, postAccess, saveProgress } from '../Services/ReadingServices'
+import { getPage, postAccess, postReward, postRewardChallenge, saveProgress } from '../Services/ReadingServices'
 import type { ProgresoLectura } from '../Models/ReadingModels'
 
 /** Abre el periodo de lectura y dice si se puede leer o hace falta un anuncio. */
@@ -30,5 +30,26 @@ export const useGuardarProgreso = (bookId: number) => {
   return useMutation({
     mutationFn: (data: ProgresoLectura) => saveProgress(bookId, data),
     retry: false,
+  })
+}
+
+/** Pide el token del anuncio recompensado (solo FREE; el backend rechaza a los Premium). */
+export const useRewardChallenge = () => {
+  return useMutation({
+    mutationFn: postRewardChallenge,
+    retry: false,
+  })
+}
+
+/** Canjea el token tras el anuncio y refresca el acceso de lectura para desbloquearlo. */
+export const useRedeemReward = (bookId: number) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: postReward,
+    retry: false,
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: ['reading', bookId, 'access'] })
+    },
   })
 }

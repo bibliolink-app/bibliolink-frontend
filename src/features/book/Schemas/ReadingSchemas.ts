@@ -21,3 +21,14 @@ export const paginaLecturaSchema = z.object({
   content: z.string(),
   hasNextPage: z.boolean(),
 })
+
+export const retoRecompensaSchema = z.object({
+  token: z.string(),
+  expiresAt: z.string(),
+})
+
+export const recompensaLecturaSchema = z.object({
+  canRead: z.boolean(),
+  expiresAt: z.string(),
+  serverTime: z.string(),
+})
