@@ -8,6 +8,7 @@ import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { useBook } from '../Hook/BookHook'
 import { useGuardarProgreso, useReadingAccess, useReadingPage } from '../Hook/ReadingHook'
 import { readingErrorMessage } from '../lib/readingErrorMessage'
+import { AnuncioRecompensaModal } from '../components/AnuncioRecompensaModal'
 
 const BOTON =
   'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 hover:border-rose-900 hover:bg-rose-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
@@ -90,13 +91,17 @@ export function LectorPage() {
               : t('book:reader.blockedHint')}
           </p>
 
-          <Link
-            to={PATHS.subscribe}
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-yellow-600 px-5 py-2.5 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 motion-safe:transition-colors"
-          >
-            <Crown className="size-5" />
-            {t('book:reader.viewPremium')}
-          </Link>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {acceso.data.requiresReward && <AnuncioRecompensaModal bookId={bookId} />}
+
+            <Link
+              to={PATHS.subscribe}
+              className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-5 py-2.5 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 motion-safe:transition-colors"
+            >
+              <Crown className="size-5" />
+              {t('book:reader.viewPremium')}
+            </Link>
+          </div>
         </div>
       )}
 
