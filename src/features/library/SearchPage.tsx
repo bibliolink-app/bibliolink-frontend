@@ -3,20 +3,20 @@ import { CircleAlert, Search, SearchX } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Libros } from '../book/components/Libros'
+import { LibrosSkeleton } from '../book/components/LibrosSkeleton'
+import { Paginacion } from '../book/components/Paginacion'
 import { SelectorCategorias } from '../book/components/SelectorCategorias'
 import { useBooks } from '../book/Hook/BookHook'
 import { bookErrorMessage } from '../book/lib/bookErrorMessage'
 import { categoriasDeLibros, filtrarPorCategoria } from '../book/lib/categorias'
 import { filtrarLibros } from '../book/lib/filtrarLibros'
-import { LoadingScreen } from '../../components/ui/LoadingScreen'
 import { paginar, totalDePaginas } from '../book/lib/paginar'
-import { Paginacion } from '../book/components/Paginacion'
 
 export function SearchPage() {
   const { t, i18n } = useTranslation()
   const [busqueda, setBusqueda] = useState('')
   const [categoria, setCategoria] = useState('')
-  const[pagina, setPagina] = useState(1)
+  const [pagina, setPagina] = useState(1)
   const { data: libros, isPending, isError, error } = useBooks()
 
   const categorias = useMemo(
@@ -32,7 +32,8 @@ export function SearchPage() {
   const totalPaginas = totalDePaginas(resultados.length)
   const visibles = paginar(resultados, pagina)
 
- 
+  // Al cambiar los filtros se vuelve a la primera página: si estabas en la 4
+  // y el resultado nuevo tiene 2, quedarías mirando una página vacía.
   const cambiarBusqueda = (valor: string) => {
     setBusqueda(valor)
     setPagina(1)
@@ -42,10 +43,11 @@ export function SearchPage() {
     setCategoria(code)
     setPagina(1)
   }
+
   const buscando = busqueda.trim() !== ''
   const sinResultados = resultados.length === 0 && (buscando || categoria !== '')
 
- return (
+  return (
     <>
       <header className="mb-8 max-w-2xl">
         <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">
@@ -71,7 +73,7 @@ export function SearchPage() {
       </div>
 
       <div className="mt-8">
-        {isPending && <LoadingScreen />}
+        {isPending && <LibrosSkeleton />}
 
         {isError && (
           <div

@@ -6,9 +6,11 @@ import { PATHS } from '../../router'
 interface LogoProps {
   size?: 'lg' | 'sm'
   asLink?: boolean
+  /** `claro` para fondos oscuros, `oscuro` para fondos claros. */
+  tono?: 'claro' | 'oscuro'
 }
 
-export function Logo({ size = 'lg', asLink = true }: LogoProps) {
+export function Logo({ size = 'lg', asLink = true, tono = 'claro' }: LogoProps) {
   const content = (
     <>
       <img
@@ -16,7 +18,11 @@ export function Logo({ size = 'lg', asLink = true }: LogoProps) {
         alt="BiblioLink"
         className={`object-contain ${size === 'lg' ? 'size-9' : 'size-6'}`}
       />
-      <span className={`font-serif font-semibold tracking-wide text-stone-300 ${size === 'lg' ? 'text-4xl' : 'text-2xl'}`}>
+      <span
+        className={`font-serif font-semibold tracking-wide ${
+          tono === 'claro' ? 'text-stone-300' : 'text-teal-950'
+        } ${size === 'lg' ? 'text-4xl' : 'text-2xl'}`}
+      >
         BiblioLink
       </span>
     </>

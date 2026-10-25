@@ -1,22 +1,23 @@
+import { useState } from 'react'
 import { CircleAlert } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Libros } from '../book/components/Libros'
+import { LibrosSkeleton } from '../book/components/LibrosSkeleton'
+import { Paginacion } from '../book/components/Paginacion'
 import { useBooks } from '../book/Hook/BookHook'
 import { bookErrorMessage } from '../book/lib/bookErrorMessage'
-import { LoadingScreen } from '../../components/ui/LoadingScreen'
-import { useState } from 'react'
 import { paginar, totalDePaginas } from '../book/lib/paginar'
-import { Paginacion } from '../book/components/Paginacion'
 
 export function LibraryHomePage() {
   const { t } = useTranslation()
-
   const [pagina, setPagina] = useState(1)
   const { data: libros, isPending, isError, error } = useBooks()
- const todos = libros ?? []
+
+  const todos = libros ?? []
   const totalPaginas = totalDePaginas(todos.length)
   const visibles = paginar(todos, pagina)
+
   return (
     <>
       <header className="mb-8 max-w-2xl">
@@ -26,7 +27,7 @@ export function LibraryHomePage() {
         <p className="mt-2 text-stone-300">{t('library:home.subtitle')}</p>
       </header>
 
-      {isPending && <LoadingScreen />}
+      {isPending && <LibrosSkeleton />}
 
       {isError && (
         <div
@@ -38,16 +39,12 @@ export function LibraryHomePage() {
         </div>
       )}
 
-      {!isPending && !isError && <Libros libros={visibles} />}
-      {!isPending && !isError && totalPaginas > 1 && (
-        <Paginacion
-          pagina={pagina}
-          totalPaginas={totalPaginas}
-          onCambiar={setPagina}
-        />
+      {!isPending && !isError && (
+        <>
+          <Libros libros={visibles} />
+          <Paginacion pagina={pagina} totalPaginas={totalPaginas} onCambiar={setPagina} />
+        </>
       )}
-
     </>
-    
   )
 }
