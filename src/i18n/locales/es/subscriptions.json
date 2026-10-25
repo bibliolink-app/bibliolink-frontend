@@ -14,6 +14,9 @@
       "features": ["Acceso a la biblioteca", "Favoritos ilimitados", "Sin anuncios"]
     }
   },
+  "actions": {
+    "subscribe": "Suscribirme"
+  },
   "toast": {
     "paymentRegistered": "Pago registrado. Tu suscripción se activará en unos minutos.",
     "genericError": "No se pudo procesar la suscripción. Intenta de nuevo."
