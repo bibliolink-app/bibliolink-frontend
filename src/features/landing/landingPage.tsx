@@ -8,7 +8,8 @@ import { Reading } from "./components/Reading";
 /** Página pública de presentación. La ve quien todavía no ha iniciado sesión. */
 export function LandingPage() {
   return (
-    <div className="flex flex-1 flex-col bg-teal-950">
+    // El mismo fondo que el login y el panel, para que la marca se sienta una sola.
+    <div className="bg-linear-to-b from-mist-700 to-teal-950 flex flex-1 flex-col">
       <Header />
 
       <main className="flex-1">
