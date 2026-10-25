@@ -21,10 +21,10 @@ export function LibraryHomePage() {
   return (
     <>
       <header className="mb-8 max-w-2xl">
-        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">
+        <h1 className="font-serif text-4xl font-bold text-stone-100 sm:text-5xl">
           {t('library:home.title')}
         </h1>
-        <p className="mt-2 text-stone-300">{t('library:home.subtitle')}</p>
+        <p className="mt-3 text-lg text-stone-300">{t('library:home.subtitle')}</p>
       </header>
 
       {isPending && <LibrosSkeleton />}
