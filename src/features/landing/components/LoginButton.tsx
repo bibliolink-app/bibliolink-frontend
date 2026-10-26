@@ -17,9 +17,9 @@ export function LoginButton({ soloIconoEnMovil = false }: LoginButtonProps) {
     <Link
       to={PATHS.login}
       aria-label={label}
-      className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-3 py-2 font-serif font-bold tracking-wide text-stone-900 shadow-md shadow-black/25 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors sm:px-4"
+      className="inline-flex items-center gap-2 rounded-full border border-stone-100/30 px-4 py-2 font-serif font-semibold text-stone-100 hover:border-yellow-500 hover:text-yellow-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
     >
-      <LogIn className="size-5" />
+      <LogIn className="size-5 shrink-0" />
       <span className={soloIconoEnMovil ? 'hidden sm:inline' : undefined}>{label}</span>
     </Link>
   )

@@ -1,32 +1,33 @@
+import { useState } from 'react'
 import { CircleAlert } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Libros } from '../book/components/Libros'
+import { LibrosSkeleton } from '../book/components/LibrosSkeleton'
+import { Paginacion } from '../book/components/Paginacion'
 import { useBooks } from '../book/Hook/BookHook'
 import { bookErrorMessage } from '../book/lib/bookErrorMessage'
-import { LoadingScreen } from '../../components/ui/LoadingScreen'
-import { useState } from 'react'
 import { paginar, totalDePaginas } from '../book/lib/paginar'
-import { Paginacion } from '../book/components/Paginacion'
 
 export function LibraryHomePage() {
   const { t } = useTranslation()
-
   const [pagina, setPagina] = useState(1)
   const { data: libros, isPending, isError, error } = useBooks()
- const todos = libros ?? []
+
+  const todos = libros ?? []
   const totalPaginas = totalDePaginas(todos.length)
   const visibles = paginar(todos, pagina)
+
   return (
     <>
       <header className="mb-8 max-w-2xl">
-        <h1 className="font-serif text-3xl font-semibold text-stone-300 sm:text-4xl">
+        <h1 className="font-serif text-4xl font-bold text-stone-100 sm:text-5xl">
           {t('library:home.title')}
         </h1>
-        <p className="mt-2 text-stone-300">{t('library:home.subtitle')}</p>
+        <p className="mt-3 text-lg text-stone-300">{t('library:home.subtitle')}</p>
       </header>
 
-      {isPending && <LoadingScreen />}
+      {isPending && <LibrosSkeleton />}
 
       {isError && (
         <div
@@ -38,16 +39,12 @@ export function LibraryHomePage() {
         </div>
       )}
 
-      {!isPending && !isError && <Libros libros={visibles} />}
-      {!isPending && !isError && totalPaginas > 1 && (
-        <Paginacion
-          pagina={pagina}
-          totalPaginas={totalPaginas}
-          onCambiar={setPagina}
-        />
+      {!isPending && !isError && (
+        <>
+          <Libros libros={visibles} />
+          <Paginacion pagina={pagina} totalPaginas={totalPaginas} onCambiar={setPagina} />
+        </>
       )}
-
     </>
-    
   )
 }

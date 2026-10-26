@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Check, ChevronDown, Tags } from 'lucide-react'
+import { Check, ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import type { CategoriaConConteo } from '../lib/categorias'
@@ -67,12 +67,13 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
         type="button"
         onClick={() => setAbierto((actual) => !actual)}
         aria-expanded={abierto}
-        className={`inline-flex items-center gap-2 rounded-md border border-yellow-600 px-4 py-3 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors ${
-          activa ? 'bg-yellow-600 text-stone-900' : 'text-stone-300 hover:bg-yellow-600/10'
+        className={`inline-flex min-w-56 items-center justify-between gap-3 rounded-xl border px-5 py-3.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 motion-safe:transition-colors ${
+          activa
+            ? 'border-yellow-600 bg-yellow-600 text-stone-900'
+            : 'border-stone-100/15 bg-teal-900/40 text-stone-300 hover:border-yellow-600/50'
         }`}
       >
-        <Tags className="size-5 shrink-0" />
-        <span className="max-w-40 truncate">{activa?.nombre ?? t('book:categories.label')}</span>
+        <span className="truncate">{activa?.nombre ?? t('book:categories.label')}</span>
         <ChevronDown
           aria-hidden
           className={`size-4 shrink-0 motion-safe:transition-transform ${abierto ? 'rotate-180' : ''}`}
