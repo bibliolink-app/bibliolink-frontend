@@ -10,7 +10,37 @@
   },
   "categories": {
     "all": "All categories",
-    "label": "Categories"
+    "label": "Categories",
+    "names": {
+      "fiction": "Fiction",
+      "classics": "Classic literature",
+      "science-fiction-fantasy": "Science fiction & fantasy",
+      "mystery-thriller": "Mystery & thriller",
+      "horror": "Horror",
+      "romance": "Romance",
+      "adventure": "Adventure",
+      "historical-fiction": "Historical fiction",
+      "short-stories": "Short stories",
+      "poetry": "Poetry",
+      "drama": "Drama",
+      "humor": "Humor & satire",
+      "mythology-folklore": "Mythology & folklore",
+      "children-young-adult": "Children's & young adult",
+      "essays": "Essays, letters & speeches",
+      "biography": "Biography & memoir",
+      "history": "History",
+      "philosophy-religion": "Philosophy & religion",
+      "social-sciences": "Social sciences & politics",
+      "economics-business": "Economics & business",
+      "natural-sciences": "Natural sciences",
+      "mathematics": "Mathematics & statistics",
+      "technology": "Technology & computing",
+      "health": "Medicine & health",
+      "arts": "Art & music",
+      "language-education": "Language, education & reference",
+      "travel": "Travel",
+      "lifestyle": "Home, nature & hobbies"
+    }
   },
   "reader": {
     "backToBook": "Back to book",
