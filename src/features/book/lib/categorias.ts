@@ -6,19 +6,22 @@ export interface CategoriaConConteo {
   cantidad: number
 }
 
+/** La misma firma reducida de `t` de i18next: alcanza para traducir por código con fallback. */
+type Traducir = (key: string, options?: { defaultValue?: string }) => string
 
 const MINIMO_LIBROS = 2
 
-export function categoriasDeLibros(libros: Libro[], locale: string): CategoriaConConteo[] {
+export function categoriasDeLibros(libros: Libro[], locale: string, t: Traducir): CategoriaConConteo[] {
   const conteo = new Map<string, CategoriaConConteo>()
 
   for (const libro of libros) {
     for (const categoria of libro.categories) {
       const actual = conteo.get(categoria.code)
+      const nombre = t(`book:categories.names.${categoria.code}`, { defaultValue: categoria.name })
 
       conteo.set(categoria.code, {
         code: categoria.code,
-        nombre: categoria.name,
+        nombre,
         cantidad: (actual?.cantidad ?? 0) + 1,
       })
     }
