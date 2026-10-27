@@ -1,7 +1,19 @@
 <!doctype html>
 <html lang="es">
   <head>
+    <script>
+      window._userway_config = { position: 3, size: 'small' }
+    </script>
     <script src="https://cdn.userway.org/widget.js" data-account="%VITE_USERWAY_ACCOUNT_ID%"></script>
+    <style>
+      /* El widget UserWay no expone una opción de offset/margen, así que en móvil lo
+         subimos para que no tape el BottomNav (home/search/favorites). */
+      @media (max-width: 640px) {
+        #userwayAccessibilityIcon {
+          bottom: 4.5rem !important;
+        }
+      }
+    </style>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="src/assets/bibliolink.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

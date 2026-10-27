@@ -20,8 +20,8 @@ export function SearchPage() {
   const { data: libros, isPending, isError, error } = useBooks()
 
   const categorias = useMemo(
-    () => categoriasDeLibros(libros ?? [], i18n.language),
-    [libros, i18n.language],
+    () => categoriasDeLibros(libros ?? [], i18n.language, t),
+    [libros, i18n.language, t],
   )
 
   const resultados = useMemo(
