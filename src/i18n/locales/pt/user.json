@@ -15,8 +15,11 @@
       "pro": "Você tem o BiblioLink Pro: sem anúncios e favoritos ilimitados.",
       "freeLead": "Você está no plano gratuito.",
       "upgradeCta": "Seja Pro",
-      "freeTrailing": "para remover os anúncios e ter favoritos ilimitados."
-    }
+      "freeTrailing": "para remover os anúncios e ter favoritos ilimitados.",
+      "badgeFree": "Usuário gratuito",
+      "badgePro": "Usuário Pro"
+    },
+    "personalInfo": "Informações pessoais"
   },
   "errors": {
     "unexpected": "Ocorreu um erro inesperado.",

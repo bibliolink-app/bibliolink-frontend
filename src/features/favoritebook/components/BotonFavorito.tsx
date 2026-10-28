@@ -33,7 +33,7 @@ export function BotonFavorito({ bookId, titulo, conTexto = false }: BotonFavorit
     ? `inline-flex items-center gap-2 rounded-md border border-yellow-600 px-4 py-2.5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:opacity-50 motion-safe:transition-colors ${
         esFavorito ? 'bg-yellow-600 text-stone-900' : 'text-stone-300 hover:bg-yellow-600/10'
       }`
-    : `grid size-8 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:opacity-50 motion-safe:transition-colors ${
+    : `grid size-10 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:opacity-50 motion-safe:transition-colors ${
         esFavorito ? 'text-yellow-500' : 'text-yellow-600/60 hover:text-yellow-500'
       }`
 

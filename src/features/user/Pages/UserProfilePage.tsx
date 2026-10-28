@@ -4,16 +4,15 @@ import { useTranslation } from 'react-i18next'
 import { PATHS } from '../../../router'
 import { LoadingScreen } from '../../../components/ui/LoadingScreen'
 import { TextLink } from '../../../components/ui/TextLink'
-import { useSession } from '../../auth/hooks/useSession'
 import { useEntitlements } from '../../subscriptions/hooks/useEntitlements'
 import { useProfile } from '../Hook/UserHook'
 import { userErrorMessage } from '../lib/userErrorMessage'
 
 function Field({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <dt className="text-sm font-semibold tracking-wide text-stone-600">{label}</dt>
-      <dd className="mt-0.5 text-stone-900">{value}</dd>
+    <div className="rounded-xl bg-stone-100 px-4 py-3">
+      <dt className="text-sm text-stone-500">{label}</dt>
+      <dd className="mt-1 break-words text-stone-900">{value}</dd>
     </div>
   )
 }
@@ -22,7 +21,6 @@ function Field({ label, value }: { label: string; value: string }) {
 export function UserProfilePage() {
   const { t } = useTranslation()
   const { data: profile, isPending, isError, error } = useProfile()
-  const { user } = useSession()
   const { hasPremiumAccess } = useEntitlements()
 
   if (isPending) return <LoadingScreen />
@@ -43,6 +41,9 @@ export function UserProfilePage() {
     .filter(Boolean)
     .join(' ')
 
+  // Iniciales para el avatar: la del nombre y la del primer apellido.
+  const iniciales = `${profile.firstName.charAt(0)}${profile.firstSurname.charAt(0)}`.toUpperCase()
+
   return (
     <>
       <header className="mb-8">
@@ -50,19 +51,39 @@ export function UserProfilePage() {
         <p className="mt-2 text-stone-300">{t('user:profilePage.subtitle')}</p>
       </header>
 
-      <article className="rounded-lg bg-stone-300 p-6 text-stone-900 shadow-xl ring-1 ring-black/25 sm:p-8">
-        <div className="mb-6 flex flex-wrap items-center gap-3">
-          <h2 className="font-serif text-2xl font-semibold">{fullName}</h2>
-          {user && (
-            <span className="rounded-full bg-stone-100 px-3 py-1 text-sm font-semibold text-stone-600 ring-1 ring-stone-500/40">
-              {t(`common:role.${user.role}`)}
+      <article className="rounded-2xl bg-stone-200 p-6 text-stone-900 shadow-xl ring-1 ring-black/15 sm:p-8">
+        <div className="flex items-start gap-5">
+          <span
+            aria-hidden
+            className="grid size-16 shrink-0 place-items-center rounded-full bg-teal-900 font-serif text-xl font-bold text-stone-100"
+          >
+            {iniciales}
+          </span>
+
+          <div className="min-w-0">
+            <h2 className="font-serif text-2xl font-semibold">{fullName}</h2>
+            <p className="mt-0.5 text-stone-500">@{profile.username}</p>
+
+            {/* Verde para el plan gratuito, dorado para Pro: el dorado es el color de marca de lo premium. */}
+            <span
+              className={`mt-2.5 inline-block rounded-full px-3 py-1 text-sm font-semibold ring-1 ${
+                hasPremiumAccess
+                  ? 'bg-yellow-100 text-yellow-900 ring-yellow-700/30'
+                  : 'bg-emerald-100 text-emerald-900 ring-emerald-700/30'
+              }`}
+            >
+              {hasPremiumAccess
+                ? t('user:profilePage.plan.badgePro')
+                : t('user:profilePage.plan.badgeFree')}
             </span>
-          )}
+          </div>
         </div>
 
-        <p className="mb-6 text-stone-600">@{profile.username}</p>
+        <h3 className="mt-8 font-serif text-lg font-semibold">
+          {t('user:profilePage.personalInfo')}
+        </h3>
 
-        <dl className="grid gap-5 sm:grid-cols-2">
+        <dl className="mt-5 grid gap-4 sm:grid-cols-2">
           <Field label={t('user:profilePage.fields.email')} value={profile.email} />
           <Field label={t('user:profilePage.fields.birthDate')} value={profile.birthDate} />
           <Field label={t('user:profilePage.fields.firstName')} value={profile.firstName} />
@@ -72,7 +93,7 @@ export function UserProfilePage() {
         </dl>
       </article>
 
-      <article className="mt-6 rounded-lg bg-stone-300 p-6 text-stone-900 shadow-xl ring-1 ring-black/25 sm:p-8">
+      <article className="mt-6 rounded-2xl bg-stone-200 p-6 text-stone-900 shadow-xl ring-1 ring-black/15 sm:p-8">
         <h2 className="font-serif text-2xl font-semibold">{t('user:profilePage.plan.title')}</h2>
 
         {hasPremiumAccess ? (
