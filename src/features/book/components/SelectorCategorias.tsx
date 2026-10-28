@@ -62,12 +62,12 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
   )
 
   return (
-    <div ref={contenedor} className="relative shrink-0">
+    <div ref={contenedor} className="relative w-full shrink-0 sm:w-auto">
       <button
         type="button"
         onClick={() => setAbierto((actual) => !actual)}
         aria-expanded={abierto}
-        className={`inline-flex min-w-56 items-center justify-between gap-3 rounded-xl border px-5 py-3.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 motion-safe:transition-colors ${
+        className={`inline-flex w-full items-center justify-between gap-3 rounded-xl border px-5 py-3.5 text-sm font-semibold sm:w-auto sm:min-w-56 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 motion-safe:transition-colors ${
           activa
             ? 'border-yellow-600 bg-yellow-600 text-stone-900'
             : 'border-stone-100/15 bg-teal-900/40 text-stone-300 hover:border-yellow-600/50'
@@ -81,7 +81,7 @@ export function SelectorCategorias({ categorias, valor, onChange }: SelectorCate
       </button>
 
       {abierto && (
-        <div className="absolute right-0 z-20 mt-2 max-h-80 w-72 overflow-y-auto rounded-xl border border-yellow-600/40 bg-teal-950 p-2 shadow-xl shadow-black/50">
+        <div className="absolute right-0 z-20 mt-2 max-h-80 w-full overflow-y-auto overscroll-contain rounded-xl border border-yellow-600/40 bg-teal-950 p-2 shadow-xl shadow-black/50 sm:w-72">
           <ul>
             {opcion('', t('book:categories.all'))}
             {categorias.map((categoria) =>

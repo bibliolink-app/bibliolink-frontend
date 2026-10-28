@@ -72,7 +72,7 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
       </Link>
 
       {/* Fuera del enlace para no anidar dos elementos interactivos. */}
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-3 right-3">
         <BotonFavorito bookId={libro.bookId} titulo={libro.title} />
       </div>
     </li>

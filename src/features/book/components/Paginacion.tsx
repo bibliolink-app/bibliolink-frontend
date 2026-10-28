@@ -20,7 +20,10 @@ export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps)
   }
 
   return (
-    <nav aria-label="Paginación" className="mt-10 flex items-center justify-center gap-5">
+    <nav
+      aria-label="Paginación"
+      className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-5"
+    >
       <button
         type="button"
         onClick={() => ir(pagina - 1)}
