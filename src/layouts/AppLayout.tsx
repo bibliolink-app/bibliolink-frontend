@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router'
 import { CircleUser, LoaderCircle, LogOut } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,7 @@ import { useSubscriptionEvents } from '../features/subscriptions/hooks/useSubscr
 import { Logo } from '../components/ui/Logo'
 import { BottomNav } from '../components/ui/BottomNav'
 import { LanguageSwitcher } from '../components/ui/LanguageSwitcher'
+import { PageLoader } from '../components/ui/PageLoader'
 import { PATHS } from '../router'
 /** el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {
@@ -70,7 +72,9 @@ const logout = useLogout()
       </header>
 
       <main id="contenido" tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 outline-none sm:py-14">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       {!isAdmin && <BottomNav />}
     </div>

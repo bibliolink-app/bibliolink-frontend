@@ -11,6 +11,7 @@
   },
   "layout": {
     "skipToContent": "Aller au contenu",
+    "loading": "Chargement…",
     "myProfile": "Mon profil",
     "logout": "Se déconnecter"
   },

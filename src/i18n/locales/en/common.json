@@ -11,6 +11,7 @@
   },
   "layout": {
     "skipToContent": "Skip to content",
+    "loading": "Loading…",
     "myProfile": "My profile",
     "logout": "Log out"
   },

@@ -1,29 +1,32 @@
+import { lazy } from 'react'
 import { Navigate, createBrowserRouter } from 'react-router'
 
-import { AdminDashboardPage } from './features/admin/AdminDashboardPage'
 import { PublicOnly } from './features/auth/guards/PublicOnly'
 import { RedirectAdmins } from './features/auth/guards/RedirectAdmins'
 import { RequireAuth } from './features/auth/guards/RequireAuth'
 import { RequireRole } from './features/auth/guards/RequireRole'
-import { ForgotPasswordPage } from './features/auth/pages/ForgotPasswordPage'
-import { LoginPage } from './features/auth/pages/LoginPage'
-import { RegisterPage } from './features/auth/pages/RegisterPage'
-import { ResetPasswordPage } from './features/auth/pages/ResetPasswordPage'
-import { GraficosPage } from './features/Graficos/Pages/GraficosPage'
-import { PremiumPage } from './features/Graficos/Pages/PremiumPage'
-import { BookDetailPage } from './features/book/Pages/BookDetailPage'
-import { LectorPage } from './features/book/Pages/LectorPage'
-import { LibraryHomePage } from './features/library/LibraryHomePage'
 import { AppLayout } from './layouts/AppLayout'
-import { AdminProfilePage } from './features/user/Pages/AdminProfilePage'
-import { AdminsListPage } from './features/user/Pages/AdminsListPage'
-import { NormalUsersListPage } from './features/user/Pages/UsersListPage'
-import { CreateAdminPage } from './features/user/Pages/CreateAdminPage'
-import { FavoritesPage } from './features/library/FavoritesPage'
-import { SearchPage } from './features/library/SearchPage'
-import { UserProfilePage } from './features/user/Pages/UserProfilePage'
-import { LandingPage } from './features/landing/landingPage'
-import { SubscribePage } from './features/subscriptions/pages/SubscribePage'
+
+// Cada página se descarga al visitarla; el <Suspense> vive en AppLayout y en main.tsx.
+const AdminDashboardPage = lazy(() => import('./features/admin/AdminDashboardPage').then((m) => ({ default: m.AdminDashboardPage })))
+const ForgotPasswordPage = lazy(() => import('./features/auth/pages/ForgotPasswordPage').then((m) => ({ default: m.ForgotPasswordPage })))
+const LoginPage = lazy(() => import('./features/auth/pages/LoginPage').then((m) => ({ default: m.LoginPage })))
+const RegisterPage = lazy(() => import('./features/auth/pages/RegisterPage').then((m) => ({ default: m.RegisterPage })))
+const ResetPasswordPage = lazy(() => import('./features/auth/pages/ResetPasswordPage').then((m) => ({ default: m.ResetPasswordPage })))
+const GraficosPage = lazy(() => import('./features/Graficos/Pages/GraficosPage').then((m) => ({ default: m.GraficosPage })))
+const PremiumPage = lazy(() => import('./features/Graficos/Pages/PremiumPage').then((m) => ({ default: m.PremiumPage })))
+const BookDetailPage = lazy(() => import('./features/book/Pages/BookDetailPage').then((m) => ({ default: m.BookDetailPage })))
+const LectorPage = lazy(() => import('./features/book/Pages/LectorPage').then((m) => ({ default: m.LectorPage })))
+const LibraryHomePage = lazy(() => import('./features/library/LibraryHomePage').then((m) => ({ default: m.LibraryHomePage })))
+const AdminProfilePage = lazy(() => import('./features/user/Pages/AdminProfilePage').then((m) => ({ default: m.AdminProfilePage })))
+const AdminsListPage = lazy(() => import('./features/user/Pages/AdminsListPage').then((m) => ({ default: m.AdminsListPage })))
+const NormalUsersListPage = lazy(() => import('./features/user/Pages/UsersListPage').then((m) => ({ default: m.NormalUsersListPage })))
+const CreateAdminPage = lazy(() => import('./features/user/Pages/CreateAdminPage').then((m) => ({ default: m.CreateAdminPage })))
+const FavoritesPage = lazy(() => import('./features/library/FavoritesPage').then((m) => ({ default: m.FavoritesPage })))
+const SearchPage = lazy(() => import('./features/library/SearchPage').then((m) => ({ default: m.SearchPage })))
+const UserProfilePage = lazy(() => import('./features/user/Pages/UserProfilePage').then((m) => ({ default: m.UserProfilePage })))
+const LandingPage = lazy(() => import('./features/landing/landingPage').then((m) => ({ default: m.LandingPage })))
+const SubscribePage = lazy(() => import('./features/subscriptions/pages/SubscribePage').then((m) => ({ default: m.SubscribePage })))
 
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
  
