@@ -48,6 +48,9 @@ export function RegisterForm() {
   // El error del captcha solo se muestra despues de un intento de envio.
   const isSubmitted = useStore(form.store, (state) => state.isSubmitted)
 
+ //envio de formulario, si se intento enviar y hay errores, se muestran
+  const seIntentoEnviar = useStore(form.store, (state) => state.submissionAttempts) > 0
+
   const handleToken = useCallback((token: string) => form.setFieldValue('captchaToken', token), [form])
 
   return (
@@ -150,7 +153,11 @@ export function RegisterForm() {
             value={field.state.value}
             onChange={field.handleChange}
             onBlur={field.handleBlur}
-            errors={field.state.meta.isDirty ? [field.state.meta.errors[0]?.message] : []}
+            errors={
+              field.state.meta.isDirty || seIntentoEnviar
+                ? [field.state.meta.errors[0]?.message]
+                : []
+            }
             disabled={register.isPending}
           />
         )}
