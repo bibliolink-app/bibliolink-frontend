@@ -18,12 +18,21 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
         {/* La portada no llena la tarjeta: va centrada y más pequeña, como un libro sobre la mesa. */}
         <div className="relative mx-auto aspect-2/3 w-2/3 max-w-50 overflow-hidden rounded-md bg-teal-950 shadow-xl shadow-black/50 group-hover:-translate-y-1 group-hover:shadow-2xl motion-safe:transition-all">
           {libro.coverUrl ? (
-            <img
-              src={libro.coverUrl}
-              alt=""
-              loading="lazy"
-              className="size-full object-cover"
-            />
+            <>
+              <img
+                src={libro.coverUrl}
+                alt={t('book:coverAlt')}
+                loading="lazy"
+                className="size-full object-cover"
+              />
+              {/*lo que se mira cuando se oculta la imagen  */}
+              <span
+                aria-hidden
+                className="alt-portada absolute inset-0 place-items-center p-3 text-center font-serif text-sm leading-snug font-bold text-stone-200"
+              >
+                {libro.title}
+              </span>
+            </>
           ) : (
             <div className="grid size-full place-items-center text-stone-400">
               <BookOpen className="size-10" />
