@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router'
 import { CircleUser, LoaderCircle, LogOut } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,7 @@ import { useSubscriptionEvents } from '../features/subscriptions/hooks/useSubscr
 import { Logo } from '../components/ui/Logo'
 import { BottomNav } from '../components/ui/BottomNav'
 import { LanguageSwitcher } from '../components/ui/LanguageSwitcher'
+import { PageLoader } from '../components/ui/PageLoader'
 import { PATHS } from '../router'
 /** el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {
@@ -28,10 +30,10 @@ const logout = useLogout()
       </a>
 
       <header className="border-b border-yellow-600/30 bg-teal-950/70">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-3">
-          <Logo size="sm" />
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-2 px-4 py-3 sm:gap-4">
+          <Logo size="sm" soloIconoEnMovil />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSwitcher />
 
             {user && (
@@ -56,7 +58,7 @@ const logout = useLogout()
               onClick={() => logout.mutate()}
               disabled={logout.isPending}
               aria-busy={logout.isPending}
-              className="inline-flex items-center justify-center gap-2.5 rounded-md border border-yellow-600 px-4 py-2 font-semibold text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
+              className="inline-flex items-center justify-center gap-2.5 rounded-md border border-yellow-600 px-3 py-2 font-semibold text-stone-300 sm:px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 enabled:active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70 motion-safe:transition-colors"
             >
               {logout.isPending ? (
                 <LoaderCircle className="size-4 motion-safe:animate-spin" />
@@ -70,7 +72,9 @@ const logout = useLogout()
       </header>
 
       <main id="contenido" tabIndex={-1} className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 outline-none sm:py-14">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       {!isAdmin && <BottomNav />}
     </div>

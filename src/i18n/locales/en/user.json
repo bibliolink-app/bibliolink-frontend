@@ -15,8 +15,11 @@
       "pro": "You have BiblioLink Pro: no ads and unlimited favorites.",
       "freeLead": "You're on the free plan.",
       "upgradeCta": "Go Pro",
-      "freeTrailing": "to remove ads and get unlimited favorites."
-    }
+      "freeTrailing": "to remove ads and get unlimited favorites.",
+      "badgeFree": "Free user",
+      "badgePro": "Pro user"
+    },
+    "personalInfo": "Personal information"
   },
   "errors": {
     "unexpected": "An unexpected error occurred.",

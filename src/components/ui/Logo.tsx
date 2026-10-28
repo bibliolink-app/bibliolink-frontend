@@ -8,9 +8,16 @@ interface LogoProps {
   asLink?: boolean
   /** `claro` para fondos oscuros, `oscuro` para fondos claros. */
   tono?: 'claro' | 'oscuro'
+  /** En pantallas angostas deja solo el icono: el nombre no cabe junto al resto de la barra. */
+  soloIconoEnMovil?: boolean
 }
 
-export function Logo({ size = 'lg', asLink = true, tono = 'claro' }: LogoProps) {
+export function Logo({
+  size = 'lg',
+  asLink = true,
+  tono = 'claro',
+  soloIconoEnMovil = false,
+}: LogoProps) {
   const content = (
     <>
       <img
@@ -21,7 +28,7 @@ export function Logo({ size = 'lg', asLink = true, tono = 'claro' }: LogoProps) 
       <span
         className={`font-serif font-semibold tracking-wide ${
           tono === 'claro' ? 'text-stone-300' : 'text-teal-950'
-        } ${size === 'lg' ? 'text-4xl' : 'text-2xl'}`}
+        } ${size === 'lg' ? 'text-4xl' : 'text-2xl'} ${soloIconoEnMovil ? 'hidden sm:inline' : ''}`}
       >
         BiblioLink
       </span>

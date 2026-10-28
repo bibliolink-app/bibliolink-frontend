@@ -1,10 +1,42 @@
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { BookOpen, Library } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
+import { Skeleton } from '../../../components/ui/skeleton'
 import { rutaLibro } from '../../../router'
 import { BotonFavorito } from '../../favoritebook/components/BotonFavorito'
 import type { Libro } from '../Models/BookModels'
+
+function Portada({ src }: { src: string }) {
+  const [estado, setEstado] = useState<'cargando' | 'lista' | 'error'>('cargando')
+
+  if (estado === 'error') {
+    return (
+      <div className="grid size-full place-items-center text-stone-400">
+        <BookOpen className="size-10" />
+      </div>
+    )
+  }
+
+  return (
+    <>
+      {estado === 'cargando' && <Skeleton className="absolute inset-0 rounded-none" />}
+      <img
+        ref={(img) => {
+          // Si venía de caché, `onLoad` pudo dispararse antes de enganchar el evento.
+          if (img?.complete && img.naturalWidth > 0) setEstado('lista')
+        }}
+        src={src}
+        alt=""
+        loading="lazy"
+        onLoad={() => setEstado('lista')}
+        onError={() => setEstado('error')}
+        className={`size-full object-cover motion-safe:transition-opacity motion-safe:duration-300 ${estado === 'lista' ? 'opacity-100' : 'opacity-0'}`}
+      />
+    </>
+  )
+}
 
 function TarjetaLibro({ libro }: { libro: Libro }) {
   const { t } = useTranslation()
@@ -18,12 +50,7 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
         {/* La portada no llena la tarjeta: va centrada y más pequeña, como un libro sobre la mesa. */}
         <div className="relative mx-auto aspect-2/3 w-2/3 max-w-50 overflow-hidden rounded-md bg-teal-950 shadow-xl shadow-black/50 group-hover:-translate-y-1 group-hover:shadow-2xl motion-safe:transition-all">
           {libro.coverUrl ? (
-            <img
-              src={libro.coverUrl}
-              alt=""
-              loading="lazy"
-              className="size-full object-cover"
-            />
+            <Portada src={libro.coverUrl} />
           ) : (
             <div className="grid size-full place-items-center text-stone-400">
               <BookOpen className="size-10" />
@@ -45,7 +72,7 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
       </Link>
 
       {/* Fuera del enlace para no anidar dos elementos interactivos. */}
-      <div className="absolute top-4 right-4">
+      <div className="absolute top-3 right-3">
         <BotonFavorito bookId={libro.bookId} titulo={libro.title} />
       </div>
     </li>

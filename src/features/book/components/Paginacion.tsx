@@ -7,7 +7,7 @@ interface PaginacionProps {
 }
 
 const BOTON =
-  'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 hover:border-rose-900 hover:bg-rose-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
+  'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
 
 export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps) {
   // Con una sola página no hay nada que paginar.
@@ -20,7 +20,10 @@ export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps)
   }
 
   return (
-    <nav aria-label="Paginación" className="mt-10 flex items-center justify-center gap-5">
+    <nav
+      aria-label="Paginación"
+      className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-5"
+    >
       <button
         type="button"
         onClick={() => ir(pagina - 1)}
