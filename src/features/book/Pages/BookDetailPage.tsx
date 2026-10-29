@@ -37,9 +37,19 @@ export function BookDetailPage() {
 
       {libro && (
         <article className="grid gap-8 sm:grid-cols-[14rem_1fr]">
-          <div className="aspect-2/3 w-full overflow-hidden rounded-lg bg-stone-300 shadow-lg shadow-black/25 ring-1 ring-stone-500/20">
+          <div className="relative aspect-2/3 w-full overflow-hidden rounded-lg bg-stone-300 shadow-lg shadow-black/25 ring-1 ring-stone-500/20">
             {libro.coverUrl ? (
-              <img src={libro.coverUrl} alt="" className="size-full object-cover" />
+              <>
+                <img src={libro.coverUrl} alt={t('book:coverAlt')} className="size-full object-cover" />
+                {/* Lo que se ve cuando "ocultar imágenes" está activo. Va aria-hidden
+                    porque el título ya se anuncia en el <h1>. */}
+                <span
+                  aria-hidden
+                  className="alt-portada absolute inset-0 place-items-center p-4 text-center font-serif leading-snug font-bold text-stone-800"
+                >
+                  {libro.title}
+                </span>
+              </>
             ) : (
               <div className="grid size-full place-items-center text-stone-600">
                 <BookOpen className="size-12" />
