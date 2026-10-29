@@ -15,15 +15,18 @@
     }
   },
   "actions": {
-    "subscribe": "Assinar"
+    "subscribe": "Assinar",
+    "loadingPayPal": "Carregando PayPal..."
   },
   "toast": {
+    "confirmPending": "Recebemos sua aprovação no PayPal, mas ainda não conseguimos confirmá-la. Sua assinatura será ativada automaticamente em alguns minutos.",
     "paymentRegistered": "Pagamento registrado. Sua assinatura será ativada em alguns minutos.",
     "genericError": "Não foi possível processar a assinatura. Tente novamente."
   },
   "errors": {
     "generic": "Não foi possível iniciar a assinatura. Tente novamente mais tarde.",
     "network": "Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.",
+    "paypalLoad": "Não foi possível carregar o PayPal. Desative o bloqueador de anúncios e recarregue a página.",
     "inactiveAccount": "Sua conta não está ativa.",
     "alreadySubscribed": "Você já tem uma assinatura ativa ou em andamento."
   }
