@@ -8,7 +8,8 @@ import { rutaLibro } from '../../../router'
 import { BotonFavorito } from '../../favoritebook/components/BotonFavorito'
 import type { Libro } from '../Models/BookModels'
 
-function Portada({ src }: { src: string }) {
+function Portada({ src, titulo }: { src: string; titulo: string }) {
+  const { t } = useTranslation()
   const [estado, setEstado] = useState<'cargando' | 'lista' | 'error'>('cargando')
 
   if (estado === 'error') {
@@ -28,12 +29,20 @@ function Portada({ src }: { src: string }) {
           if (img?.complete && img.naturalWidth > 0) setEstado('lista')
         }}
         src={src}
-        alt=""
+        alt={t('book:coverAlt')}
         loading="lazy"
         onLoad={() => setEstado('lista')}
         onError={() => setEstado('error')}
         className={`size-full object-cover motion-safe:transition-opacity motion-safe:duration-300 ${estado === 'lista' ? 'opacity-100' : 'opacity-0'}`}
       />
+      {/* Lo que se ve cuando "ocultar imágenes" está activo. Va aria-hidden
+          porque el título ya se anuncia en el <h3> de la tarjeta. */}
+      <span
+        aria-hidden
+        className="alt-portada absolute inset-0 place-items-center p-3 text-center font-serif text-sm leading-snug font-bold text-stone-200"
+      >
+        {titulo}
+      </span>
     </>
   )
 }
@@ -50,7 +59,7 @@ function TarjetaLibro({ libro }: { libro: Libro }) {
         {/* La portada no llena la tarjeta: va centrada y más pequeña, como un libro sobre la mesa. */}
         <div className="relative mx-auto aspect-2/3 w-2/3 max-w-50 overflow-hidden rounded-md bg-teal-950 shadow-xl shadow-black/50 group-hover:-translate-y-1 group-hover:shadow-2xl motion-safe:transition-all">
           {libro.coverUrl ? (
-            <Portada src={libro.coverUrl} />
+            <Portada src={libro.coverUrl} titulo={libro.title} />
           ) : (
             <div className="grid size-full place-items-center text-stone-400">
               <BookOpen className="size-10" />

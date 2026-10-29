@@ -6,12 +6,19 @@
     </script>
     <script src="https://cdn.userway.org/widget.js" data-account="%VITE_USERWAY_ACCOUNT_ID%"></script>
     <style>
-      /* El widget UserWay no expone una opción de offset/margen, así que en móvil lo
-         subimos para que no tape el BottomNav (home/search/favorites). */
+      /* Se ajusta la posición del icono de accesibilidad en dispositivos móviles */
       @media (max-width: 640px) {
         #userwayAccessibilityIcon {
           bottom: 4.5rem !important;
         }
+      }
+
+      /*se muestra el texto del libro cuando la imagen no se muestra  */
+      .alt-portada {
+        display: none;
+      }
+      #root img[data-userway-s25-styled] + .alt-portada {
+        display: grid;
       }
     </style>
     <meta charset="UTF-8" />
