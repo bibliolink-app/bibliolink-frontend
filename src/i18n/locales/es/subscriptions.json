@@ -15,15 +15,18 @@
     }
   },
   "actions": {
-    "subscribe": "Suscribirme"
+    "subscribe": "Suscribirme",
+    "loadingPayPal": "Cargando PayPal..."
   },
   "toast": {
+    "confirmPending": "Recibimos tu aprobación en PayPal, pero aún no pudimos confirmarla. Tu suscripción se activará automáticamente en unos minutos.",
     "paymentRegistered": "Pago registrado. Tu suscripción se activará en unos minutos.",
     "genericError": "No se pudo procesar la suscripción. Intenta de nuevo."
   },
   "errors": {
     "generic": "No se pudo iniciar la suscripción. Inténtalo de nuevo más tarde.",
     "network": "No se pudo conectar con el servidor. Revisa tu conexión e inténtalo de nuevo.",
+    "paypalLoad": "No se pudo cargar PayPal. Desactiva el bloqueador de anuncios y recarga la página.",
     "inactiveAccount": "Tu cuenta no está activa.",
     "alreadySubscribed": "Ya tienes una suscripción vigente o en proceso."
   }
