@@ -1,13 +1,13 @@
 // Ambos valores son públicos (los entrega el equipo de backend junto al plan mensual de BiblioLink Pro).
-const CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID
-export const PAYPAL_PLAN_ID = import.meta.env.VITE_PAYPAL_PLAN_ID
+const CLIENT_ID = import.meta.env.PAYPAL_CLIENT_ID
+export const PAYPAL_PLAN_ID = import.meta.env.PAYPAL_PLAN_ID
 
 let sdkPromise: Promise<PayPalSdk> | null = null
 
 /** Carga el SDK de PayPal para suscripciones una sola vez. Falla si falta configuración o si un bloqueador lo impide. */
 export function loadPayPalSdk(): Promise<PayPalSdk> {
   if (!CLIENT_ID || !PAYPAL_PLAN_ID) {
-    return Promise.reject(new Error('Faltan VITE_PAYPAL_CLIENT_ID o VITE_PAYPAL_PLAN_ID en el .env'))
+    return Promise.reject(new Error('Faltan PAYPAL_CLIENT_ID o PAYPAL_PLAN_ID en el .env'))
   }
 
   if (window.paypal) return Promise.resolve(window.paypal)
