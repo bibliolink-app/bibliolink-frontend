@@ -6,6 +6,7 @@ import { defineConfig } from 'vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  envPrefix: ['VITE_', 'PAYPAL_'],
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
