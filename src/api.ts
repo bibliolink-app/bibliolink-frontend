@@ -1,5 +1,7 @@
 import axios, { isAxiosError } from 'axios'
 
+import i18n from '@/i18n'
+
 //Conexión con la API del backend: configuración, errores y cliente HTTP.
 
 export const API_URL = import.meta.env.VITE_API_URL
@@ -18,13 +20,21 @@ export class ApiError extends Error {
   /** Código HTTP. `0` cuando no hubo respuesta (red caída, timeout). */
   readonly status: number
   readonly messages: string[]
+ 
+  readonly code: string | null
 
-  constructor(status: number, messages: string[]) {
+  constructor(status: number, messages: string[], code: string | null = null) {
     super(messages[0] ?? UNEXPECTED_ERROR)
     this.name = 'ApiError'
     this.status = status
     this.messages = messages
+    this.code = code
   }
+}
+
+function extractCode(data: unknown): string | null {
+  if (typeof data !== 'object' || data === null || !('code' in data)) return null
+  return typeof data.code === 'string' ? data.code : null
 }
 
 /** El filtro de excepciones del backend responde `{ message: string | string[], ... }`. */
@@ -42,7 +52,7 @@ function toApiError(error: unknown): ApiError {
 
   if (isAxiosError(error)) {
     if (!error.response) return new ApiError(0, [NETWORK_ERROR])
-    return new ApiError(error.response.status, extractMessages(error.response.data))
+    return new ApiError(error.response.status, extractMessages(error.response.data), extractCode(error.response.data))
   }
 
   return new ApiError(0, [])
@@ -59,11 +69,16 @@ declare module 'axios' {
   }
 }
 
-// Los tokens viajan en cookies httpOnly: no hay interceptor de request porque no hay nada que inyectar.
+// Los tokens viajan en cookies httpOnly: el único interceptor de request envía el idioma para que el backend traduzca sus errores.
 export const api = axios.create({
   baseURL: API_URL,
   withCredentials: true,
   timeout: 15_000,
+})
+
+api.interceptors.request.use((config) => {
+  config.headers['Accept-Language'] = i18n.resolvedLanguage ?? 'es'
+  return config
 })
 
 let onSessionExpired: () => void = () => {}

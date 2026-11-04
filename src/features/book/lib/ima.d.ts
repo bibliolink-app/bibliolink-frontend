@@ -5,15 +5,31 @@ declare global {
     init(width: number, height: number, viewMode: string): void
     start(): void
     destroy(): void
-    addEventListener(type: string, listener: () => void): void
+    addEventListener(type: string, listener: (event: ImaAdErrorEvent) => void): void
+  }
+
+  interface ImaAdError {
+    getErrorCode(): number
+    getVastErrorCode(): number
+    getInnerError(): unknown
+    getMessage(): string
+  }
+
+  interface ImaAdErrorEvent {
+    getError(): ImaAdError
   }
 
   interface ImaAdsManagerLoadedEvent {
-    getAdsManager(contentPlayback: { currentTime: number }): ImaAdsManager
+    getAdsManager(contentPlayback: { currentTime: number }, settings?: ImaAdsRenderingSettings): ImaAdsManager
+  }
+
+  interface ImaAdsRenderingSettings {
+    /** Tipos MIME de vídeo permitidos; por defecto IMA acepta cualquiera, incluido HLS. */
+    mimeTypes: string[]
   }
 
   interface ImaAdsLoader {
-    addEventListener(type: string, listener: (event: ImaAdsManagerLoadedEvent) => void): void
+    addEventListener(type: string, listener: (event: ImaAdsManagerLoadedEvent & ImaAdErrorEvent) => void): void
     requestAds(request: ImaAdsRequest): void
     destroy(): void
   }
@@ -33,6 +49,7 @@ declare global {
     AdDisplayContainer: new (container: HTMLElement) => ImaAdDisplayContainer
     AdsLoader: new (container: ImaAdDisplayContainer) => ImaAdsLoader
     AdsRequest: new () => ImaAdsRequest
+    AdsRenderingSettings: new () => ImaAdsRenderingSettings
     AdsManagerLoadedEvent: { Type: { ADS_MANAGER_LOADED: string } }
     AdErrorEvent: { Type: { AD_ERROR: string } }
     AdEvent: { Type: { COMPLETE: string } }
