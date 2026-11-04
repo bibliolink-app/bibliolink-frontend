@@ -15,15 +15,18 @@
     }
   },
   "actions": {
-    "subscribe": "S'abonner"
+    "subscribe": "S'abonner",
+    "loadingPayPal": "Chargement de PayPal..."
   },
   "toast": {
+    "confirmPending": "Nous avons reçu votre approbation PayPal mais n'avons pas encore pu la confirmer. Votre abonnement sera activé automatiquement dans quelques minutes.",
     "paymentRegistered": "Paiement enregistré. Votre abonnement sera activé dans quelques minutes.",
     "genericError": "Impossible de traiter l'abonnement. Réessayez."
   },
   "errors": {
     "generic": "Impossible de démarrer l'abonnement. Réessayez plus tard.",
     "network": "Impossible de se connecter au serveur. Vérifiez votre connexion et réessayez.",
+    "paypalLoad": "Impossible de charger PayPal. Désactivez votre bloqueur de publicités et rechargez la page.",
     "inactiveAccount": "Votre compte n'est pas actif.",
     "alreadySubscribed": "Vous avez déjà un abonnement actif ou en cours."
   }

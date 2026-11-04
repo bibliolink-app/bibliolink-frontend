@@ -15,15 +15,18 @@
     }
   },
   "actions": {
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "loadingPayPal": "Loading PayPal..."
   },
   "toast": {
+    "confirmPending": "We received your PayPal approval but couldn't confirm it yet. Your subscription will activate automatically in a few minutes.",
     "paymentRegistered": "Payment registered. Your subscription will activate in a few minutes.",
     "genericError": "We couldn't process the subscription. Please try again."
   },
   "errors": {
     "generic": "We couldn't start the subscription. Please try again later.",
     "network": "We couldn't connect to the server. Check your connection and try again.",
+    "paypalLoad": "PayPal could not be loaded. Turn off your ad blocker and reload the page.",
     "inactiveAccount": "Your account is not active.",
     "alreadySubscribed": "You already have an active or pending subscription."
   }
