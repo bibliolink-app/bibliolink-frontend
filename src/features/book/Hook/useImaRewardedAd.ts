@@ -3,6 +3,15 @@ import type { RefObject } from 'react'
 
 import { AD_TAG_URL, loadImaSdk } from '../lib/imaSdk'
 
+/** Sin esto los fallos del anuncio son invisibles: el usuario solo ve el mensaje genérico. */
+function registrarError(origen: string, event: ImaAdErrorEvent) {
+  const error = event.getError()
+  console.warn(
+    `[IMA] Error en ${origen}: código ${error.getErrorCode()} (VAST ${error.getVastErrorCode()}) - ${error.getMessage()}`,
+    { origen: window.location.origin, interno: error.getInnerError() },
+  )
+}
+
 export type EstadoAnuncio = 'loading' | 'ready' | 'playing' | 'completed' | 'error'
 
 
@@ -36,10 +45,16 @@ export function useImaRewardedAd(contenedor: RefObject<HTMLDivElement | null>, a
 
         loader = new ima.AdsLoader(display)
         loader.addEventListener(ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, (event) => {
-          const manager = event.getAdsManager({ currentTime: 0 })
+          // Solo MP4: la prueba mostró que el HLS (m3u8 + seg.ts) se descarga pero el reproductor falla con el error 400.
+          const ajustes = new ima.AdsRenderingSettings()
+          ajustes.mimeTypes = ['video/mp4']
+          const manager = event.getAdsManager({ currentTime: 0 }, ajustes)
           managerRef.current = manager
 
-          manager.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, () => setEstado('error'))
+          manager.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, (errorEvent) => {
+            registrarError('manager', errorEvent)
+            setEstado('error')
+          })
           manager.addEventListener(ima.AdEvent.Type.COMPLETE, () => {
             setEstado('completed')
             alCompletarRef.current()
@@ -47,7 +62,10 @@ export function useImaRewardedAd(contenedor: RefObject<HTMLDivElement | null>, a
 
           setEstado('ready')
         })
-        loader.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, () => setEstado('error'))
+        loader.addEventListener(ima.AdErrorEvent.Type.AD_ERROR, (errorEvent) => {
+          registrarError('loader', errorEvent)
+          setEstado('error')
+        })
 
         const solicitud = new ima.AdsRequest()
         solicitud.adTagUrl = `${AD_TAG_URL}${Date.now()}`
@@ -55,7 +73,8 @@ export function useImaRewardedAd(contenedor: RefObject<HTMLDivElement | null>, a
         solicitud.linearAdSlotHeight = elemento.clientHeight
         loader.requestAds(solicitud)
       })
-      .catch(() => {
+      .catch((error: unknown) => {
+        console.warn('[IMA] No se pudo cargar el SDK (¿bloqueador de anuncios?)', error)
         if (!cancelado) setEstado('error')
       })
 
