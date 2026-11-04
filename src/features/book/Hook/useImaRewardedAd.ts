@@ -3,11 +3,10 @@ import type { RefObject } from 'react'
 
 import { AD_TAG_URL, loadImaSdk } from '../lib/imaSdk'
 
-/** Sin esto los fallos del anuncio son invisibles: el usuario solo ve el mensaje genérico. */
 function registrarError(origen: string, event: ImaAdErrorEvent) {
   const error = event.getError()
   console.warn(
-    `[IMA] Error en ${origen}: código ${error.getErrorCode()} (VAST ${error.getVastErrorCode()}) - ${error.getMessage()}`,
+    `[IMA] Error in ${origen}: code ${error.getErrorCode()} (VAST ${error.getVastErrorCode()}) - ${error.getMessage()}`,
     { origen: window.location.origin, interno: error.getInnerError() },
   )
 }
@@ -74,7 +73,7 @@ export function useImaRewardedAd(contenedor: RefObject<HTMLDivElement | null>, a
         loader.requestAds(solicitud)
       })
       .catch((error: unknown) => {
-        console.warn('[IMA] No se pudo cargar el SDK (¿bloqueador de anuncios?)', error)
+        console.warn('[IMA] The SDK could not be loaded (ad blocker?)', error)
         if (!cancelado) setEstado('error')
       })
 

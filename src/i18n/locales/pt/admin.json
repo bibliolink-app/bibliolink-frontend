@@ -14,14 +14,6 @@
       "analytics": {
         "title": "Estatísticas",
         "description": "Acompanhe o crescimento dos usuários registrados na plataforma."
-      },
-      "catalog": {
-        "title": "Catálogo de livros",
-        "description": "Gerencie os livros da coleção."
-      },
-      "subscriptions": {
-        "title": "Assinaturas e pagamentos",
-        "description": "Acompanhe as assinaturas ativas e as transações de pagamento."
       }
     }
   },
