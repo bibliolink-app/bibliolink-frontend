@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { ChartColumn, CreditCard, UserCircle, Users } from 'lucide-react'
+import { ChartColumn, UserCircle, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '../../router'
@@ -26,11 +26,6 @@ export function AdminDashboardPage() {
       description: t('admin:dashboard.sections.analytics.description'),
       icon: <ChartColumn className="size-6" />,
       to: PATHS.adminAnalytics,
-    },
-    {
-      title: t('admin:dashboard.sections.subscriptions.title'),
-      description: t('admin:dashboard.sections.subscriptions.description'),
-      icon: <CreditCard className="size-6" />,
     },
   ]
 
