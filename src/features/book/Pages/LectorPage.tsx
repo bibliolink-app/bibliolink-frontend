@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { ArrowLeft, ChevronLeft, ChevronRight, CircleAlert, Crown, Heart } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -11,7 +11,7 @@ import { readingErrorMessage } from '../lib/readingErrorMessage'
 import { AnuncioRecompensaModal } from '../components/AnuncioRecompensaModal'
 
 const BOTON =
-  'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 hover:border-rose-900 hover:bg-rose-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
+  'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
 
 export function LectorPage() {
   const { t } = useTranslation()
@@ -32,6 +32,20 @@ export function LectorPage() {
 
   const puedeLeer = acceso.data?.canRead === true
   const contenido = useReadingPage(bookId, pagina, puedeLeer)
+
+  // Se espera a que llegue la página nueva (la anterior se conserva mientras carga) y entonces se sube al inicio del texto.
+  const articulo = useRef<HTMLElement>(null)
+  const paginaMostrada = useRef<number | null>(null)
+  const numeroMostrado = contenido.data?.pageNumber
+
+  useEffect(() => {
+    if (numeroMostrado === undefined) return
+
+    if (paginaMostrada.current !== null && paginaMostrada.current !== numeroMostrado) {
+      articulo.current?.scrollIntoView({ block: 'start' })
+    }
+    paginaMostrada.current = numeroMostrado
+  }, [numeroMostrado])
 
   const irAPagina = (nueva: number) => {
     setPaginaElegida(nueva)
@@ -131,7 +145,8 @@ export function LectorPage() {
               {/* El backend saneó este HTML con lista blanca: solo etiquetas de
                   texto y ningún atributo. Por eso se puede insertar tal cual. */}
               <article
-                className="rounded-2xl bg-stone-100 px-6 py-8 text-stone-900 shadow-lg shadow-black/25 sm:px-10 sm:py-12 [&_blockquote]:my-4 [&_blockquote]:border-l-4 [&_blockquote]:border-yellow-600/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_h1]:mt-8 [&_h1]:mb-4 [&_h1]:font-serif [&_h1]:text-2xl [&_h1]:font-bold [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:font-serif [&_h3]:text-lg [&_h3]:font-semibold [&_hr]:my-8 [&_hr]:border-stone-300 [&_li]:mb-1 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6"
+                ref={articulo}
+                className="scroll-mt-4 rounded-2xl bg-stone-100 px-6 py-8 text-stone-900 shadow-lg shadow-black/25 sm:px-10 sm:py-12 [&_blockquote]:my-4 [&_blockquote]:border-l-4 [&_blockquote]:border-yellow-600/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_h1]:mt-8 [&_h1]:mb-4 [&_h1]:font-serif [&_h1]:text-2xl [&_h1]:font-bold [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-serif [&_h2]:text-xl [&_h2]:font-bold [&_h3]:mt-6 [&_h3]:mb-2 [&_h3]:font-serif [&_h3]:text-lg [&_h3]:font-semibold [&_hr]:my-8 [&_hr]:border-stone-300 [&_li]:mb-1 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6"
                 dangerouslySetInnerHTML={{ __html: contenido.data.content }}
               />
 

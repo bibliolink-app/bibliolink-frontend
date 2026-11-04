@@ -46,7 +46,7 @@ export function GraficosPage() {
 
         <Link
           to={PATHS.adminAnalyticsPremium}
-          className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-4 py-2.5 font-semibold text-stone-900 shadow-md shadow-black/20 hover:bg-rose-900 hover:text-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
+          className="inline-flex items-center gap-2 rounded-md bg-yellow-600 px-4 py-2.5 font-semibold text-stone-900 shadow-md shadow-black/20 hover:bg-yellow-800 hover:text-stone-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 motion-safe:transition-colors"
         >
           <Crown className="size-5" />
           {t('graficos:page.premiumLink')}

@@ -14,14 +14,6 @@
       "analytics": {
         "title": "Analytics",
         "description": "Track the growth of registered users on the platform."
-      },
-      "catalog": {
-        "title": "Book catalog",
-        "description": "Manage the books in the collection."
-      },
-      "subscriptions": {
-        "title": "Subscriptions & payments",
-        "description": "Monitor active subscriptions and payment transactions."
       }
     }
   },

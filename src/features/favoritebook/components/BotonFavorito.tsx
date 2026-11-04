@@ -14,6 +14,8 @@ import {
 } from '../../../components/ui/alert-dialog'
 import { useAgregarFavorito, useEsFavorito, useQuitarFavorito } from '../Hook/FavoritesHook'
 
+const HOVER_DIALOGO = 'hover:border-yellow-800 hover:bg-yellow-800 hover:text-stone-300'
+
 interface BotonFavoritoProps {
   bookId: number
   titulo: string
@@ -82,8 +84,8 @@ export function BotonFavorito({ bookId, titulo, conTexto = false }: BotonFavorit
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>{t('common:actions.cancel')}</AlertDialogCancel>
-          <AlertDialogAction variant="destructive" onClick={() => quitar.mutate(bookId)}>
+          <AlertDialogCancel className={HOVER_DIALOGO}>{t('common:actions.cancel')}</AlertDialogCancel>
+          <AlertDialogAction variant="destructive" className={HOVER_DIALOGO} onClick={() => quitar.mutate(bookId)}>
             {t('book:favoriteButton.confirmAction')}
           </AlertDialogAction>
         </AlertDialogFooter>
