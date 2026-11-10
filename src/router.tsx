@@ -5,6 +5,7 @@ import { PublicOnly } from './features/auth/guards/PublicOnly'
 import { RedirectAdmins } from './features/auth/guards/RedirectAdmins'
 import { RequireAuth } from './features/auth/guards/RequireAuth'
 import { RequireRole } from './features/auth/guards/RequireRole'
+import { LandingPage } from './features/landing/landingPage'
 import { AppLayout } from './layouts/AppLayout'
 
 // Cada página se descarga al visitarla; el <Suspense> vive en AppLayout y en main.tsx.
@@ -25,7 +26,6 @@ const CreateAdminPage = lazy(() => import('./features/user/Pages/CreateAdminPage
 const FavoritesPage = lazy(() => import('./features/library/FavoritesPage').then((m) => ({ default: m.FavoritesPage })))
 const SearchPage = lazy(() => import('./features/library/SearchPage').then((m) => ({ default: m.SearchPage })))
 const UserProfilePage = lazy(() => import('./features/user/Pages/UserProfilePage').then((m) => ({ default: m.UserProfilePage })))
-const LandingPage = lazy(() => import('./features/landing/landingPage').then((m) => ({ default: m.LandingPage })))
 const SubscribePage = lazy(() => import('./features/subscriptions/pages/SubscribePage').then((m) => ({ default: m.SubscribePage })))
 
  //Todas las URLs de la aplicación. Cualquier ruta nueva se declara aquí y se usa desde aquí
