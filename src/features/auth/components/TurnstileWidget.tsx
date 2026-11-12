@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import i18n from '@/i18n'
 
 const SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
-const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY
+const SITE_KEY = import.meta.env.TURNSTILE_SITE
 
 
 const TURNSTILE_LANGUAGE: Record<string, string> = { pt: 'pt-BR' }
