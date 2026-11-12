@@ -4,10 +4,10 @@ import i18n from '@/i18n'
 
 //Conexión con la API del backend: configuración, errores y cliente HTTP.
 
-export const API_URL = import.meta.env.API_URL
+export const API_URL = import.meta.env.VITE_API_URL
 
 if (!API_URL) {
-  throw new Error('Configuración de entorno inválida: API_URL no está definida.')
+  throw new Error('Configuración de entorno inválida: VITE_API_URL no está definida.')
 }
 
 // ─────────────────────────────── Errores ────────────────────────────────
