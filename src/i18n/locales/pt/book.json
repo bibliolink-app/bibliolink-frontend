@@ -4,6 +4,12 @@
     "backToCatalog": "Voltar ao catálogo",
     "read": "Ler"
   },
+  "pagination": {
+    "label": "Paginação",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "status": "Página {{page}} de {{total}}"
+  },
   "catalog": {
     "inFavorites": "Nos favoritos",
     "viewBook": "Ver livro",

@@ -28,9 +28,9 @@ export const useAgregarFavorito = () => {
 
   return useMutation({
     mutationFn: addFavorite,
-    onSuccess: () => {
+    onSuccess: ({ message }) => {
       void queryClient.invalidateQueries({ queryKey: CLAVE })
-      toast.success('Agregado a favoritos')
+      toast.success(message)
     },
     onError: (error) => toast.error(favoritesErrorMessage(error)),
   })
@@ -41,9 +41,9 @@ export const useQuitarFavorito = () => {
 
   return useMutation({
     mutationFn: removeFavorite,
-    onSuccess: () => {
+    onSuccess: ({ message }) => {
       void queryClient.invalidateQueries({ queryKey: CLAVE })
-      toast.success('Quitado de favoritos')
+      toast.success(message)
     },
     onError: (error) => toast.error(favoritesErrorMessage(error)),
   })

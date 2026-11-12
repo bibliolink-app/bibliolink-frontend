@@ -12,6 +12,15 @@ export const favoritoSchema = z.object({
   book: libroSchema,
 })
 
+/** Respuesta de agregar: el favorito más el mensaje ya traducido por el backend (según `Accept-Language`). */
+export const favoritoAgregadoSchema = favoritoSchema.extend({ message: z.string() })
+
+/** Respuesta de quitar: confirmación traducida por el backend. */
+export const favoritoQuitadoSchema = z.object({
+  bookId: z.number().int().positive(),
+  message: z.string(),
+})
+
 export const listaFavoritosSchema = z.object({
   plan: z.enum(['FREE', 'PREMIUM']),
   limit: z.number().int(),
