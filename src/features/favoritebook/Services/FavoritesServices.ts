@@ -1,6 +1,6 @@
 import { api } from '../../../api'
-import type { Favorito, ListaFavoritos } from '../Models/FavoritesModels'
-import { favoritoSchema, listaFavoritosSchema } from '../Schemas/FavoritesSchemas'
+import type { FavoritoAgregado, FavoritoQuitado, ListaFavoritos } from '../Models/FavoritesModels'
+import { favoritoAgregadoSchema, favoritoQuitadoSchema, listaFavoritosSchema } from '../Schemas/FavoritesSchemas'
 
 export const getFavorites = async (): Promise<ListaFavoritos> => {
   const response = await api.get('/favorites')
@@ -8,12 +8,14 @@ export const getFavorites = async (): Promise<ListaFavoritos> => {
   return listaFavoritosSchema.parse(response.data)
 }
 
-export const addFavorite = async (bookId: number): Promise<Favorito> => {
+export const addFavorite = async (bookId: number): Promise<FavoritoAgregado> => {
   const response = await api.post('/favorites', { bookId })
 
-  return favoritoSchema.parse(response.data)
+  return favoritoAgregadoSchema.parse(response.data)
 }
 
-export const removeFavorite = async (bookId: number): Promise<void> => {
-  await api.delete(`/favorites/books/${bookId}`)
+export const removeFavorite = async (bookId: number): Promise<FavoritoQuitado> => {
+  const response = await api.delete(`/favorites/books/${bookId}`)
+
+  return favoritoQuitadoSchema.parse(response.data)
 }

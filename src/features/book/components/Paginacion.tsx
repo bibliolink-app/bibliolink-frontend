@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 interface PaginacionProps {
   pagina: number
@@ -10,6 +11,8 @@ const BOTON =
   'inline-flex items-center gap-1.5 rounded-md border border-yellow-600 px-4 py-2 text-sm font-semibold text-stone-300 enabled:cursor-pointer enabled:hover:border-yellow-800 enabled:hover:bg-yellow-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500 disabled:cursor-not-allowed disabled:opacity-40 motion-safe:transition-colors'
 
 export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps) {
+  const { t } = useTranslation()
+
   // Con una sola página no hay nada que paginar.
   if (totalPaginas <= 1) return null
 
@@ -21,7 +24,7 @@ export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps)
 
   return (
     <nav
-      aria-label="Paginación"
+      aria-label={t('book:pagination.label')}
       className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-5"
     >
       <button
@@ -31,11 +34,11 @@ export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps)
         className={BOTON}
       >
         <ChevronLeft className="size-4" />
-        Anterior
+        {t('book:pagination.previous')}
       </button>
 
       <p aria-live="polite" className="text-sm text-stone-400">
-        Página {pagina} de {totalPaginas}
+        {t('book:pagination.status', { page: pagina, total: totalPaginas })}
       </p>
 
       <button
@@ -44,7 +47,7 @@ export function Paginacion({ pagina, totalPaginas, onCambiar }: PaginacionProps)
         disabled={pagina === totalPaginas}
         className={BOTON}
       >
-        Siguiente
+        {t('book:pagination.next')}
         <ChevronRight className="size-4" />
       </button>
     </nav>
