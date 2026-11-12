@@ -14,7 +14,7 @@ import { PATHS } from '../router'
 /** el rol de la sesión y el cierre de sesión. */
 export function AppLayout() {
   const { t } = useTranslation()
-  const { user, isAdmin } = useSession()
+  const { isAdmin } = useSession()
 const logout = useLogout()
 
   // Los administradores no tienen suscripción: no hace falta abrir la conexión SSE para ellos.
@@ -36,11 +36,6 @@ const logout = useLogout()
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageSwitcher />
 
-            {user && (
-              <span className="hidden rounded-full border border-yellow-600 px-3 py-1 text-sm font-semibold text-stone-300 sm:inline-block">
-                {t(`common:role.${user.role}`)}
-              </span>
-            )}
              {/* El administrador entra a su perfil desde su propio panel. */}
             {!isAdmin && (
               <Link
